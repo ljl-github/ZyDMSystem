@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0ffc6717259a4ba48a0a79818323bc20" Name="Diagram1">
+        <EntityTypeShape EntityType="ZyDMSystemModel.AbsentRecord" Width="1.5" PointX="7.5" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZyDMSystemModel.Admin" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZyDMSystemModel.CheckIn" Width="1.5" PointX="7.5" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZyDMSystemModel.Class" Width="1.5" PointX="8.25" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZyDMSystemModel.Department" Width="1.5" PointX="6" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZyDMSystemModel.Dorm" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZyDMSystemModel.DormAdmin" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZyDMSystemModel.DormExchange" Width="1.5" PointX="10.5" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZyDMSystemModel.Dormitory" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZyDMSystemModel.Major" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZyDMSystemModel.MoveOut" Width="1.5" PointX="7.5" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZyDMSystemModel.Student" Width="1.5" PointX="10.5" PointY="4.375" IsExpanded="true" />
+        <AssociationConnector Association="ZyDMSystemModel.FK_AbsentRecord_Dorm" ManuallyRouted="false" />
+        <AssociationConnector Association="ZyDMSystemModel.FK_AbsentRecord_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="ZyDMSystemModel.FK_CheckIn_Dorm" ManuallyRouted="false" />
+        <AssociationConnector Association="ZyDMSystemModel.FK_CheckIn_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="ZyDMSystemModel.FK_Class_Department" ManuallyRouted="false" />
+        <AssociationConnector Association="ZyDMSystemModel.FK_Class_Major" ManuallyRouted="false" />
+        <AssociationConnector Association="ZyDMSystemModel.FK_Student_Class" ManuallyRouted="false" />
+        <AssociationConnector Association="ZyDMSystemModel.FK_Dorm_Dormitory" ManuallyRouted="false" />
+        <AssociationConnector Association="ZyDMSystemModel.FK_DormExchange_Dorm" ManuallyRouted="false" />
+        <AssociationConnector Association="ZyDMSystemModel.FK_DormExchange_Dorm1" ManuallyRouted="false" />
+        <AssociationConnector Association="ZyDMSystemModel.FK_MoveOut_Dorm" ManuallyRouted="false" />
+        <AssociationConnector Association="ZyDMSystemModel.FK_Student_Dorm" ManuallyRouted="false" />
+        <AssociationConnector Association="ZyDMSystemModel.FK_Dormitory_DormAdmin" ManuallyRouted="false" />
+        <AssociationConnector Association="ZyDMSystemModel.FK_DormExchange_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="ZyDMSystemModel.FK_MoveOut_Student" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
