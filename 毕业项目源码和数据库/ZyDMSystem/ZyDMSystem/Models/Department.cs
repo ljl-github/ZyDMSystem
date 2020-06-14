@@ -17,13 +17,13 @@ namespace ZyDMSystem.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Department()
         {
-            this.Class = new HashSet<Class>();
+            this.Major = new HashSet<Major>();
         }
     
         public int DepartmentID { get; set; }
         public string DepartmentName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Class> Class { get; set; }
+        public virtual ICollection<Major> Major { get; set; }
     }
 }

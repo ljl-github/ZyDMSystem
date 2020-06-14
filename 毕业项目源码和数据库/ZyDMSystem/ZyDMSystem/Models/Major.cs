@@ -22,8 +22,10 @@ namespace ZyDMSystem.Models
     
         public int MajorID { get; set; }
         public string MajorName { get; set; }
+        public int DepartmentID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Class> Class { get; set; }
+        public virtual Department Department { get; set; }
     }
 }

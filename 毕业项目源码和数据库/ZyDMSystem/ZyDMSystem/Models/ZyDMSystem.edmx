@@ -40,7 +40,6 @@
           </Key>
           <Property Name="ClassID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ClassName" Type="nvarchar" MaxLength="30" />
-          <Property Name="DepamentID" Type="int" Nullable="false" />
           <Property Name="MajorID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Department">
@@ -95,6 +94,7 @@
           </Key>
           <Property Name="MajorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MajorName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="DepartmentID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="MoveOut">
           <Key>
@@ -163,18 +163,6 @@
             </Principal>
             <Dependent Role="CheckIn">
               <PropertyRef Name="StuID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Class_Department">
-          <End Role="Department" Type="Self.Department" Multiplicity="1" />
-          <End Role="Class" Type="Self.Class" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Department">
-              <PropertyRef Name="DepartmentID" />
-            </Principal>
-            <Dependent Role="Class">
-              <PropertyRef Name="DepamentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -247,6 +235,18 @@
             </Principal>
             <Dependent Role="Dormitory">
               <PropertyRef Name="DormAdminID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Major_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="Major" Type="Self.Major" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentID" />
+            </Principal>
+            <Dependent Role="Major">
+              <PropertyRef Name="DepartmentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -327,10 +327,6 @@
             <End Role="Student" EntitySet="Student" />
             <End Role="CheckIn" EntitySet="CheckIn" />
           </AssociationSet>
-          <AssociationSet Name="FK_Class_Department" Association="Self.FK_Class_Department">
-            <End Role="Department" EntitySet="Department" />
-            <End Role="Class" EntitySet="Class" />
-          </AssociationSet>
           <AssociationSet Name="FK_Class_Major" Association="Self.FK_Class_Major">
             <End Role="Major" EntitySet="Major" />
             <End Role="Class" EntitySet="Class" />
@@ -354,6 +350,10 @@
           <AssociationSet Name="FK_Dormitory_DormAdmin" Association="Self.FK_Dormitory_DormAdmin">
             <End Role="DormAdmin" EntitySet="DormAdmin" />
             <End Role="Dormitory" EntitySet="Dormitory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Major_Department" Association="Self.FK_Major_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Major" EntitySet="Major" />
           </AssociationSet>
           <AssociationSet Name="FK_MoveOut_Dorm" Association="Self.FK_MoveOut_Dorm">
             <End Role="Dorm" EntitySet="Dorm" />
@@ -416,9 +416,7 @@
           </Key>
           <Property Name="ClassID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ClassName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="DepamentID" Type="Int32" Nullable="false" />
           <Property Name="MajorID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Department" Relationship="Self.FK_Class_Department" FromRole="Class" ToRole="Department" />
           <NavigationProperty Name="Major" Relationship="Self.FK_Class_Major" FromRole="Class" ToRole="Major" />
           <NavigationProperty Name="Student" Relationship="Self.FK_Student_Class" FromRole="Class" ToRole="Student" />
         </EntityType>
@@ -428,7 +426,7 @@
           </Key>
           <Property Name="DepartmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DepartmentName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Class" Relationship="Self.FK_Class_Department" FromRole="Department" ToRole="Class" />
+          <NavigationProperty Name="Major" Relationship="Self.FK_Major_Department" FromRole="Department" ToRole="Major" />
         </EntityType>
         <EntityType Name="Dorm">
           <Key>
@@ -488,7 +486,9 @@
           </Key>
           <Property Name="MajorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MajorName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DepartmentID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Class" Relationship="Self.FK_Class_Major" FromRole="Major" ToRole="Class" />
+          <NavigationProperty Name="Department" Relationship="Self.FK_Major_Department" FromRole="Major" ToRole="Department" />
         </EntityType>
         <EntityType Name="MoveOut">
           <Key>
@@ -568,18 +568,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Class_Department">
-          <End Role="Department" Type="Self.Department" Multiplicity="1" />
-          <End Role="Class" Type="Self.Class" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Department">
-              <PropertyRef Name="DepartmentID" />
-            </Principal>
-            <Dependent Role="Class">
-              <PropertyRef Name="DepamentID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Class_Major">
           <End Role="Major" Type="Self.Major" Multiplicity="1" />
           <End Role="Class" Type="Self.Class" Multiplicity="*" />
@@ -601,6 +589,18 @@
             </Principal>
             <Dependent Role="Student">
               <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Major_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="Major" Type="Self.Major" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentID" />
+            </Principal>
+            <Dependent Role="Major">
+              <PropertyRef Name="DepartmentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -729,10 +729,6 @@
             <End Role="Student" EntitySet="Student" />
             <End Role="CheckIn" EntitySet="CheckIn" />
           </AssociationSet>
-          <AssociationSet Name="FK_Class_Department" Association="Self.FK_Class_Department">
-            <End Role="Department" EntitySet="Department" />
-            <End Role="Class" EntitySet="Class" />
-          </AssociationSet>
           <AssociationSet Name="FK_Class_Major" Association="Self.FK_Class_Major">
             <End Role="Major" EntitySet="Major" />
             <End Role="Class" EntitySet="Class" />
@@ -740,6 +736,10 @@
           <AssociationSet Name="FK_Student_Class" Association="Self.FK_Student_Class">
             <End Role="Class" EntitySet="Class" />
             <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Major_Department" Association="Self.FK_Major_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Major" EntitySet="Major" />
           </AssociationSet>
           <AssociationSet Name="FK_Dorm_Dormitory" Association="Self.FK_Dorm_Dormitory">
             <End Role="Dormitory" EntitySet="Dormitory" />
@@ -817,7 +817,6 @@
               <MappingFragment StoreEntitySet="Class">
                 <ScalarProperty Name="ClassID" ColumnName="ClassID" />
                 <ScalarProperty Name="ClassName" ColumnName="ClassName" />
-                <ScalarProperty Name="DepamentID" ColumnName="DepamentID" />
                 <ScalarProperty Name="MajorID" ColumnName="MajorID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -878,6 +877,7 @@
               <MappingFragment StoreEntitySet="Major">
                 <ScalarProperty Name="MajorID" ColumnName="MajorID" />
                 <ScalarProperty Name="MajorName" ColumnName="MajorName" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

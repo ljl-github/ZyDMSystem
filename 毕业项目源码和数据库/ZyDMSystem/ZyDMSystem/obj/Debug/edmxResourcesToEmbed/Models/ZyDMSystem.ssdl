@@ -1,0 +1,370 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ZyDMSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AbsentRecord">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StuID" Type="int" Nullable="false" />
+    <Property Name="DormID" Type="int" Nullable="false" />
+    <Property Name="Date" Type="date" />
+  </EntityType>
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="30" />
+    <Property Name="Sex" Type="bit" />
+    <Property Name="Account" Type="nvarchar" MaxLength="30" />
+    <Property Name="Pwd" Type="nvarchar" MaxLength="50" />
+    <Property Name="Photo" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="CheckIn">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StuID" Type="int" Nullable="false" />
+    <Property Name="DormID" Type="int" Nullable="false" />
+    <Property Name="Date" Type="date" />
+  </EntityType>
+  <EntityType Name="Class">
+    <Key>
+      <PropertyRef Name="ClassID" />
+    </Key>
+    <Property Name="ClassID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClassName" Type="nvarchar" MaxLength="30" />
+    <Property Name="MajorID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="DepartmentID" />
+    </Key>
+    <Property Name="DepartmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DepartmentName" Type="nvarchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Dorm">
+    <Key>
+      <PropertyRef Name="DormID" />
+    </Key>
+    <Property Name="DormID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Floor" Type="int" />
+    <Property Name="DormNumber" Type="int" />
+    <Property Name="PNumber" Type="int" />
+    <Property Name="DormitoryID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DormAdmin">
+    <Key>
+      <PropertyRef Name="DormAdminID" />
+    </Key>
+    <Property Name="DormAdminID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="30" />
+    <Property Name="Sex" Type="bit" />
+    <Property Name="Account" Type="nvarchar" MaxLength="30" />
+    <Property Name="Pwd" Type="nvarchar" MaxLength="50" />
+    <Property Name="Photo" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="DormExchange">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StuID" Type="int" Nullable="false" />
+    <Property Name="OldDormID" Type="int" Nullable="false" />
+    <Property Name="NewDormID" Type="int" Nullable="false" />
+    <Property Name="Date" Type="date" />
+  </EntityType>
+  <EntityType Name="Dormitory">
+    <Key>
+      <PropertyRef Name="DormitoryID" />
+    </Key>
+    <Property Name="DormitoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="30" />
+    <Property Name="DormAdminID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Major">
+    <Key>
+      <PropertyRef Name="MajorID" />
+    </Key>
+    <Property Name="MajorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MajorName" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="DepartmentID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MoveOut">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StuID" Type="int" Nullable="false" />
+    <Property Name="DormID" Type="int" Nullable="false" />
+    <Property Name="Date" Type="date" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="StuID" />
+    </Key>
+    <Property Name="StuID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="30" />
+    <Property Name="Sex" Type="bit" />
+    <Property Name="Account" Type="nvarchar" MaxLength="30" />
+    <Property Name="Pwd" Type="nvarchar" MaxLength="50" />
+    <Property Name="Photo" Type="nvarchar" MaxLength="100" />
+    <Property Name="ClassID" Type="int" Nullable="false" />
+    <Property Name="DormID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_AbsentRecord_Dorm">
+    <End Role="Dorm" Type="Self.Dorm" Multiplicity="1" />
+    <End Role="AbsentRecord" Type="Self.AbsentRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dorm">
+        <PropertyRef Name="DormID" />
+      </Principal>
+      <Dependent Role="AbsentRecord">
+        <PropertyRef Name="DormID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AbsentRecord_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="AbsentRecord" Type="Self.AbsentRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StuID" />
+      </Principal>
+      <Dependent Role="AbsentRecord">
+        <PropertyRef Name="StuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CheckIn_Dorm">
+    <End Role="Dorm" Type="Self.Dorm" Multiplicity="1" />
+    <End Role="CheckIn" Type="Self.CheckIn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dorm">
+        <PropertyRef Name="DormID" />
+      </Principal>
+      <Dependent Role="CheckIn">
+        <PropertyRef Name="DormID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CheckIn_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="CheckIn" Type="Self.CheckIn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StuID" />
+      </Principal>
+      <Dependent Role="CheckIn">
+        <PropertyRef Name="StuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Class_Major">
+    <End Role="Major" Type="Self.Major" Multiplicity="1" />
+    <End Role="Class" Type="Self.Class" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Major">
+        <PropertyRef Name="MajorID" />
+      </Principal>
+      <Dependent Role="Class">
+        <PropertyRef Name="MajorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Dorm_Dormitory">
+    <End Role="Dormitory" Type="Self.Dormitory" Multiplicity="1" />
+    <End Role="Dorm" Type="Self.Dorm" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dormitory">
+        <PropertyRef Name="DormitoryID" />
+      </Principal>
+      <Dependent Role="Dorm">
+        <PropertyRef Name="DormitoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DormExchange_Dorm">
+    <End Role="Dorm" Type="Self.Dorm" Multiplicity="1" />
+    <End Role="DormExchange" Type="Self.DormExchange" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dorm">
+        <PropertyRef Name="DormID" />
+      </Principal>
+      <Dependent Role="DormExchange">
+        <PropertyRef Name="OldDormID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DormExchange_Dorm1">
+    <End Role="Dorm" Type="Self.Dorm" Multiplicity="1" />
+    <End Role="DormExchange" Type="Self.DormExchange" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dorm">
+        <PropertyRef Name="DormID" />
+      </Principal>
+      <Dependent Role="DormExchange">
+        <PropertyRef Name="NewDormID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DormExchange_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="DormExchange" Type="Self.DormExchange" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StuID" />
+      </Principal>
+      <Dependent Role="DormExchange">
+        <PropertyRef Name="StuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Dormitory_DormAdmin">
+    <End Role="DormAdmin" Type="Self.DormAdmin" Multiplicity="1" />
+    <End Role="Dormitory" Type="Self.Dormitory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DormAdmin">
+        <PropertyRef Name="DormAdminID" />
+      </Principal>
+      <Dependent Role="Dormitory">
+        <PropertyRef Name="DormAdminID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Major_Department">
+    <End Role="Department" Type="Self.Department" Multiplicity="1" />
+    <End Role="Major" Type="Self.Major" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DepartmentID" />
+      </Principal>
+      <Dependent Role="Major">
+        <PropertyRef Name="DepartmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MoveOut_Dorm">
+    <End Role="Dorm" Type="Self.Dorm" Multiplicity="1" />
+    <End Role="MoveOut" Type="Self.MoveOut" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dorm">
+        <PropertyRef Name="DormID" />
+      </Principal>
+      <Dependent Role="MoveOut">
+        <PropertyRef Name="DormID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MoveOut_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="MoveOut" Type="Self.MoveOut" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StuID" />
+      </Principal>
+      <Dependent Role="MoveOut">
+        <PropertyRef Name="StuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Student_Class">
+    <End Role="Class" Type="Self.Class" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="ClassID" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="ClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Student_Dorm">
+    <End Role="Dorm" Type="Self.Dorm" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dorm">
+        <PropertyRef Name="DormID" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="DormID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ZyDMSystemModelStoreContainer">
+    <EntitySet Name="AbsentRecord" EntityType="Self.AbsentRecord" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CheckIn" EntityType="Self.CheckIn" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Dorm" EntityType="Self.Dorm" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DormAdmin" EntityType="Self.DormAdmin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DormExchange" EntityType="Self.DormExchange" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Dormitory" EntityType="Self.Dormitory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Major" EntityType="Self.Major" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MoveOut" EntityType="Self.MoveOut" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AbsentRecord_Dorm" Association="Self.FK_AbsentRecord_Dorm">
+      <End Role="Dorm" EntitySet="Dorm" />
+      <End Role="AbsentRecord" EntitySet="AbsentRecord" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AbsentRecord_Student" Association="Self.FK_AbsentRecord_Student">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="AbsentRecord" EntitySet="AbsentRecord" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CheckIn_Dorm" Association="Self.FK_CheckIn_Dorm">
+      <End Role="Dorm" EntitySet="Dorm" />
+      <End Role="CheckIn" EntitySet="CheckIn" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CheckIn_Student" Association="Self.FK_CheckIn_Student">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="CheckIn" EntitySet="CheckIn" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Class_Major" Association="Self.FK_Class_Major">
+      <End Role="Major" EntitySet="Major" />
+      <End Role="Class" EntitySet="Class" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Dorm_Dormitory" Association="Self.FK_Dorm_Dormitory">
+      <End Role="Dormitory" EntitySet="Dormitory" />
+      <End Role="Dorm" EntitySet="Dorm" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DormExchange_Dorm" Association="Self.FK_DormExchange_Dorm">
+      <End Role="Dorm" EntitySet="Dorm" />
+      <End Role="DormExchange" EntitySet="DormExchange" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DormExchange_Dorm1" Association="Self.FK_DormExchange_Dorm1">
+      <End Role="Dorm" EntitySet="Dorm" />
+      <End Role="DormExchange" EntitySet="DormExchange" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DormExchange_Student" Association="Self.FK_DormExchange_Student">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="DormExchange" EntitySet="DormExchange" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Dormitory_DormAdmin" Association="Self.FK_Dormitory_DormAdmin">
+      <End Role="DormAdmin" EntitySet="DormAdmin" />
+      <End Role="Dormitory" EntitySet="Dormitory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Major_Department" Association="Self.FK_Major_Department">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Major" EntitySet="Major" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MoveOut_Dorm" Association="Self.FK_MoveOut_Dorm">
+      <End Role="Dorm" EntitySet="Dorm" />
+      <End Role="MoveOut" EntitySet="MoveOut" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MoveOut_Student" Association="Self.FK_MoveOut_Student">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="MoveOut" EntitySet="MoveOut" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Student_Class" Association="Self.FK_Student_Class">
+      <End Role="Class" EntitySet="Class" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Student_Dorm" Association="Self.FK_Student_Dorm">
+      <End Role="Dorm" EntitySet="Dorm" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
