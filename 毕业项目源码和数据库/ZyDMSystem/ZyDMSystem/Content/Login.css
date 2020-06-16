@@ -41,7 +41,18 @@
             outline: none;
             background: transparent;
         }
-
+        .login-box .login-field select
+        {
+            width: 100%;
+            font-size: 16px;
+            color: #fff;
+            margin-bottom: 30px;
+            border: none;
+            background: transparent;
+        }
+        .login-box .login-field select .role{
+            background-color: black;
+        }
         .login-box .login-field label {
             position: absolute;
             top: 0;
@@ -61,7 +72,6 @@
             color: aqua;
             font-size: 12px;
         }
-
     .login-box .btn_login {
         background: transparent;
         border: none;

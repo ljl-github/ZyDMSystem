@@ -10,18 +10,36 @@
     <link rel="stylesheet" type="text/css" href="~/Content/Login.css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <style type="text/css">
+        .field-validation-error {
+        color:aqua;
+        }
+    </style>
 </head>
 <body>
     <div class="login-box">
         <h2>登录</h2>
-        <form>
+        <form action="/Login/Login" method="post" id="LoginForm">
             <div class="login-field">
-                <input type="text" name="" required="">
+                @Html.ValidationMessage("errorMsg")
+            </div>
+            <br />
+            <div class="login-field">
+                <input type="text" name="Account" required="">
                 <label>用户名</label>
             </div>
             <div class="login-field">
-                <input type="password" name="" required="">
+                <input type="password" name="Pwd" required="">
                 <label>密码</label>
+            </div>
+            <div class="login-field">
+                <select name="Role" class="form-control" required>
+                    <option value="" class="role">--请选择角色--</option>
+                    <option value="0" class="role">系统管理员</option>
+                    <option value="1" class="role">楼宇管理员</option>
+                    <option value="2" class="role">学生</option>
+                </select>
             </div>
             <div class="row">
                 <div class="col-lg-6">
@@ -38,5 +56,17 @@
 <script>
     $(".btn_register").click(function () {
         window.location.href = "/Login/Register";
-    })
+    });
+    $("#LoginForm").validate({
+        rules: {
+            Account: { required: true },
+            Pwd: { required: true },
+            Role: { required: true }
+        },
+        messages: {
+            Account: { required: "" },
+            Pwd: { required: "" },
+            Role: { required: "" }
+        }
+    });
 </script>
