@@ -30,7 +30,7 @@ namespace ZyDMSystem.Models
         public string Pwd { get; set; }
         public string Photo { get; set; }
         public int ClassID { get; set; }
-        public int DormID { get; set; }
+        public Nullable<int> DormID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AbsentRecord> AbsentRecord { get; set; }

@@ -27,7 +27,7 @@
             <br />
             <div class="login-field">
                 <input type="text" name="Account" required="">
-                <label>用户名</label>
+                <label>账号</label>
             </div>
             <div class="login-field">
                 <input type="password" name="Pwd" required="">
@@ -43,10 +43,22 @@
             </div>
             <div class="row">
                 <div class="col-lg-6">
-                    <button type="submit" class="btn_login">登录</button>
+                    <a href="#" class="btn_Login">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        登录
+                    </a>
                 </div>
                 <div class="col-lg-6">
-                    <button type="button" class="btn_register">注册</button>
+                    <a href="#" class="btn_Register">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        注册
+                    </a>
                 </div>
             </div>
         </form>
@@ -54,19 +66,29 @@
 </body>
 </html>
 <script>
-    $(".btn_register").click(function () {
+    $(".btn_Register").click(function () {
         window.location.href = "/Login/Register";
+    });
+    $(".btn_Login").click(function () {
+        $("#LoginForm").submit();
     });
     $("#LoginForm").validate({
         rules: {
-            Account: { required: true },
-            Pwd: { required: true },
+            Account: { required: true, checkAccount: true },
+            Pwd: { required: true, checkPwd: true },
             Role: { required: true }
         },
         messages: {
-            Account: { required: "" },
-            Pwd: { required: "" },
+            Account: { required: "", checkAccount: "账号由3-8位字母及下划线(_)组成!" },
+            Pwd: { required: "" ,checkPwd:"密码组成为6-12位字母或数字！"},
             Role: { required: "" }
         }
     });
+    $.validator.addMethod("checkPwd", function (date) {
+        return /^[a-zA-Z0-9]{6,12}$/.test(date);
+    })
+    //验证账号输入英文
+    $.validator.addMethod("checkAccount", function (date) {
+        return /^[a-zA-Z_]{3,8}$/.test(date);
+    })
 </script>

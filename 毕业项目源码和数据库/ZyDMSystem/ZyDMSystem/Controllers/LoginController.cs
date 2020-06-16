@@ -64,7 +64,21 @@ namespace ZyDMSystem.Controllers
         }
         public ActionResult Register()
         {
-            return View();
+            return View(db.Class.ToList());
+        }
+        [HttpPost]
+        public ActionResult Register(HttpPostedFileBase Photo,Student student)
+        {
+            var stu = db.Student.SingleOrDefault(s=>s.Account==student.Account);
+            if (stu != null)
+            {
+                ModelState.AddModelError("errorMsg", "该账号已被注册！");
+                return View(db.Class.ToList());
+            }
+            else
+            {
+                return Content("1");
+            }
         }
     }
 }

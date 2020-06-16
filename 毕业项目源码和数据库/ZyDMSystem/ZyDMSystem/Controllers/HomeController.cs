@@ -12,6 +12,12 @@ namespace ZyDMSystem.Controllers
         {
             return View();
         }
+        //退出
+        public ActionResult Quit()
+        {
+            Session.Clear();
+            return RedirectToAction("Login","Login");
+        }
 
         public ActionResult About()
         {
