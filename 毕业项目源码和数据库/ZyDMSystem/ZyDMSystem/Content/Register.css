@@ -34,7 +34,7 @@
             width: 100%;
             padding: 10px 0;
             font-size: 16px;
-            color: #fff;
+            color: white;
             margin-bottom: 30px;
             border: none;
             border-bottom: 1px solid #fff;
@@ -63,6 +63,9 @@
 
         .login-box .login-field span {
         color:white;
+        }
+        .login-box .errorMsg span{
+            color:aqua;
         }
 
         .login-box .login-field input#lab_sex {
@@ -259,3 +262,10 @@
     background:transparent;
     text-decoration:none;
 }
+
+
+/*清除Chrome自动填充时样式*/
+/*input{
+    -webkit-text-fill-color: white !important;
+    transition: background-color 5000s ease-in-out 0s;
+}*/
