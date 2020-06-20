@@ -265,7 +265,9 @@
 
 
 /*清除Chrome自动填充时样式*/
-/*input{
+input {
     -webkit-text-fill-color: white !important;
     transition: background-color 5000s ease-in-out 0s;
-}*/
+    caret-color:white; /*更改默认光标颜色*/
+}
+

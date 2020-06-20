@@ -88,3 +88,5 @@ E:\毕业项目\毕业项目源码和数据库\ZyDMSystem\ZyDMSystem\obj\Debug\Z
 E:\毕业项目\毕业项目源码和数据库\ZyDMSystem\ZyDMSystem\obj\Debug\ZyDMSystem.csproj.CopyComplete
 E:\毕业项目\毕业项目源码和数据库\ZyDMSystem\ZyDMSystem\obj\Debug\ZyDMSystem.dll
 E:\毕业项目\毕业项目源码和数据库\ZyDMSystem\ZyDMSystem\obj\Debug\ZyDMSystem.pdb
+E:\毕业项目\毕业项目源码和数据库\ZyDMSystem\ZyDMSystem\obj\Debug\ZyDMSystem.csprojAssemblyReference.cache
+E:\毕业项目\毕业项目源码和数据库\ZyDMSystem\ZyDMSystem\bin\zh-Hans\EntityFramework.SqlServer.resources.dll

@@ -17,7 +17,7 @@
 <body>
     <div class="login-box">
         <h2>注册</h2>
-        <form id="RegisterForm" method="post" action="/Login/Register" enctype="multipart/form-data" autocomplete="off" @*取消表单自动填充*@>
+        <form id="RegisterForm" method="post" action="/Login/Register" enctype="multipart/form-data" @*autocomplete="off"*@ @*取消表单自动填充*@>
             <div class="errorMsg">
                 @Html.ValidationMessage("errorMsg")
             </div>
