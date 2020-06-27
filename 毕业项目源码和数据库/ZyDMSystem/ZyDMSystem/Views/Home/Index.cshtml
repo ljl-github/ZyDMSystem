@@ -1,8 +1,205 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+    Layout = null;
 }
 
-<h2>Index</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    @Styles.Render("~/Content/css4")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap4")
+    <title>@ViewBag.Title - 我的 ASP.NET 应用程序</title>
+    <style type="text/css">
+        * {
+            list-style: none;
+            text-decoration: none;
+        }
+
+        body {
+            padding-top: 0px;
+        }
+
+        .dropdown-item {
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .card-img-top {
+            height: 30%;
+            width: 30%;
+            border-radius: 50%;
+            margin: 0 auto;
+        }
+
+        .left_menu {
+            margin: 0px;
+            padding: 0px;
+        }
+
+            .left_menu a.menu {
+                color: #565656;
+                font-size: 24px;
+            }
+
+            .left_menu .menu:hover {
+                color: black;
+                text-decoration: none;
+            }
+
+            .left_menu a.menu svg {
+                margin-top: 0.2em;
+            }
+
+        .menu_item {
+            display: none;
+            margin-left: 3.5em;
+        }
+
+            .menu_item a {
+                color: #565656;
+                font-size: 20px;
+            }
+
+                .menu_item a:hover {
+                    color: black;
+                    text-decoration: none;
+                }
+
+        .left, .right {
+            margin-top: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light row" style="height:64px;">
+        <div class="col-lg-6">
+            <img src="~/Content/image/未标题-1.jpg" style="height:192px;" />
+            <a class="navbar-brand" href="#">智云宿舍管理系统</a>
+        </div>
+        <div class="col-lg-4">
+            <div>欢迎使用智云宿舍管理系统！现在是北京时间：<span id="nowTime"></span></div>
+        </div>
+        <div class="collapse navbar-collapse col-lg-2" id="navbarNavDropdown">
+            <ul class="navbar-nav " style="line-height:76px;font-size:22px;">
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="~/Content/image/1.jpg" width="50" height="50" style="border-radius:50%;margin-bottom:0.5em;" />
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="width:80px;">
+                        <a class="dropdown-item text-center" href="#">我的资料</a>
+                        <a class="dropdown-item text-center" href="/Home/Quit">退出</a>
+                    </div>
+                </li>
+            </ul>
+            <a class="btn btn-danger" href="/Home/Quit">退出系统</a>
+        </div>
+    </nav>
+    <div class="row" style="margin:0px;padding:0px;">
+        <div class="left col-lg-2">
+            <div class="card bg-transparent border-0" style="width: 18rem;">
+                <img src="~/Content/image/1.jpg" class="card-img-top" alt="我的头像">
+                <div class="card-body text-center">
+                    <p class="card-text">姓名:雷建龙</p>
+                    <p class="card-text">电话:150********</p>
+                </div>
+            </div>
+            <ul class="left_menu">
+                <li>
+                    <a href="#" class="menu">
+                        <div class="row">
+                            <div class="text-center col-lg-9">后台首页</div>
+                            <svg class="bi bi-chevron-down col-lg-3" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                            </svg>
+                            <svg style="display:none" class="bi bi-chevron-up col-lg-3" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" />
+                            </svg>
+                        </div>
+                    </a>
+                    <div class="menu_item">
+                        <div><a href="#">首页管理1</a></div>
+                        <div><a href="#">首页管理1</a></div>
+                        <div><a href="#">首页管理</a></div>
+                    </div>
+                </li>
+            </ul>
+            <ul class="left_menu">
+                <li>
+                    <a href="#" class="menu">
+                        <div class="row">
+                            <div class="text-center col-lg-9">学生管理</div>
+                            <svg class="bi bi-chevron-down col-lg-3" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                            </svg>
+                            <svg style="display:none" class="bi bi-chevron-up col-lg-3" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" />
+                            </svg>
+                        </div>
+                    </a>
+                    <div class="menu_item">
+                        <div><a data-src="/Student/Index" href="#">学生管理</a></div>
+                        <div><a href="#">学生管理</a></div>
+                        <div><a href="#">学生管理</a></div>
+                    </div>
+                </li>
+            </ul>
+            <ul class="left_menu">
+                <li>
+                    <a href="#" class="menu">
+                        <div class="row">
+                            <div class="text-center col-lg-9">楼宇管理</div>
+                            <svg class="bi bi-chevron-down col-lg-3" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                            </svg>
+                            <svg style="display:none" class="bi bi-chevron-up col-lg-3" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" />
+                            </svg>
+                        </div>
+                    </a>
+                    <div class="menu_item">
+                        <div><a href="/Home/Contact" data-ajax-update="#right_content" data-ajax="true">楼宇管理</a></div>
+                        <div><a href="/Home/About" data-ajax-update="#right_content" data-ajax="true">楼宇管理1</a></div>
+                        <div><a href="#">楼宇管理11</a></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="right col-lg-10" id="my_content">
+            <iframe frameborder="0" id="iframe_content" src="/Home/About" scrolling="yes" width="100%" height="100%"></iframe>
+        </div>
+    </div>
+    <div>
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - 智云宿舍管理系统</p>
+        </footer>
+    </div>
+    <script type="text/javascript">
+        function getDate() {
+            //获取当前时间
+            var date = new Date();
+            //格式化为本地时间格式
+            var date1 = date.toLocaleString();
+            //将时间写入span
+            $("#nowTime").html(date1);
+        }
+        //使用定时器每秒向div写入当前时间
+        setInterval("getDate()", 1000);
+
+        $(".menu").click(function () {
+            $(this).parent().children("div").slideToggle(500);
+            $(this).children().children("svg").toggle();
+        })
+
+        $(".menu_item div a").click(function () {
+            var src = $(this).attr("data-src");
+            $("#iframe_content").attr("src", src);
+        })
+    </script>
+</body>
+</html>
 
