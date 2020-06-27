@@ -134,8 +134,9 @@
     <Property Name="Account" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
     <Property Name="Pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Photo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="Int32" />
     <Property Name="ClassID" Type="Int32" Nullable="false" />
-    <Property Name="DormID" Type="Int32" Nullable="false" />
+    <Property Name="DormID" Type="Int32" />
     <NavigationProperty Name="AbsentRecord" Relationship="Self.FK_AbsentRecord_Student" FromRole="Student" ToRole="AbsentRecord" />
     <NavigationProperty Name="CheckIn" Relationship="Self.FK_CheckIn_Student" FromRole="Student" ToRole="CheckIn" />
     <NavigationProperty Name="Class" Relationship="Self.FK_Student_Class" FromRole="Student" ToRole="Class" />
@@ -276,7 +277,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Student_Dorm">
-    <End Role="Dorm" Type="Self.Dorm" Multiplicity="1" />
+    <End Role="Dorm" Type="Self.Dorm" Multiplicity="0..1" />
     <End Role="Student" Type="Self.Student" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Dorm">

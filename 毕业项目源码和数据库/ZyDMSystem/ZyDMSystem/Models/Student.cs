@@ -29,6 +29,7 @@ namespace ZyDMSystem.Models
         public string Account { get; set; }
         public string Pwd { get; set; }
         public string Photo { get; set; }
+        public Nullable<int> State { get; set; }
         public int ClassID { get; set; }
         public Nullable<int> DormID { get; set; }
     

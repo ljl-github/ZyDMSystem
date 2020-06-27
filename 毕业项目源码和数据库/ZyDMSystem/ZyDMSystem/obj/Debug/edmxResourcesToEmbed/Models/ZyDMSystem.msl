@@ -121,6 +121,7 @@
           <ScalarProperty Name="Account" ColumnName="Account" />
           <ScalarProperty Name="Pwd" ColumnName="Pwd" />
           <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="State" ColumnName="State" />
           <ScalarProperty Name="ClassID" ColumnName="ClassID" />
           <ScalarProperty Name="DormID" ColumnName="DormID" />
         </MappingFragment>

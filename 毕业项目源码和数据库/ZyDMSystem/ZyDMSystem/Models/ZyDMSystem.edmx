@@ -115,8 +115,9 @@
           <Property Name="Account" Type="nvarchar" MaxLength="30" />
           <Property Name="Pwd" Type="nvarchar" MaxLength="50" />
           <Property Name="Photo" Type="nvarchar" MaxLength="100" />
+          <Property Name="State" Type="int" />
           <Property Name="ClassID" Type="int" Nullable="false" />
-          <Property Name="DormID" Type="int" Nullable="false" />
+          <Property Name="DormID" Type="int" />
         </EntityType>
         <Association Name="FK_AbsentRecord_Dorm">
           <End Role="Dorm" Type="Self.Dorm" Multiplicity="1" />
@@ -287,7 +288,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Student_Dorm">
-          <End Role="Dorm" Type="Self.Dorm" Multiplicity="1" />
+          <End Role="Dorm" Type="Self.Dorm" Multiplicity="0..1" />
           <End Role="Student" Type="Self.Student" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Dorm">
@@ -511,8 +512,9 @@
           <Property Name="Account" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Photo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="Int32" />
           <Property Name="ClassID" Type="Int32" Nullable="false" />
-          <Property Name="DormID" Type="Int32" Nullable="false" />
+          <Property Name="DormID" Type="Int32" />
           <NavigationProperty Name="AbsentRecord" Relationship="Self.FK_AbsentRecord_Student" FromRole="Student" ToRole="AbsentRecord" />
           <NavigationProperty Name="CheckIn" Relationship="Self.FK_CheckIn_Student" FromRole="Student" ToRole="CheckIn" />
           <NavigationProperty Name="Class" Relationship="Self.FK_Student_Class" FromRole="Student" ToRole="Class" />
@@ -653,7 +655,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Student_Dorm">
-          <End Role="Dorm" Type="Self.Dorm" Multiplicity="1" />
+          <End Role="Dorm" Type="Self.Dorm" Multiplicity="0..1" />
           <End Role="Student" Type="Self.Student" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Dorm">
@@ -900,6 +902,7 @@
                 <ScalarProperty Name="Account" ColumnName="Account" />
                 <ScalarProperty Name="Pwd" ColumnName="Pwd" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="ClassID" ColumnName="ClassID" />
                 <ScalarProperty Name="DormID" ColumnName="DormID" />
               </MappingFragment>

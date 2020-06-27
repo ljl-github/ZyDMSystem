@@ -4,18 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2dd1f72802be4cacbc02df17f3367878" Name="Diagram1">
-        <EntityTypeShape EntityType="ZyDMSystemModel.AbsentRecord" Width="1.5" PointX="7.5" PointY="8.25" IsExpanded="true" />
+      <Diagram DiagramId="da37b21e4f0c4a31b46f14f634af769f" Name="Diagram1">
+        <EntityTypeShape EntityType="ZyDMSystemModel.AbsentRecord" Width="1.5" PointX="7.5" PointY="8.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ZyDMSystemModel.Admin" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZyDMSystemModel.CheckIn" Width="1.5" PointX="7.5" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZyDMSystemModel.CheckIn" Width="1.5" PointX="7.5" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ZyDMSystemModel.Class" Width="1.5" PointX="8.25" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZyDMSystemModel.Department" Width="1.5" PointX="3.75" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZyDMSystemModel.Dorm" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZyDMSystemModel.DormAdmin" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZyDMSystemModel.DormExchange" Width="1.5" PointX="10.5" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZyDMSystemModel.Department" Width="1.5" PointX="3.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZyDMSystemModel.Dorm" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZyDMSystemModel.DormAdmin" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZyDMSystemModel.DormExchange" Width="1.5" PointX="10.5" PointY="8.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ZyDMSystemModel.Dormitory" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ZyDMSystemModel.Major" Width="1.5" PointX="6" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZyDMSystemModel.MoveOut" Width="1.5" PointX="7.5" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZyDMSystemModel.MoveOut" Width="1.5" PointX="7.5" PointY="11.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ZyDMSystemModel.Student" Width="1.5" PointX="10.5" PointY="3.5" IsExpanded="true" />
         <AssociationConnector Association="ZyDMSystemModel.FK_AbsentRecord_Dorm" ManuallyRouted="false" />
         <AssociationConnector Association="ZyDMSystemModel.FK_AbsentRecord_Student" ManuallyRouted="false" />
