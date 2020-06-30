@@ -6,7 +6,6 @@
         <MappingFragment StoreEntitySet="AbsentRecord">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="StuID" ColumnName="StuID" />
-          <ScalarProperty Name="DormID" ColumnName="DormID" />
           <ScalarProperty Name="Date" ColumnName="Date" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -70,6 +69,7 @@
           <ScalarProperty Name="Account" ColumnName="Account" />
           <ScalarProperty Name="Pwd" ColumnName="Pwd" />
           <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="DormitoryID" ColumnName="DormitoryID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -89,7 +89,6 @@
         <MappingFragment StoreEntitySet="Dormitory">
           <ScalarProperty Name="DormitoryID" ColumnName="DormitoryID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="DormAdminID" ColumnName="DormAdminID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

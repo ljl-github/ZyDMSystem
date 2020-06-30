@@ -17,7 +17,6 @@ namespace ZyDMSystem.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Dorm()
         {
-            this.AbsentRecord = new HashSet<AbsentRecord>();
             this.CheckIn = new HashSet<CheckIn>();
             this.DormExchange = new HashSet<DormExchange>();
             this.DormExchange1 = new HashSet<DormExchange>();
@@ -31,8 +30,6 @@ namespace ZyDMSystem.Models
         public Nullable<int> PNumber { get; set; }
         public int DormitoryID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AbsentRecord> AbsentRecord { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CheckIn> CheckIn { get; set; }
         public virtual Dormitory Dormitory { get; set; }

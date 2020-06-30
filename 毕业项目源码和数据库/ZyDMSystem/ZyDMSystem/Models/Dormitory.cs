@@ -18,14 +18,15 @@ namespace ZyDMSystem.Models
         public Dormitory()
         {
             this.Dorm = new HashSet<Dorm>();
+            this.DormAdmin = new HashSet<DormAdmin>();
         }
     
         public int DormitoryID { get; set; }
         public string Name { get; set; }
-        public int DormAdminID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Dorm> Dorm { get; set; }
-        public virtual DormAdmin DormAdmin { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DormAdmin> DormAdmin { get; set; }
     }
 }

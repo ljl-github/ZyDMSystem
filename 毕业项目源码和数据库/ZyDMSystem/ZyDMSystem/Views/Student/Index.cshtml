@@ -1,0 +1,184 @@
+﻿
+@{
+    Layout = null;
+}
+@using ZyDMSystem.Models;
+@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<Student>
+@{
+    var mList=ViewBag.mList as List<Major>;
+    var dList = ViewBag.dList as List<Department>;
+    string[] stateList ={ "已入住", "未入住", "已迁出" };
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap4")
+    @Styles.Render("~/Content/css4")
+    <link href="~/Content/css/page.css" rel="stylesheet" />
+    <title>学生管理</title>
+    <style type="text/css">
+        #stu_table tr td {
+            padding: 0px;
+        }
+        .checkbox {
+            width:0.8em;
+            height:0.8em;
+        }
+        .checkbox:hover{
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body>
+    <form action="/Student/Index" method="get">
+        <div class="form-group" style="margin-left:1em;">
+            <label for="Name">姓名：</label>
+            <input type="text" name="Name" value="@ViewBag.Name" />
+            @*<label for="DepartmentName">系部：</label>
+            <select name="DepartmentName" style="width:184px;height:30px;">
+                <option value="">未选择系部</option>
+                @if (ViewBag.DepartmentName != "")
+                {
+                    var check = false;
+                    foreach (var depart in dList)
+                    {
+                        if (ViewBag.DepartmentName == depart.DepartmentName)
+                        {
+                            check = true;
+                        }
+                        else
+                        {
+                            check = false;
+                        }
+                        <option value="@depart.DepartmentName" selected="@check">@depart.DepartmentName</option>
+                    }
+                }
+                else
+                {
+                    foreach (var depart in dList)
+                    {
+
+                        <option value="@depart.DepartmentName">@depart.DepartmentName</option>
+                    }
+                }
+            </select>
+            <label for="MajorName">专业：</label>
+            <select name="MajorName" style="width:184px;height:30px;">
+                <option value="">未选择专业</option>
+                @if (ViewBag.MajorName != "")
+                {
+                    var check = false;
+                    foreach (var major in mList)
+                    {
+                        if (ViewBag.MajorName == major.MajorName)
+                        {
+                            check = true;
+                        }
+                        else
+                        {
+                            check = false;
+                        }
+                        <option value="@major.MajorName" selected="@check">@major.MajorName</option>
+                    }
+                }
+                else
+                {
+                    foreach (var major in mList)
+                    {
+
+                        <option value="@major.MajorName">@major.MajorName</option>
+                    }
+                }
+            </select>
+            <label for="State">状态：</label>
+            <select name="State" style="width:184px;height:30px;">
+                <option value="">未选择状态</option>
+                @if (ViewBag.State != "")
+                {
+                    var check = false;
+                    foreach (var state in stateList)
+                    {
+                        if (ViewBag.State == state)
+                        {
+                            check = true;
+                        }
+                        else
+                        {
+                            check = false;
+                        }
+                        <option value="@state" selected="@check">@state</option>
+                    }
+                }
+                else
+                {
+                    foreach (var state in stateList)
+                    {
+
+                        <option value="@state">@state</option>
+                    }
+                }
+            </select>*@
+            <input type="submit" value="查询" class="btn btn-primary" style="margin-left:0.5em;" />
+        </div>
+    </form>
+    <table class="table table-bordered table-hover text-center" id="stu_table">
+        <tr class="bg-primary text-white">
+            <th>姓名</th>
+            <th>班级</th>
+            <th>性别</th>
+            <th>学号</th>
+            <th>图片</th>
+            <th>系部</th>
+            <th>专业</th>
+            <th>宿舍</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+        @foreach (var stu in Model)
+                {
+            <tr class="text-center" style="line-height:104px;">
+                <td>@stu.Name</td>
+                <td>@stu.Class.ClassName</td>
+                <td>@(stu.Sex==true?"男":"女")</td>
+                <td>@stu.Account</td>
+                <td><img src="~/Content/image/@stu.Photo" alt="@stu.Name" width="60" height="80" /></td>
+                <td>@stu.Class.Major.Department.DepartmentName</td>
+                <td>@stu.Class.Major.MajorName</td>
+                <td>
+                    @if (stu.DormID == null)
+                    {
+                        <span>该学生还没有宿舍！</span>
+                        <a href="">去分配</a>
+                    }
+                    else
+                    {
+                        <span>@stu.Dorm.Dormitory.Name - @stu.Dorm.DormNumber</span>
+                    }
+                </td>
+                <td>
+                    @stu.State
+                </td>
+                <td>
+                    <a href="/Student/EditStu/@stu.StuID" class="btn btn-info">编辑</a>
+                    <a href="/Student/DeleteStu/@stu.StuID" class="btn btn-danger" onclick="return confirm('您确定要删除该学生吗？')">删除</a>
+                </td>
+            </tr>
+        }
+    </table>
+    <div>
+        @*分页*@
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+        @*<span>每页 @Model.PageSize 条记录,共 @Model.PageCount 页，当前第 @Model.PageNumber 页</span>*@
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $(".pagination").append("<span style='border-style:none;'>每页 @Model.PageSize 条记录,共 @Model.PageCount 页，当前第 @Model.PageNumber 页</span>");
+
+        })
+    </script>
+</body>
+</html>

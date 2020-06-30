@@ -14,20 +14,14 @@ namespace ZyDMSystem.Models
     
     public partial class DormAdmin
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public DormAdmin()
-        {
-            this.Dormitory = new HashSet<Dormitory>();
-        }
-    
         public int DormAdminID { get; set; }
         public string Name { get; set; }
         public Nullable<bool> Sex { get; set; }
         public string Account { get; set; }
         public string Pwd { get; set; }
         public string Photo { get; set; }
+        public int DormitoryID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Dormitory> Dormitory { get; set; }
+        public virtual Dormitory Dormitory { get; set; }
     }
 }

@@ -76,11 +76,11 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light row" style="height:64px;">
-        <div class="col-lg-6">
+        <div class="col-lg-5">
             <img src="~/Content/image/未标题-1.jpg" style="height:192px;" />
             <a class="navbar-brand" href="#">智云宿舍管理系统</a>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-5">
             <div>欢迎使用智云宿舍管理系统！现在是北京时间：<span id="nowTime"></span></div>
         </div>
         <div class="collapse navbar-collapse col-lg-2" id="navbarNavDropdown">
@@ -141,9 +141,9 @@
                         </div>
                     </a>
                     <div class="menu_item">
-                        <div><a data-src="/Student/Index" href="#">学生管理</a></div>
-                        <div><a href="#">学生管理</a></div>
-                        <div><a href="#">学生管理</a></div>
+                        <div><a data-src="/Student/Index" href="#">学生列表</a></div>
+                        <div><a data-src="/Student/AddStu" href="#">学生添加</a></div>
+                        <div><a data-src="/AbsentRecord/Index" href="#">学生缺寝记录</a></div>
                     </div>
                 </li>
             </ul>
@@ -161,9 +161,10 @@
                         </div>
                     </a>
                     <div class="menu_item">
-                        <div><a href="/Home/Contact" data-ajax-update="#right_content" data-ajax="true">楼宇管理</a></div>
-                        <div><a href="/Home/About" data-ajax-update="#right_content" data-ajax="true">楼宇管理1</a></div>
-                        <div><a href="#">楼宇管理11</a></div>
+                        <div><a data-src="/Dormitory/Index" href="#">查看楼宇</a></div>
+                        <div><a data-src="/Dormitory/AddDorm" href="#">添加楼宇</a></div>
+                        <div><a data-src="/DormAdmin/Index" href="#">查看楼宇管理员</a></div>
+                        <div><a data-src="/DormAdmin/AddDormAdmin" href="#">添加楼宇管理员</a></div>
                     </div>
                 </li>
             </ul>

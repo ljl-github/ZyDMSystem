@@ -1,0 +1,149 @@
+﻿
+@{
+    Layout = null;
+}
+@using ZyDMSystem.Models
+@model Student
+    @{ 
+        var cList = ViewBag.Class as List<Class>;
+    }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.5.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <style type="text/css">
+        label.error, span.field-validation-error {
+            color: red;
+            margin-left: 1em;
+        }
+
+        input[type='text'], input[type='password'], input[type='file'], select {
+            width: 14.5%;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">学生管理</li>
+            <li class="breadcrumb-item"><a href="/Student/Index">学生列表</a></li>
+            <li class="breadcrumb-item active" aria-current="page">编辑学生信息</li>
+        </ol>
+    </nav>
+    <form id="EditForm" method="post" action="/Student/EditStu" enctype="multipart/form-data">
+        <input type="hidden" name="State" value="@Model.State" />@*入住状态*@
+        <input type="hidden" name="DormID" value="@Model.DormID" />@*宿舍*@
+        <input type="hidden" name="StuID" value="@Model.StuID" />@*ID*@
+        <div class="form-group">
+            <label for="Name">姓名：</label>
+            <input type="text" name="Name" value="@Model.Name" />
+        </div>
+        <div class="form-group">
+            <label for="Sex">性别：</label>
+            @if (Model.Sex == true)
+            {
+                <input type="radio" name="Sex" value="true" checked />@:男
+                <input type="radio" name="Sex" value="false" style="margin-left:2em;" />@:女
+            }
+            else
+            {
+                <input type="radio" name="Sex" value="true" />@:男
+                <input type="radio" name="Sex" value="false" checked style="margin-left:2em;" />@:女
+            }
+        </div>
+        <div class="form-group">
+            <label for="Account">学号：</label>
+            <input type="text" name="Account" value="@Model.Account" readonly />
+        </div>
+        <div class="form-group">
+            <label for="Pwd">密码：</label>
+            <input type="password" name="Pwd" value="@Model.Pwd" />
+        </div>
+        <div class="form-group">
+            <label for="Photo">图片：</label>
+            <img src="~/Content/image/@Model.Photo" alt="@Model.Name" width="50" height="50" id="stu_img" />
+            <input type="file" name="Photo" id="file" onchange="replaceImg()" />
+            @Html.ValidationMessage("errorMsg")
+        </div>
+        <div class="form-group">
+            <label for="ClassID">班级：</label>
+            <select name="ClassID">
+                @foreach (var cl in cList)
+                {
+                    var check = false;
+                    if (cl.ClassID == Model.ClassID)
+                    {
+                        check = true;
+                    }
+                    <option class="chooseClass" value="@cl.ClassID" selected="@check">@cl.ClassName</option>
+                }
+            </select>
+        </div>
+        <input type="button" class="btn btn-primary" id="btn_Edit" value="保存" />
+    </form>
+</body>
+</html>
+<script type="text/javascript">
+    $("#btn_Edit").click(function () {
+        $("#EditForm").submit();
+    });
+    $("#EditForm").validate({
+        rules: {
+            Name: { required: true, checkSinogram: true,maxlength: 8,minlength:2 },
+            Pwd: { required: true, checkPwd: true }
+        },
+        messages: {
+            Name: { required: "姓名不能为空！", checkSinogram: "姓名只能由汉字组成！", maxlength: "姓名最多输入8个汉字！", minlength:"姓名最少输入两个汉字！" },
+            Account: { required: "学号不能为空！", checkAccount:"学号为6位纯数字！" }
+        }
+    });
+    $.validator.addMethod("checkPwd", function (date) {
+        return /^[a-zA-Z0-9]{6,12}$/.test(date);
+    })
+    //验证姓名输入汉字
+    $.validator.addMethod("checkSinogram", function (date) {
+        var reg = new RegExp("[\\u4E00-\\u9FFF]+", "g");
+        return reg.test(date);
+    })
+    function replaceImg() {
+
+        //获得原来图片路径
+        var imgSrc = $("#stu_img").attr("src");
+        
+        //通过FormData构造函数创建一个空对象，存储格式为键，值
+        var formData = new FormData();
+        //将$("#file")jquery对象转换成$("#file")[0]js对象，还可以使用.get(0)，
+        //这样才能取得js对象的属性和方法
+        //multiple="multiple" 可上传多个文件，files[0] 取第一个
+        var filename = $("#file")[0].files[0];
+        if (filename != null)
+        {
+            formData.append('file', filename); //将文件转成二进制形式
+            $.ajax({
+                type: "post",
+                url: "/Student/ReplaceImg",//"/控制器名/控制器内方法"
+                async: false,
+                contentType: false, //这个一定要写
+                processData: false, //这个也一定要写，不然会报错,序列化配合formData使用
+                data: formData,
+                success: function (data) {
+                    //替换图片src
+                    if (data != "alert('图片格式不正确,请您重新选择！')") {
+                        $("#stu_img").attr("src", data);
+                    } else {
+                        var obj = document.getElementById('file');
+                        obj.outerHTML = obj.outerHTML;
+                    }
+                },
+                error: function (errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+        }
+    }
+</script>

@@ -6,7 +6,6 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="StuID" Type="int" Nullable="false" />
-    <Property Name="DormID" Type="int" Nullable="false" />
     <Property Name="Date" Type="date" />
   </EntityType>
   <EntityType Name="Admin">
@@ -64,6 +63,7 @@
     <Property Name="Account" Type="nvarchar" MaxLength="30" />
     <Property Name="Pwd" Type="nvarchar" MaxLength="50" />
     <Property Name="Photo" Type="nvarchar" MaxLength="100" />
+    <Property Name="DormitoryID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="DormExchange">
     <Key>
@@ -81,7 +81,6 @@
     </Key>
     <Property Name="DormitoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="30" />
-    <Property Name="DormAdminID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Major">
     <Key>
@@ -107,25 +106,13 @@
     <Property Name="StuID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="30" />
     <Property Name="Sex" Type="bit" />
-    <Property Name="Account" Type="nvarchar" MaxLength="30" />
+    <Property Name="Account" Type="nvarchar" MaxLength="6" />
     <Property Name="Pwd" Type="nvarchar" MaxLength="50" />
     <Property Name="Photo" Type="nvarchar" MaxLength="100" />
-    <Property Name="State" Type="int" />
+    <Property Name="State" Type="nvarchar" MaxLength="3" />
     <Property Name="ClassID" Type="int" Nullable="false" />
     <Property Name="DormID" Type="int" />
   </EntityType>
-  <Association Name="FK_AbsentRecord_Dorm">
-    <End Role="Dorm" Type="Self.Dorm" Multiplicity="1" />
-    <End Role="AbsentRecord" Type="Self.AbsentRecord" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Dorm">
-        <PropertyRef Name="DormID" />
-      </Principal>
-      <Dependent Role="AbsentRecord">
-        <PropertyRef Name="DormID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_AbsentRecord_Student">
     <End Role="Student" Type="Self.Student" Multiplicity="1" />
     <End Role="AbsentRecord" Type="Self.AbsentRecord" Multiplicity="*" />
@@ -186,6 +173,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_DormAdmin_Dormitory">
+    <End Role="Dormitory" Type="Self.Dormitory" Multiplicity="1" />
+    <End Role="DormAdmin" Type="Self.DormAdmin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dormitory">
+        <PropertyRef Name="DormitoryID" />
+      </Principal>
+      <Dependent Role="DormAdmin">
+        <PropertyRef Name="DormitoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_DormExchange_Dorm">
     <End Role="Dorm" Type="Self.Dorm" Multiplicity="1" />
     <End Role="DormExchange" Type="Self.DormExchange" Multiplicity="*" />
@@ -219,18 +218,6 @@
       </Principal>
       <Dependent Role="DormExchange">
         <PropertyRef Name="StuID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Dormitory_DormAdmin">
-    <End Role="DormAdmin" Type="Self.DormAdmin" Multiplicity="1" />
-    <End Role="Dormitory" Type="Self.Dormitory" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="DormAdmin">
-        <PropertyRef Name="DormAdminID" />
-      </Principal>
-      <Dependent Role="Dormitory">
-        <PropertyRef Name="DormAdminID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -307,10 +294,6 @@
     <EntitySet Name="Major" EntityType="Self.Major" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MoveOut" EntityType="Self.MoveOut" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_AbsentRecord_Dorm" Association="Self.FK_AbsentRecord_Dorm">
-      <End Role="Dorm" EntitySet="Dorm" />
-      <End Role="AbsentRecord" EntitySet="AbsentRecord" />
-    </AssociationSet>
     <AssociationSet Name="FK_AbsentRecord_Student" Association="Self.FK_AbsentRecord_Student">
       <End Role="Student" EntitySet="Student" />
       <End Role="AbsentRecord" EntitySet="AbsentRecord" />
@@ -331,6 +314,10 @@
       <End Role="Dormitory" EntitySet="Dormitory" />
       <End Role="Dorm" EntitySet="Dorm" />
     </AssociationSet>
+    <AssociationSet Name="FK_DormAdmin_Dormitory" Association="Self.FK_DormAdmin_Dormitory">
+      <End Role="Dormitory" EntitySet="Dormitory" />
+      <End Role="DormAdmin" EntitySet="DormAdmin" />
+    </AssociationSet>
     <AssociationSet Name="FK_DormExchange_Dorm" Association="Self.FK_DormExchange_Dorm">
       <End Role="Dorm" EntitySet="Dorm" />
       <End Role="DormExchange" EntitySet="DormExchange" />
@@ -342,10 +329,6 @@
     <AssociationSet Name="FK_DormExchange_Student" Association="Self.FK_DormExchange_Student">
       <End Role="Student" EntitySet="Student" />
       <End Role="DormExchange" EntitySet="DormExchange" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Dormitory_DormAdmin" Association="Self.FK_Dormitory_DormAdmin">
-      <End Role="DormAdmin" EntitySet="DormAdmin" />
-      <End Role="Dormitory" EntitySet="Dormitory" />
     </AssociationSet>
     <AssociationSet Name="FK_Major_Department" Association="Self.FK_Major_Department">
       <End Role="Department" EntitySet="Department" />

@@ -6,9 +6,7 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="StuID" Type="Int32" Nullable="false" />
-    <Property Name="DormID" Type="Int32" Nullable="false" />
     <Property Name="Date" Type="DateTime" Precision="0" />
-    <NavigationProperty Name="Dorm" Relationship="Self.FK_AbsentRecord_Dorm" FromRole="AbsentRecord" ToRole="Dorm" />
     <NavigationProperty Name="Student" Relationship="Self.FK_AbsentRecord_Student" FromRole="AbsentRecord" ToRole="Student" />
   </EntityType>
   <EntityType Name="Admin">
@@ -60,7 +58,6 @@
     <Property Name="DormNumber" Type="Int32" />
     <Property Name="PNumber" Type="Int32" />
     <Property Name="DormitoryID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="AbsentRecord" Relationship="Self.FK_AbsentRecord_Dorm" FromRole="Dorm" ToRole="AbsentRecord" />
     <NavigationProperty Name="CheckIn" Relationship="Self.FK_CheckIn_Dorm" FromRole="Dorm" ToRole="CheckIn" />
     <NavigationProperty Name="Dormitory" Relationship="Self.FK_Dorm_Dormitory" FromRole="Dorm" ToRole="Dormitory" />
     <NavigationProperty Name="DormExchange" Relationship="Self.FK_DormExchange_Dorm" FromRole="Dorm" ToRole="DormExchange" />
@@ -78,7 +75,8 @@
     <Property Name="Account" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
     <Property Name="Pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Photo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Dormitory" Relationship="Self.FK_Dormitory_DormAdmin" FromRole="DormAdmin" ToRole="Dormitory" />
+    <Property Name="DormitoryID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Dormitory" Relationship="Self.FK_DormAdmin_Dormitory" FromRole="DormAdmin" ToRole="Dormitory" />
   </EntityType>
   <EntityType Name="DormExchange">
     <Key>
@@ -99,9 +97,8 @@
     </Key>
     <Property Name="DormitoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="DormAdminID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Dorm" Relationship="Self.FK_Dorm_Dormitory" FromRole="Dormitory" ToRole="Dorm" />
-    <NavigationProperty Name="DormAdmin" Relationship="Self.FK_Dormitory_DormAdmin" FromRole="Dormitory" ToRole="DormAdmin" />
+    <NavigationProperty Name="DormAdmin" Relationship="Self.FK_DormAdmin_Dormitory" FromRole="Dormitory" ToRole="DormAdmin" />
   </EntityType>
   <EntityType Name="Major">
     <Key>
@@ -131,10 +128,10 @@
     <Property Name="StuID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
     <Property Name="Sex" Type="Boolean" />
-    <Property Name="Account" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Account" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
     <Property Name="Pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Photo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="State" Type="Int32" />
+    <Property Name="State" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
     <Property Name="ClassID" Type="Int32" Nullable="false" />
     <Property Name="DormID" Type="Int32" />
     <NavigationProperty Name="AbsentRecord" Relationship="Self.FK_AbsentRecord_Student" FromRole="Student" ToRole="AbsentRecord" />
@@ -144,18 +141,6 @@
     <NavigationProperty Name="DormExchange" Relationship="Self.FK_DormExchange_Student" FromRole="Student" ToRole="DormExchange" />
     <NavigationProperty Name="MoveOut" Relationship="Self.FK_MoveOut_Student" FromRole="Student" ToRole="MoveOut" />
   </EntityType>
-  <Association Name="FK_AbsentRecord_Dorm">
-    <End Role="Dorm" Type="Self.Dorm" Multiplicity="1" />
-    <End Role="AbsentRecord" Type="Self.AbsentRecord" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Dorm">
-        <PropertyRef Name="DormID" />
-      </Principal>
-      <Dependent Role="AbsentRecord">
-        <PropertyRef Name="DormID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_AbsentRecord_Student">
     <End Role="Student" Type="Self.Student" Multiplicity="1" />
     <End Role="AbsentRecord" Type="Self.AbsentRecord" Multiplicity="*" />
@@ -288,15 +273,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Dormitory_DormAdmin">
-    <End Role="DormAdmin" Type="Self.DormAdmin" Multiplicity="1" />
-    <End Role="Dormitory" Type="Self.Dormitory" Multiplicity="*" />
+  <Association Name="FK_DormAdmin_Dormitory">
+    <End Role="Dormitory" Type="Self.Dormitory" Multiplicity="1" />
+    <End Role="DormAdmin" Type="Self.DormAdmin" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="DormAdmin">
-        <PropertyRef Name="DormAdminID" />
+      <Principal Role="Dormitory">
+        <PropertyRef Name="DormitoryID" />
       </Principal>
-      <Dependent Role="Dormitory">
-        <PropertyRef Name="DormAdminID" />
+      <Dependent Role="DormAdmin">
+        <PropertyRef Name="DormitoryID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -337,10 +322,6 @@
     <EntitySet Name="Major" EntityType="Self.Major" />
     <EntitySet Name="MoveOut" EntityType="Self.MoveOut" />
     <EntitySet Name="Student" EntityType="Self.Student" />
-    <AssociationSet Name="FK_AbsentRecord_Dorm" Association="Self.FK_AbsentRecord_Dorm">
-      <End Role="Dorm" EntitySet="Dorm" />
-      <End Role="AbsentRecord" EntitySet="AbsentRecord" />
-    </AssociationSet>
     <AssociationSet Name="FK_AbsentRecord_Student" Association="Self.FK_AbsentRecord_Student">
       <End Role="Student" EntitySet="Student" />
       <End Role="AbsentRecord" EntitySet="AbsentRecord" />
@@ -385,9 +366,9 @@
       <End Role="Dorm" EntitySet="Dorm" />
       <End Role="Student" EntitySet="Student" />
     </AssociationSet>
-    <AssociationSet Name="FK_Dormitory_DormAdmin" Association="Self.FK_Dormitory_DormAdmin">
-      <End Role="DormAdmin" EntitySet="DormAdmin" />
+    <AssociationSet Name="FK_DormAdmin_Dormitory" Association="Self.FK_DormAdmin_Dormitory">
       <End Role="Dormitory" EntitySet="Dormitory" />
+      <End Role="DormAdmin" EntitySet="DormAdmin" />
     </AssociationSet>
     <AssociationSet Name="FK_DormExchange_Student" Association="Self.FK_DormExchange_Student">
       <End Role="Student" EntitySet="Student" />

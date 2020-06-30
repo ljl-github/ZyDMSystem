@@ -1,0 +1,123 @@
+﻿
+@{
+    Layout = null;
+}
+@using ZyDMSystem.Models
+@model List<Class>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.5.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <style type="text/css">
+        label.error, span.field-validation-error{
+            color: red;
+            margin-left: 1em;
+        }
+        input[type='text'], input[type='password'], input[type='file'],select{
+            width: 14.5%;
+            height:30px;
+        }
+    </style>
+</head>
+<body>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">学生管理</li>
+            <li class="breadcrumb-item active" aria-current="page">学生添加</li>
+        </ol>
+    </nav>
+    <form id="AddForm" method="post" action="/Student/AddStu" enctype="multipart/form-data">
+        <div class="form-group">
+            <input type="hidden" name="State" value="未入住" />@*入住状态*@
+            <input type="hidden" name="DormID" value="null" />@*宿舍*@
+            <label for="Name">姓名：</label>
+            <input type="text" name="Name" />
+        </div>
+        <div class="form-group">
+            <label for="Sex">性别：</label>
+            <input type="radio" name="Sex" value="true" checked />男
+            <input type="radio" name="Sex" value="false" style="margin-left:2em;" />女
+        </div>
+        <div class="form-group">
+            <label for="Account">学号：</label>
+            <input type="text" name="Account" onblur="checkAccount()" />
+        </div>
+        <div class="form-group">
+            <label for="Pwd">密码：</label>
+            <input type="password" name="Pwd" />
+        </div>
+        <div class="form-group">
+            <label for="Photo">图片：</label>
+            <input type="file" name="Photo" id="file" />
+            @Html.ValidationMessage("errorMsg")
+        </div>
+        <div class="form-group">
+            <label for="ClassID">班级：</label>
+            <select name="ClassID">
+                <option class="chooseClass" value="">--请选择班级--</option>
+                @foreach (var cl in Model)
+                {
+                    <option class="chooseClass" value="@cl.ClassID">@cl.ClassName</option>
+                }
+            </select>
+        </div>
+        <input type="button" class="btn btn-primary" id="btn_Add" value="添加"   />
+    </form>
+</body>
+</html>
+<script type="text/javascript">
+    $("#btn_Add").click(function () {
+        $("#AddForm").submit();
+    });
+    $("#AddForm").validate({
+        rules: {
+            Name: { required: true, checkSinogram: true,maxlength: 8,minlength:2 },
+            Account: { required: true, checkAccount: true },
+            Pwd: { required: true, checkPwd: true },
+            Photo: { required: true },
+            ClassID: { required: true }
+        },
+        messages: {
+            Name: { required: "姓名不能为空！", checkSinogram: "姓名只能由汉字组成！", maxlength: "姓名最多输入8个汉字！", minlength:"姓名最少输入两个汉字！" },
+            Account: { required: "学号不能为空！", checkAccount:"学号为6位纯数字！" },
+            Pwd: { required: "密码不能为空！", checkPwd: "密码组成为6-12位字母或数字！" },
+            Photo: { required: "请选择学生图片！" },
+            ClassID: { required: "请选择学生班级！" }
+        }
+    });
+    $.validator.addMethod("checkPwd", function (date) {
+        return /^[a-zA-Z0-9]{6,12}$/.test(date);
+    })
+    //验证姓名输入汉字
+    $.validator.addMethod("checkSinogram", function (date) {
+        var reg = new RegExp("[\\u4E00-\\u9FFF]+", "g");
+        return reg.test(date);
+    })
+    //验证学号输入数字
+    $.validator.addMethod("checkAccount", function (date) {
+        return /^[0-9_]{6}$/.test(date);
+    });
+
+    function checkAccount() {
+        var acc = $("input[name='Account']").val();
+        $.ajax({
+            url: "/Student/CheckAccount",
+            type: "get",
+            data: {
+                Account: acc
+            },
+            success: function (data) {
+                if (data==0) {
+                    alert('已有学生拥有该学号！,请重新输入！')
+                }
+            },
+            error: function () {
+                alert('发生了未知错误！')
+            }
+        })
+    }
+</script>
