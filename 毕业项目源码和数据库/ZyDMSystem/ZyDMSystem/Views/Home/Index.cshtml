@@ -2,19 +2,13 @@
     ViewBag.Title = "Index";
     Layout = null;
 }
+@{ 
+    var userAdmin=Session["admin"] as Admin;
+    var userDormAdmin = Session["dormAdmin"] as DormAdmin;
+    var userStu = Session["stu"] as Student;
+}
 @using ZyDMSystem.Models
-    @if (Session["admin"] != null)
-    {
-        var admin = Session["admin"] as Admin;
-    }
-    @if (Session["DormAdmin"] != null)
-    {
-        var dormAdmin = Session["DormAdmin"] as Admin;
-    }
-    @if (Session["stu"] != null)
-    {
-        var stu = Session["stu"] as Admin;
-    }
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,8 +35,8 @@
         }
 
         .card-img-top {
-            height: 30%;
-            width: 30%;
+            height: 120px;
+            width: 120px;
             border-radius: 50%;
             margin: 0 auto;
         }
@@ -99,10 +93,33 @@
             <ul class="navbar-nav " style="line-height:76px;font-size:22px;">
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="~/Content/image/" width="50" height="50" style="border-radius:50%;margin-bottom:0.5em;" />
+                        
+                        @if (userAdmin != null)
+                        {
+                            <img src="~/Content/image/@userAdmin.Photo" width="50" height="50" style="border-radius:50%;margin-bottom:0.5em;" />
+                        }
+                        @if (userDormAdmin != null)
+                        {
+                            <img src="~/Content/image/@userDormAdmin.Photo" width="50" height="50" style="border-radius:50%;margin-bottom:0.5em;" />
+                        }
+                        @if (userStu != null)
+                        {
+                            <img src="~/Content/image/@userStu.Photo" width="50" height="50" style="border-radius:50%;margin-bottom:0.5em;" />
+                        }
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="width:80px;">
-                        <a class="dropdown-item text-center" href="/Home/MyInfo">我的资料</a>
+                        @if (userAdmin != null)
+                        {
+                            <a class="dropdown-item text-center" href="#" data-src="/Home/MyInfo/@userAdmin.ID">我的资料</a>
+                        }
+                        @if (userDormAdmin != null)
+                        {
+                            <a class="dropdown-item text-center" href="#" data-src="/Home/MyInfo/@userDormAdmin.DormAdminID">我的资料</a>
+                        }
+                        @if (userStu != null)
+                        {
+                            <a class="dropdown-item text-center" href="#" data-src="/Home/MyInfo/@userStu.StuID" >我的资料</a>
+                        }
                         <a class="dropdown-item text-center" href="/Home/Quit">退出</a>
                     </div>
                 </li>
@@ -113,11 +130,31 @@
     <div class="row" style="margin:0px;padding:0px;">
         <div class="left col-lg-2">
             <div class="card bg-transparent border-0" style="width: 18rem;">
-                <img src="~/Content/image/1.jpg" class="card-img-top" alt="我的头像">
-                <div class="card-body text-center">
-                    <p class="card-text">姓名:雷建龙</p>
-                    <p class="card-text">电话:150********</p>
-                </div>
+                @if (userAdmin != null)
+                {
+                    <img src="~/Content/image/@userAdmin.Photo" class="card-img-top" alt="@userAdmin.Name">
+                    <div class="card-body text-center">
+                        <p class="card-text">姓名:@userAdmin.Name</p>
+                        <p class="card-text">性别:@(userAdmin.Sex==true?"男":"女")</p>
+                        <p class="card-text">工号:@userAdmin.Account</p>
+                    </div>
+                }
+                @if (userDormAdmin != null)
+                {
+                    <img src="~/Content/image/@userDormAdmin.Photo" class="card-img-top" alt="@userDormAdmin.Name">
+                    <p class="card-text">姓名:@userDormAdmin.Name</p>
+                    <p class="card-text">性别:@(userDormAdmin.Sex==true?"男":"女")</p>
+                    <p class="card-text">工号:@userDormAdmin.Account</p>
+                }
+                @if (userStu != null)
+                {
+                    <img src="~/Content/image/@userStu.Photo" class="card-img-top" alt="@userStu.Name">
+                    <div class="card-body text-center" id="info">
+                        <p class="card-text">姓名:@userStu.Name</p>
+                        <p class="card-text">性别:@(userStu.Sex==true?"男":"女")</p>
+                        <p class="card-text">工号:@userStu.Account</p>
+                    </div>
+                }
             </div>
             <ul class="left_menu">
                 <li>
@@ -211,6 +248,12 @@
             var src = $(this).attr("data-src");
             $("#iframe_content").attr("src", src);
         })
+
+        $("a.dropdown-item").click(function () {
+            var src = $(this).attr("data-src");
+            $("#iframe_content").attr("src", src);
+        })
+
         //iframe自适应高度
         function iFrameHeight() {
             var ifm = document.getElementById("iframe_content");

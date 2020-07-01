@@ -1,0 +1,46 @@
+﻿@{
+    Layout = null;
+}
+@using ZyDMSystem.Models
+@model List<DormAdmin>
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap4")
+    @Styles.Render("~/Content/css4")
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <title>Index</title>
+</head>
+<body>
+    <table class="table table-hover table-bordered">
+        <tr class="bg-light">
+            <th>姓名</th>
+            <th>性别</th>
+            <th>工号</th>
+            <th>照片</th>
+            <th>地址</th>
+            <th>操作</th>
+        </tr>
+        @foreach (var dAdmin in Model)
+        {
+            <tr>
+                <td>@dAdmin.Name</td>
+                <td>@(dAdmin.Sex==true?"男":"女")</td>
+                <td>@dAdmin.Account</td>
+                <td>
+                    <img src="~/Content/image/@dAdmin.Photo" alt="@dAdmin.Name" width="50" height="50" />
+                </td>
+                <td>@dAdmin.Address</td>
+                <td>
+                    <a href="#" class="btn btn-outline-primary">编辑</a>
+                    <a href="#" class="btn btn-outline-danger">删除</a>
+                </td>
+            </tr>
+        }
+    </table>
+</body>
+</html>

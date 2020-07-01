@@ -20,6 +20,8 @@ namespace ZyDMSystem.Controllers
         [HttpPost]
         public ActionResult Login(int Role,string Account,string Pwd)
         {
+            //session失效时间
+            Session.Timeout = 120;
             if (Role == 0)
             {
                 var admin = db.Admin.SingleOrDefault(a=>a.Account==Account&&a.Pwd==Pwd);
@@ -39,7 +41,7 @@ namespace ZyDMSystem.Controllers
                 var DormAdmin = db.DormAdmin.SingleOrDefault(a => a.Account == Account && a.Pwd == Pwd);
                 if (DormAdmin != null)
                 {
-                    Session["DormAdmin"] = DormAdmin;
+                    Session["dormAdmin"] = DormAdmin;
                     return RedirectToAction("Index", "Home");
                 }
                 else

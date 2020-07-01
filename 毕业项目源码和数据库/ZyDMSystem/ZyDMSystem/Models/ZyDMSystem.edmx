@@ -64,13 +64,12 @@
           </Key>
           <Property Name="DormAdminID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="30" />
-          <Property Name="Age" Type="int" />
           <Property Name="Sex" Type="bit" />
           <Property Name="Account" Type="nvarchar" MaxLength="30" />
           <Property Name="Pwd" Type="nvarchar" MaxLength="50" />
           <Property Name="Photo" Type="nvarchar" MaxLength="100" />
           <Property Name="Address" Type="nvarchar" MaxLength="100" />
-          <Property Name="DormitoryID" Type="int" Nullable="false" />
+          <Property Name="DormitoryID" Type="int" />
         </EntityType>
         <EntityType Name="DormExchange">
           <Key>
@@ -181,7 +180,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DormAdmin_Dormitory">
-          <End Role="Dormitory" Type="Self.Dormitory" Multiplicity="1" />
+          <End Role="Dormitory" Type="Self.Dormitory" Multiplicity="0..1" />
           <End Role="DormAdmin" Type="Self.DormAdmin" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Dormitory">
@@ -434,13 +433,12 @@
           </Key>
           <Property Name="DormAdminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Age" Type="Int32" />
           <Property Name="Sex" Type="Boolean" />
           <Property Name="Account" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Photo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="DormitoryID" Type="Int32" Nullable="false" />
+          <Property Name="DormitoryID" Type="Int32" />
           <NavigationProperty Name="Dormitory" Relationship="Self.FK_DormAdmin_Dormitory" FromRole="DormAdmin" ToRole="Dormitory" />
         </EntityType>
         <EntityType Name="DormExchange">
@@ -639,7 +637,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DormAdmin_Dormitory">
-          <End Role="Dormitory" Type="Self.Dormitory" Multiplicity="1" />
+          <End Role="Dormitory" Type="Self.Dormitory" Multiplicity="0..1" />
           <End Role="DormAdmin" Type="Self.DormAdmin" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Dormitory">
@@ -814,7 +812,6 @@
               <MappingFragment StoreEntitySet="DormAdmin">
                 <ScalarProperty Name="DormAdminID" ColumnName="DormAdminID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Age" ColumnName="Age" />
                 <ScalarProperty Name="Sex" ColumnName="Sex" />
                 <ScalarProperty Name="Account" ColumnName="Account" />
                 <ScalarProperty Name="Pwd" ColumnName="Pwd" />

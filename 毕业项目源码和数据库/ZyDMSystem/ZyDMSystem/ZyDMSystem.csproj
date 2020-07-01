@@ -377,6 +377,7 @@
     <Content Include="Views\Dormitory\Index.cshtml" />
     <Content Include="Views\Dormitory\SetDormAdmin.cshtml" />
     <Content Include="Views\DormAdmin\Index.cshtml" />
+    <Content Include="Views\Home\MyInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

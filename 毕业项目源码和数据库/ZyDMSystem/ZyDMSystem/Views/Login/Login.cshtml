@@ -65,7 +65,7 @@
             Role: { required: true }
         },
         messages: {
-            Account: { required: "", checkAccount: "学号/工号为纯数字!" },
+            Account: { required: "", checkAccount: "学号/工号为6-8位纯数字!" },
             Pwd: { required: "" ,checkPwd:"密码组成为6-12位字母或数字！"},
             Role: { required: "" }
         }
@@ -73,8 +73,8 @@
     $.validator.addMethod("checkPwd", function (date) {
         return /^[a-zA-Z0-9]{6,12}$/.test(date);
     })
-    //验证账号输入英文
+    //验证学号/工号输入数字
     $.validator.addMethod("checkAccount", function (date) {
-        return /^[0-9]$/.test(date);
+        return /^[0-9]{6,8}$/.test(date);
     })
 </script>
