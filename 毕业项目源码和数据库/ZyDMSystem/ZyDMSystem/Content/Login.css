@@ -205,3 +205,10 @@ input {
     transition: background-color 5000s ease-in-out 0s;
     caret-color: white; /*更改默认光标颜色*/
 }
+
+a.btn_Login {
+    width:100%;
+    margin:0px;
+    padding:0px;
+
+}

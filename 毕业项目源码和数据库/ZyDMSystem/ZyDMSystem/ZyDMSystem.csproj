@@ -137,6 +137,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AbsentRecordController.cs" />
+    <Compile Include="Controllers\DormAdminController.cs" />
     <Compile Include="Controllers\DormController.cs" />
     <Compile Include="Controllers\DormitoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -374,6 +375,8 @@
     <Content Include="Views\Student\EditStu.cshtml" />
     <Content Include="Views\AbsentRecord\Index.cshtml" />
     <Content Include="Views\Dormitory\Index.cshtml" />
+    <Content Include="Views\Dormitory\SetDormAdmin.cshtml" />
+    <Content Include="Views\DormAdmin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -7,13 +7,14 @@
 @using PagedList.Mvc;
 @model IPagedList<Dormitory>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap4")
     @Styles.Render("~/Content/css4")
-    <link href="~/Content/css/page.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.validate.js"></script>
     <title>楼宇列表</title>
     <style type="text/css">
         #stu_table tr td {
@@ -24,24 +25,33 @@
             width: 0.8em;
             height: 0.8em;
         }
-
             .checkbox:hover {
                 cursor: pointer;
             }
+        label.error {
+            color:red;
+        }
+        #Name-error {
+            color:red;
+        }
     </style>
 </head>
 <body>
     <form action="/Dormitory/Index" method="post">
         <div class="form-group" style="margin-left:1em;">
+            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#staticBackdrop">
+                添加楼宇
+            </button>
             <label for="Name">楼宇名称：</label>
             <input type="text" name="Name" value="@ViewBag.Name" />
             <input type="submit" value="查询" class="btn btn-primary" style="margin-left:0.5em;" />
         </div>
     </form>
-    <table class="table table-bordered table-hover text-center" id="stu_table">
+    <table class="table table-bordered table-hover text-center">
         <tr class="bg-primary text-white">
             <th>楼宇名称</th>
             <th>楼宇管理员</th>
+            <th>操作</th>
         </tr>
         @foreach (var dormitory in Model)
         {
@@ -52,6 +62,10 @@
                     {
                         @dormAdmin.Name @:
                     }
+                </td>
+                <td>
+                    <a href="#" class="btn  btn-outline-info">编辑楼宇</a>
+                    <a href="/Dormitory/SetDormAdmin/@dormitory.DormitoryID" class="btn  btn-outline-primary">设置楼宇管理员</a>
                 </td>
             </tr>
         }
@@ -65,7 +79,44 @@
         $(function () {
             $(".pagination").append("<span style='border-style:none;'>每页 @Model.PageSize 条记录,共 @Model.PageCount 页，当前第 @Model.PageNumber 页</span>");
 
+            $("#AddDorm").validate({
+                rules: {
+                    Name: { required: true}
+                },
+                messages: {
+                    Name: { required: "楼宇名称不能为空！" }
+                }
+            });
+            $("#btn_addDorm").click(function () {
+                $("#AddDorm").submit();
+            })
         })
     </script>
 </body>
 </html>
+
+<!-- 添加楼宇模态框 -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">添加楼宇</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/Dormitory/AddDorm" method="post" id="AddDorm">
+                    <div class="form-group">
+                        <label>楼宇名称：</label>
+                        <input type="text" name="Name" class="form-control" id="dName" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="btn_addDorm">添加</button>
+            </div>
+        </div>
+    </div>
+</div>

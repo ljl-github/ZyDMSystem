@@ -43,5 +43,68 @@ namespace ZyDMSystem.Controllers
             }
             return View(dormList);
         }
+        //设置楼宇管理员
+        public ActionResult SetDormAdmin(int? id) 
+        {
+            //所有楼宇管理员
+            ViewBag.dAdmin = db.DormAdmin.ToList();
+            //该楼宇管理员
+            ViewBag.dormAdmin = db.DormAdmin.Where(a=>a.DormitoryID==id).ToList();
+            return View(db.Dormitory.Find(id));
+        }
+        [HttpPost]
+        public ActionResult SetDormAdmin(int[] DormAdminID,int DormitoryID)
+        {
+            if (DormAdminID != null)
+            {
+                foreach (var admin in DormAdminID)
+                {
+                    var dAdmin = db.DormAdmin.Find(admin);
+                    dAdmin.DormitoryID = DormitoryID;
+                }
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                foreach (var admin in db.DormAdmin.ToList())
+                {
+                    admin.DormitoryID = null;
+                }
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
+        //添加楼宇
+        [HttpPost]
+        //public int AddDorm(string Name)
+        //{
+        //    var dormi = db.Dormitory.Where(a => a.Name == Name).ToList();
+        //    if (dormi.Count > 0)
+        //    {
+        //        return 0;
+        //    }
+        //    else
+        //    {
+        //        var dormitory = new Dormitory() { Name = Name };
+        //        db.Dormitory.Add(dormitory);
+        //        db.SaveChanges();
+        //        return 1;
+        //    }
+        //}
+        public ActionResult AddDorm(Dormitory dormitory)
+        {
+            var dormi = db.Dormitory.Where(a => a.Name == dormitory.Name).ToList();
+            if (dormi.Count > 0)
+            {
+                return Content("<script>alert('该楼宇已存在！');history.go(-1)</script>");
+            }
+            else
+            {
+                db.Dormitory.Add(dormitory);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
     }
 }

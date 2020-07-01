@@ -2,7 +2,19 @@
     ViewBag.Title = "Index";
     Layout = null;
 }
-
+@using ZyDMSystem.Models
+    @if (Session["admin"] != null)
+    {
+        var admin = Session["admin"] as Admin;
+    }
+    @if (Session["DormAdmin"] != null)
+    {
+        var dormAdmin = Session["DormAdmin"] as Admin;
+    }
+    @if (Session["stu"] != null)
+    {
+        var stu = Session["stu"] as Admin;
+    }
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,10 +99,10 @@
             <ul class="navbar-nav " style="line-height:76px;font-size:22px;">
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="~/Content/image/1.jpg" width="50" height="50" style="border-radius:50%;margin-bottom:0.5em;" />
+                        <img src="~/Content/image/" width="50" height="50" style="border-radius:50%;margin-bottom:0.5em;" />
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="width:80px;">
-                        <a class="dropdown-item text-center" href="#">我的资料</a>
+                        <a class="dropdown-item text-center" href="/Home/MyInfo">我的资料</a>
                         <a class="dropdown-item text-center" href="/Home/Quit">退出</a>
                     </div>
                 </li>
@@ -111,7 +123,7 @@
                 <li>
                     <a href="#" class="menu">
                         <div class="row">
-                            <div class="text-center col-lg-9">后台首页</div>
+                            <div class="text-center col-lg-9">后台管理</div>
                             <svg class="bi bi-chevron-down col-lg-3" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
                             </svg>
@@ -121,7 +133,7 @@
                         </div>
                     </a>
                     <div class="menu_item">
-                        <div><a href="#">首页管理1</a></div>
+                        <div><a href="#">首页</a></div>
                         <div><a href="#">首页管理1</a></div>
                         <div><a href="#">首页管理</a></div>
                     </div>
@@ -162,7 +174,6 @@
                     </a>
                     <div class="menu_item">
                         <div><a data-src="/Dormitory/Index" href="#">查看楼宇</a></div>
-                        <div><a data-src="/Dormitory/AddDorm" href="#">添加楼宇</a></div>
                         <div><a data-src="/DormAdmin/Index" href="#">查看楼宇管理员</a></div>
                         <div><a data-src="/DormAdmin/AddDormAdmin" href="#">添加楼宇管理员</a></div>
                     </div>

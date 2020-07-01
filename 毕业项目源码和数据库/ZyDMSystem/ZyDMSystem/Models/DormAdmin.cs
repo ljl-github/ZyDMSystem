@@ -16,11 +16,13 @@ namespace ZyDMSystem.Models
     {
         public int DormAdminID { get; set; }
         public string Name { get; set; }
+        public Nullable<int> Age { get; set; }
         public Nullable<bool> Sex { get; set; }
         public string Account { get; set; }
         public string Pwd { get; set; }
         public string Photo { get; set; }
-        public int DormitoryID { get; set; }
+        public string Address { get; set; }
+        public Nullable<int> DormitoryID { get; set; }
     
         public virtual Dormitory Dormitory { get; set; }
     }

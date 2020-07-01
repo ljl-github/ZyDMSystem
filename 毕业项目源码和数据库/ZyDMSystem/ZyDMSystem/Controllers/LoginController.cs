@@ -63,39 +63,39 @@ namespace ZyDMSystem.Controllers
                 }
             }
         }
-        public ActionResult Register()
-        {
-            return View(db.Class.ToList());
-        }
-        [HttpPost]
-        public ActionResult Register(HttpPostedFileBase Photo,Student student)
-        {
-            var stu = db.Student.SingleOrDefault(s=>s.Account==student.Account);
-            if (stu != null)
-            {
-                ModelState.AddModelError("errorMsg", "该账号已被注册！");
-                return View(db.Class.ToList());
-            }
-            else
-            {
-                //获取图片文件名 截取判断后缀名
-                string fileName = Path.GetFileName(Photo.FileName);
-                string fileFormat = fileName.Substring(fileName.LastIndexOf('.')+1);
-                if (fileFormat != "jpg" && fileFormat != "jpeg" && fileFormat != "png")
-                {
-                    ModelState.AddModelError("errorMsg", "图片格式不正确！");
-                    return View(db.Class.ToList());
-                }
-                else
-                {
-                    //保存图片
-                    Photo.SaveAs(Server.MapPath("~/Content/image/")+fileName);
-                    student.Photo = fileName;
-                    db.Student.Add(student);
-                    db.SaveChanges();
-                    return Content("<script>alert('注册成功！');location.href='/Login/Login';</script>");
-                }
-            }
-        }
+        //public ActionResult Register()
+        //{
+        //    return View(db.Class.ToList());
+        //}
+        //[HttpPost]
+        //public ActionResult Register(HttpPostedFileBase Photo,Student student)
+        //{
+        //    var stu = db.Student.SingleOrDefault(s=>s.Account==student.Account);
+        //    if (stu != null)
+        //    {
+        //        ModelState.AddModelError("errorMsg", "该账号已被注册！");
+        //        return View(db.Class.ToList());
+        //    }
+        //    else
+        //    {
+        //        //获取图片文件名 截取判断后缀名
+        //        string fileName = Path.GetFileName(Photo.FileName);
+        //        string fileFormat = fileName.Substring(fileName.LastIndexOf('.')+1);
+        //        if (fileFormat != "jpg" && fileFormat != "jpeg" && fileFormat != "png")
+        //        {
+        //            ModelState.AddModelError("errorMsg", "图片格式不正确！");
+        //            return View(db.Class.ToList());
+        //        }
+        //        else
+        //        {
+        //            //保存图片
+        //            Photo.SaveAs(Server.MapPath("~/Content/image/")+fileName);
+        //            student.Photo = fileName;
+        //            db.Student.Add(student);
+        //            db.SaveChanges();
+        //            return Content("<script>alert('注册成功！');location.href='/Login/Login';</script>");
+        //        }
+        //    }
+        //}
     }
 }

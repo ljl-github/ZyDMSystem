@@ -12,9 +12,10 @@
     string[] stateList ={ "已入住", "未入住", "已迁出" };
 }
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap4")
     @Styles.Render("~/Content/css4")
@@ -24,13 +25,15 @@
         #stu_table tr td {
             padding: 0px;
         }
+
         .checkbox {
-            width:0.8em;
-            height:0.8em;
+            width: 0.8em;
+            height: 0.8em;
         }
-        .checkbox:hover{
-            cursor:pointer;
-        }
+
+            .checkbox:hover {
+                cursor: pointer;
+            }
     </style>
 </head>
 <body>

@@ -93,3 +93,4 @@ E:\毕业项目\毕业项目源码和数据库\ZyDMSystem\ZyDMSystem\bin\PagedLi
 E:\毕业项目\毕业项目源码和数据库\ZyDMSystem\ZyDMSystem\bin\PagedList.Mvc.dll
 E:\毕业项目\毕业项目源码和数据库\ZyDMSystem\ZyDMSystem\bin\PagedList.xml
 E:\毕业项目\毕业项目源码和数据库\ZyDMSystem\ZyDMSystem\bin\PagedList.Mvc.xml
+E:\毕业项目\毕业项目源码和数据库\ZyDMSystem\ZyDMSystem\obj\Debug\ZyDMSystem.csprojAssemblyReference.cache
