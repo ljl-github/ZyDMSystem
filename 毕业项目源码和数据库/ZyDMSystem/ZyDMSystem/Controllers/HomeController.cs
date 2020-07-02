@@ -48,7 +48,8 @@ namespace ZyDMSystem.Controllers
         }
 
         //修改资料
-        public ActionResult UpdateInfo(int id,string Phone,string Address)
+        [HttpPost]
+        public int UpdateInfo(int id,string Phone,string Address)
         {
             if (Session["admin"] != null)
             {
@@ -56,6 +57,7 @@ namespace ZyDMSystem.Controllers
                 admin.Phone = Phone;
                 admin.Address = Address;
                 db.SaveChanges();
+                return 1;
             }
             if (Session["dormAdmin"] != null)
             {
@@ -63,6 +65,7 @@ namespace ZyDMSystem.Controllers
                 dormAdmin.Phone = Phone;
                 dormAdmin.Address = Address;
                 db.SaveChanges();
+                return 1;
             }
             if (Session["stu"] != null)
             {
@@ -70,8 +73,9 @@ namespace ZyDMSystem.Controllers
                 stu.Phone = Phone;
                 stu.Address = Address;
                 db.SaveChanges();
+                return 1;
             }
-            return RedirectToAction("Personal",new { id});
+            return 0;
         }
         //修改密码
         public ActionResult ReplacePwd(int id)

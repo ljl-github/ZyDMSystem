@@ -80,9 +80,6 @@
 </body>
 </html>
 <script>
-    $("#btn_save").click(function () {
-        $("#updateForm").submit();
-    });
     $("#updateForm").validate({
         rules: {
             Phone: {checkPhone: true }
@@ -93,5 +90,31 @@
     });
     $.validator.addMethod("checkPhone", function (date) {
         return /^1[3456789]\d{9}$/.test(date);
+    })
+
+    $("#btn_save").click(function () {
+        var id = $("input[name='ID']").val();
+        var phone = $("input[name='Phone']").val();
+        var address = $("input[name='Address']").val();
+        $.ajax({
+            type: "post",
+            url: "/Home/UpdateInfo",
+            data: {
+                "ID": id,
+                "Phone": phone,
+                "Address": address
+            },
+            success: function (data) {
+                if (data == 1) {
+                    alert('保存成功！');
+                    location.href = "/Home/MyInfo/" + id;
+                } else {
+                    alert('保存失败！')
+                }
+            },
+            error: function () {
+                alert('发生了未知错误！')
+            }
+        })
     })
 </script>

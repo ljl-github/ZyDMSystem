@@ -13,37 +13,27 @@ namespace ZyDMSystem.Controllers
     public class StudentController : Controller
     {
         ZyDMSystemEntities db = new ZyDMSystemEntities();
-        public static string name;
         // GET: Student
         //学生列表
+        public ActionResult Index(int? page = null)
+        {
+            List<Student> sList = db.Student.OrderByDescending(p => p.ClassID).ToList();
+            //第几页
+            int pageNumber = page ?? 1;
+            //每页显示5条
+            int pageSize = 5;
+            IPagedList<Student> stuList = sList.ToPagedList<Student>(pageNumber, pageSize);
+            return View(stuList);
+        }
+        [HttpPost]
         public ActionResult Index(string Name,int? page = null)
         {
-            IPagedList<Student> stuList = null;
-
-            if ((Name != "" && Name != null) || name != null)
-            {
-                if (name == null)
-                {
-                    name = Name;
-                }
-                var sList = db.Student.Where(s => s.Name == Name||s.Name==name).ToList();
-                //第几页
-                int pageNumber = page ?? 1;
-                //每页显示5条
-                int pageSize = 5;
-                ViewBag.Name = name;
-                stuList = sList.ToPagedList<Student>(pageNumber, pageSize);
-            }
-            else
-            {
-                ViewBag.Name = name;
-                var sList = db.Student.Where(s => s.Name.Contains("")).ToList();
-                //第几页
-                int pageNumber = page ?? 1;
-                //每页显示5条
-                int pageSize = 5;
-                stuList = sList.ToPagedList<Student>(pageNumber, pageSize);
-            }
+            List<Student> sList = db.Student.Where(s => (s.Name.Contains(Name))||(s.Name==Name)).OrderByDescending(p => p.ClassID).ToList();
+            //第几页
+            int pageNumber = page ?? 1;
+            //每页显示5条
+            int pageSize = 5;
+            IPagedList<Student> stuList = sList.ToPagedList<Student>(pageNumber, pageSize);
             return View(stuList);
         }
         //添加学生
@@ -105,6 +95,8 @@ namespace ZyDMSystem.Controllers
                 stu.Name = student.Name;
                 stu.Sex = student.Sex;
                 stu.Pwd = student.Pwd;
+                stu.Phone = student.Phone;
+                stu.Address = student.Address;
                 stu.ClassID = student.ClassID;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -115,6 +107,8 @@ namespace ZyDMSystem.Controllers
                 stu.Name = student.Name;
                 stu.Sex = student.Sex;
                 stu.Pwd = student.Pwd;
+                stu.Phone = student.Phone;
+                stu.Address = student.Address;
                 stu.ClassID = student.ClassID;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -131,7 +125,7 @@ namespace ZyDMSystem.Controllers
             string fileName = Path.GetFileName(file.FileName);
             //截取后缀名
             string fileFormat = Path.GetExtension(fileName);
-            if (fileFormat != ".jpg" && fileFormat != ".jpeg" && fileFormat != ".png")
+            if (fileFormat != ".jpg" && fileFormat != ".jpeg" && fileFormat != ".png" && fileFormat != ".JPG" && fileFormat != ".JPEG")
             {
                 return JavaScript("alert('图片格式不正确,请您重新选择！')");
             }
@@ -150,7 +144,7 @@ namespace ZyDMSystem.Controllers
             var student = db.Student.Find(id);
             if (student.State == "已入住")
             {
-                return Content("<script>alert('只能删除已迁出的学生！');location.href='/Student/Index';</script>");
+                return Content("<script>alert('只能删除未入住或已迁出的学生！');location.href='/Student/Index';</script>");
             }
             else
             {

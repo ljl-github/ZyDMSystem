@@ -1,0 +1,77 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap4")
+    @Styles.Render("~/Content/css4")
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <title>ReplacePwd</title>
+    <style>
+        label.error {
+            color:red;
+            margin-left:2em;
+        }
+    </style>
+</head>
+<body>
+    <h2>修改登录密码</h2>
+    <form action="/Home/ReplacePwd" method="post" id="replaceForm">
+        <div class="form-group">
+            <input type="hidden" name="ID" value="@Model.ID" />
+            <label>原始密码</label>
+            <input type="password" name="Pwd" />
+        </div>
+        <div class="form-group">
+            <label>&nbsp;&nbsp;&nbsp;新密码</label>
+            <input type="password" id="newPwd" name="newPwd" />
+        </div>
+        <a href="#" id="btn_save" class="btn btn-outline-primary">修改密码</a>
+    </form>
+</body>
+</html>
+<script>
+    $("#replaceForm").validate({
+        rules: {
+            newPwd: { required: true, checkPwd: true },
+        },
+        messages: {
+            newPwd: { required: "", checkPwd: "密码组成为6-12位字母或数字！" },
+        }
+    });
+    $.validator.addMethod("checkPwd", function (date) {
+        return /^[a-zA-Z0-9]{6,12}$/.test(date);
+    })
+    $("#btn_save").click(function () {
+        var id = $("input[name='ID']").val();
+        var pwd = $("input[name='Pwd']").val();
+        var newP = $("#newPwd").val();
+        $.ajax({
+            type: "post",
+            url: "/Home/ReplacePwd",
+            data: {
+                "ID": id,
+                "Pwd": pwd,
+                "newPwd": newP
+            },
+            success: function (data) {
+                if (data == 1) {
+                    alert('您已成功修改密码！');
+                    location.href = "/Home/Personal/" + id;
+                } else {
+                    alert('原始密码输入错误！')
+                }
+            },
+            error: function () {
+                alert('发生了未知错误！')
+            }
+        })
+    })
+</script>

@@ -39,7 +39,7 @@
     <form id="EditForm" method="post" action="/Student/EditStu" enctype="multipart/form-data">
         <input type="hidden" name="State" value="@Model.State" />@*入住状态*@
         <input type="hidden" name="DormID" value="@Model.DormID" />@*宿舍*@
-        <input type="hidden" name="StuID" value="@Model.StuID" />@*ID*@
+        <input type="hidden" name="ID" value="@Model.ID" />@*ID*@
         <div class="form-group">
             <label for="Name">姓名：</label>
             <input type="text" name="Name" value="@Model.Name" />
@@ -62,13 +62,22 @@
             <input type="text" name="Account" value="@Model.Account" readonly />
         </div>
         <div class="form-group">
+            <label for="Account">电话：</label>
+            <input type="text" name="Phone" value="@Model.Phone"  />
+        </div>
+        <div class="form-group">
+            <label for="Account">地址：</label>
+            <input type="text" name="Address" value="@Model.Address"  />
+        </div>
+        <div class="form-group" style="display:none">
             <label for="Pwd">密码：</label>
             <input type="password" name="Pwd" value="@Model.Pwd" />
         </div>
         <div class="form-group">
-            <label for="Photo">图片：</label>
+            <label for="Photo">照片：</label>
             <img src="~/Content/image/@Model.Photo" alt="@Model.Name" width="50" height="50" id="stu_img" />
-            <input type="file" name="Photo" id="file" onchange="replaceImg()" />
+            <input type="file" name="Photo" id="file" onchange="replaceImg()" style="display:none" />
+            <a href="#" id="cPhoto">更换头像</a>
             @Html.ValidationMessage("errorMsg")
         </div>
         <div class="form-group">
@@ -90,6 +99,9 @@
 </body>
 </html>
 <script type="text/javascript">
+    $("#cPhoto").click(function () {
+        $("#file").click();
+    })
     $("#btn_Edit").click(function () {
         $("#EditForm").submit();
     });
@@ -111,10 +123,10 @@
         var reg = new RegExp("[\\u4E00-\\u9FFF]+", "g");
         return reg.test(date);
     })
-    function replaceImg() {
 
-        //获得原来图片路径
-        var imgSrc = $("#stu_img").attr("src");
+    //获得原来图片路径
+    var imgSrc = $("#stu_img").attr("src");
+    function replaceImg() {
         
         //通过FormData构造函数创建一个空对象，存储格式为键，值
         var formData = new FormData();
@@ -137,6 +149,7 @@
                     if (data != "alert('图片格式不正确,请您重新选择！')") {
                         $("#stu_img").attr("src", data);
                     } else {
+                        $("#stu_img").attr("src", imgSrc);
                         var obj = document.getElementById('file');
                         obj.outerHTML = obj.outerHTML;
                     }
