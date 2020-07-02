@@ -82,11 +82,11 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light row" style="height:64px;">
-        <div class="col-lg-5">
+        <div class="col-lg-4">
             <img src="~/Content/image/未标题-1.jpg" style="height:192px;" />
             <a class="navbar-brand" href="#">智云宿舍管理系统</a>
         </div>
-        <div class="col-lg-5">
+        <div class="col-lg-6">
             <div>欢迎使用智云宿舍管理系统！现在是北京时间：<span id="nowTime"></span></div>
         </div>
         <div class="collapse navbar-collapse col-lg-2" id="navbarNavDropdown">
@@ -110,15 +110,15 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="width:80px;">
                         @if (userAdmin != null)
                         {
-                            <a class="dropdown-item text-center" href="#" data-src="/Home/MyInfo/@userAdmin.ID">我的资料</a>
+                            <a class="dropdown-item text-center" href="#" data-src="/Home/Personal/@userAdmin.ID">个人中心</a>
                         }
                         @if (userDormAdmin != null)
                         {
-                            <a class="dropdown-item text-center" href="#" data-src="/Home/MyInfo/@userDormAdmin.DormAdminID">我的资料</a>
+                            <a class="dropdown-item text-center" href="#" data-src="/Home/Personal/@userDormAdmin.ID">个人中心</a>
                         }
                         @if (userStu != null)
                         {
-                            <a class="dropdown-item text-center" href="#" data-src="/Home/MyInfo/@userStu.StuID" >我的资料</a>
+                            <a class="dropdown-item text-center" href="#" data-src="/Home/Personal/@userStu.ID">个人中心</a>
                         }
                         <a class="dropdown-item text-center" href="/Home/Quit">退出</a>
                     </div>
@@ -135,24 +135,23 @@
                     <img src="~/Content/image/@userAdmin.Photo" class="card-img-top" alt="@userAdmin.Name">
                     <div class="card-body text-center">
                         <p class="card-text">姓名:@userAdmin.Name</p>
-                        <p class="card-text">性别:@(userAdmin.Sex==true?"男":"女")</p>
                         <p class="card-text">工号:@userAdmin.Account</p>
                     </div>
                 }
                 @if (userDormAdmin != null)
                 {
                     <img src="~/Content/image/@userDormAdmin.Photo" class="card-img-top" alt="@userDormAdmin.Name">
-                    <p class="card-text">姓名:@userDormAdmin.Name</p>
-                    <p class="card-text">性别:@(userDormAdmin.Sex==true?"男":"女")</p>
-                    <p class="card-text">工号:@userDormAdmin.Account</p>
+                    <div class="card-body text-center" id="info">
+                        <p class="card-text">姓名:@userDormAdmin.Name</p>
+                        <p class="card-text">学号:@userDormAdmin.Account</p>
+                    </div>
                 }
                 @if (userStu != null)
                 {
                     <img src="~/Content/image/@userStu.Photo" class="card-img-top" alt="@userStu.Name">
                     <div class="card-body text-center" id="info">
                         <p class="card-text">姓名:@userStu.Name</p>
-                        <p class="card-text">性别:@(userStu.Sex==true?"男":"女")</p>
-                        <p class="card-text">工号:@userStu.Account</p>
+                        <p class="card-text">学号:@userStu.Account</p>
                     </div>
                 }
             </div>

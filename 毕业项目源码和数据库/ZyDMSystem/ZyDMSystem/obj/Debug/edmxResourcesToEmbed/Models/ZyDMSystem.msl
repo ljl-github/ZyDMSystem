@@ -19,6 +19,8 @@
           <ScalarProperty Name="Account" ColumnName="Account" />
           <ScalarProperty Name="Pwd" ColumnName="Pwd" />
           <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -63,12 +65,13 @@
     <EntitySetMapping Name="DormAdmin">
       <EntityTypeMapping TypeName="ZyDMSystemModel.DormAdmin">
         <MappingFragment StoreEntitySet="DormAdmin">
-          <ScalarProperty Name="DormAdminID" ColumnName="DormAdminID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Sex" ColumnName="Sex" />
           <ScalarProperty Name="Account" ColumnName="Account" />
           <ScalarProperty Name="Pwd" ColumnName="Pwd" />
           <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="DormitoryID" ColumnName="DormitoryID" />
         </MappingFragment>
@@ -115,12 +118,14 @@
     <EntitySetMapping Name="Student">
       <EntityTypeMapping TypeName="ZyDMSystemModel.Student">
         <MappingFragment StoreEntitySet="Student">
-          <ScalarProperty Name="StuID" ColumnName="StuID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Sex" ColumnName="Sex" />
           <ScalarProperty Name="Account" ColumnName="Account" />
           <ScalarProperty Name="Pwd" ColumnName="Pwd" />
           <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="State" ColumnName="State" />
           <ScalarProperty Name="ClassID" ColumnName="ClassID" />
           <ScalarProperty Name="DormID" ColumnName="DormID" />

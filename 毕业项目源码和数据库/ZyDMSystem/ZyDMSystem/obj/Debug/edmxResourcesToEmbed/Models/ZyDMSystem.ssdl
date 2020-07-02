@@ -18,6 +18,8 @@
     <Property Name="Account" Type="nvarchar" MaxLength="30" />
     <Property Name="Pwd" Type="nvarchar" MaxLength="50" />
     <Property Name="Photo" Type="nvarchar" MaxLength="100" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="11" />
+    <Property Name="Address" Type="nvarchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="CheckIn">
     <Key>
@@ -55,14 +57,15 @@
   </EntityType>
   <EntityType Name="DormAdmin">
     <Key>
-      <PropertyRef Name="DormAdminID" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="DormAdminID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="30" />
     <Property Name="Sex" Type="bit" />
     <Property Name="Account" Type="nvarchar" MaxLength="30" />
     <Property Name="Pwd" Type="nvarchar" MaxLength="50" />
     <Property Name="Photo" Type="nvarchar" MaxLength="100" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="11" />
     <Property Name="Address" Type="nvarchar" MaxLength="100" />
     <Property Name="DormitoryID" Type="int" />
   </EntityType>
@@ -102,14 +105,16 @@
   </EntityType>
   <EntityType Name="Student">
     <Key>
-      <PropertyRef Name="StuID" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="StuID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="30" />
     <Property Name="Sex" Type="bit" />
     <Property Name="Account" Type="nvarchar" MaxLength="6" />
     <Property Name="Pwd" Type="nvarchar" MaxLength="50" />
     <Property Name="Photo" Type="nvarchar" MaxLength="100" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="11" />
+    <Property Name="Address" Type="nvarchar" MaxLength="100" />
     <Property Name="State" Type="nvarchar" MaxLength="3" />
     <Property Name="ClassID" Type="int" Nullable="false" />
     <Property Name="DormID" Type="int" />
@@ -119,7 +124,7 @@
     <End Role="AbsentRecord" Type="Self.AbsentRecord" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Student">
-        <PropertyRef Name="StuID" />
+        <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="AbsentRecord">
         <PropertyRef Name="StuID" />
@@ -143,7 +148,7 @@
     <End Role="CheckIn" Type="Self.CheckIn" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Student">
-        <PropertyRef Name="StuID" />
+        <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CheckIn">
         <PropertyRef Name="StuID" />
@@ -215,7 +220,7 @@
     <End Role="DormExchange" Type="Self.DormExchange" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Student">
-        <PropertyRef Name="StuID" />
+        <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="DormExchange">
         <PropertyRef Name="StuID" />
@@ -251,7 +256,7 @@
     <End Role="MoveOut" Type="Self.MoveOut" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Student">
-        <PropertyRef Name="StuID" />
+        <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="MoveOut">
         <PropertyRef Name="StuID" />

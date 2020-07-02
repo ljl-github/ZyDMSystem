@@ -12,11 +12,86 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap4")
     @Styles.Render("~/Content/css4")
+    <script src="~/Scripts/jquery.validate.js"></script>
     <title>MyInfo</title>
+    <style type="text/css">
+        label.error {
+            color:red;
+            margin-left:2em;
+        }
+        a#btn_save {
+            display: inline-block;
+            width: 78px;
+            height: 38px;
+            line-height: 38px;
+            text-align: center;
+            border-radius: 15px;
+            border: 1px solid gray;
+            color: black;
+        }
+
+            a#btn_save:hover {
+                text-decoration: none;
+                cursor: pointer;
+                color: black;
+                background-color: rgba(128, 128, 128,0.2);
+            }
+    </style>
 </head>
 <body>
-    <div class="form-group">
-        <label>姓名：@Model.Name</label>
+    <h2>个人信息</h2>
+    <br />
+    <div>
+        <form id="updateForm" action="/Home/UpdateInfo" method="post">
+            <div class="form-group">
+                <input type="hidden" name="ID" value="@Model.ID" />
+                <label>电话：</label>
+                <input type="text" name="Phone" value="@Model.Phone" />
+            </div>
+            <div class="form-group">
+                <label>住址：</label>
+                <input type="text" name="Address" value="@Model.Address" />
+            </div>
+            <a href="#" id="btn_save">保存</a>
+        </form>
     </div>
+    <br />
+    <hr />
+    <div>
+        <label class="text-danger">*以下资料不可修改,如有疑问请联系管理员！</label>
+        <div class="form-group">
+            <label>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</label>
+            <input type="text" name="Name" value="@Model.Name" readonly />
+        </div>
+        <div class="form-group">
+            <label>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label>
+            <input type="text" name="Sex" value="@(Model.Sex==true?"男":"女")" readonly />
+        </div>
+        <div class="form-group">
+            <label>学号/工号：</label>
+            <input type="text" name="Account" value="@Model.Account" readonly />
+        </div>
+        <div class="form-group">
+            <label>照&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片：</label>
+            <img src="~/Content/image/@Model.Photo" alt="@Model.Name" width="100" height="100" />
+        </div>
+    </div>
+    <a href="/Home/Personal/@Model.ID">返回个人中心</a>
 </body>
 </html>
+<script>
+    $("#btn_save").click(function () {
+        $("#updateForm").submit();
+    });
+    $("#updateForm").validate({
+        rules: {
+            Phone: {checkPhone: true }
+        },
+        messages: {
+            Phone: {checkPhone: "请输入正确的电话！" }
+        }
+    });
+    $.validator.addMethod("checkPhone", function (date) {
+        return /^1[3456789]\d{9}$/.test(date);
+    })
+</script>

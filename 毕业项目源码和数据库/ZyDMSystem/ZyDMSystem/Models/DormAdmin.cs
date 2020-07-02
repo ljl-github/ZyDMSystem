@@ -14,12 +14,13 @@ namespace ZyDMSystem.Models
     
     public partial class DormAdmin
     {
-        public int DormAdminID { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
         public Nullable<bool> Sex { get; set; }
         public string Account { get; set; }
         public string Pwd { get; set; }
         public string Photo { get; set; }
+        public string Phone { get; set; }
         public string Address { get; set; }
         public Nullable<int> DormitoryID { get; set; }
     

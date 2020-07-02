@@ -96,7 +96,7 @@ namespace ZyDMSystem.Controllers
         [HttpPost]
         public ActionResult EditStu(HttpPostedFileBase Photo, Student student)
         {
-            var stu = db.Student.Find(student.StuID);
+            var stu = db.Student.Find(student.ID);
             if (Photo != null)
             {
                 //获取图片文件名 

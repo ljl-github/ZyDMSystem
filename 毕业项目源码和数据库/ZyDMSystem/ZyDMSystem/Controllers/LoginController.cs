@@ -15,13 +15,14 @@ namespace ZyDMSystem.Controllers
         // GET: Login
         public ActionResult Login()
         {
+            //每次进入登录界面是清空session
+            Session.Clear();
+
             return View();
         }
         [HttpPost]
         public ActionResult Login(int Role,string Account,string Pwd)
         {
-            //session失效时间
-            Session.Timeout = 120;
             if (Role == 0)
             {
                 var admin = db.Admin.SingleOrDefault(a=>a.Account==Account&&a.Pwd==Pwd);

@@ -20,5 +20,7 @@ namespace ZyDMSystem.Models
         public string Account { get; set; }
         public string Pwd { get; set; }
         public string Photo { get; set; }
+        public string Phone { get; set; }
+        public string Address { get; set; }
     }
 }
