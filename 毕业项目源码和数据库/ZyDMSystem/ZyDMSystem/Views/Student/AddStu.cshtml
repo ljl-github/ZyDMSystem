@@ -88,18 +88,18 @@
             Name: { required: true, checkSinogram: true,maxlength: 8,minlength:2 },
             Account: { required: true, checkAccount: true },
             Pwd: { required: true, checkPwd: true },
-            Phone: { required: true },
+            Phone: { required: true, checkPhone: true  },
             Address: { required: true },
-            Photo: { required: true },
+            Photo: { required: true},
             ClassID: { required: true }
         },
         messages: {
             Name: { required: "姓名不能为空！", checkSinogram: "姓名只能由汉字组成！", maxlength: "姓名最多输入8个汉字！", minlength:"姓名最少输入两个汉字！" },
             Account: { required: "学号不能为空！", checkAccount:"学号为6位纯数字！" },
             Pwd: { required: "密码不能为空！", checkPwd: "密码组成为6-12位字母或数字！" },
-            Phone: { required: "电话不能为空！" },
+            Phone: { required: "电话不能为空！",checkPhone: "请输入正确的电话！" },
             Address: { required: "住址不能为空！" },
-            Photo: { required: "请选择学生图片！" },
+            Photo: { required: "请选择学生图片！"},
             ClassID: { required: "请选择学生班级！" }
         }
     });
@@ -113,9 +113,11 @@
     })
     //验证学号输入数字
     $.validator.addMethod("checkAccount", function (date) {
-        return /^[0-9_]{6}$/.test(date);
+        return /^[0-9]{6}$/.test(date);
     });
-
+    $.validator.addMethod("checkPhone", function (date) {
+        return /^1[3456789]\d{9}$/.test(date);
+    })
     function checkAccount() {
         var acc = $("input[name='Account']").val();
         $.ajax({

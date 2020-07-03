@@ -23,7 +23,7 @@
                 <th></th>
                 <th>姓名</th>
                 <th>性别</th>
-                <th>年龄</th>
+                <th>电话</th>
                 <th>图片</th>
                 <th>住址</th>
             </tr>
@@ -32,7 +32,7 @@
                 var check = false;
                 foreach (var item in ViewBag.dormAdmin as List<DormAdmin>)
                 {
-                    if (dAdmin.DormAdminID == item.DormAdminID)
+                    if (dAdmin.ID == item.ID)
                     {
                         check = true;
                         break;
@@ -44,11 +44,11 @@
                 }
                 <tr>
                     <td>
-                        <input type="checkbox" name="DormAdminID" value="@dAdmin.DormAdminID" checked="@check" />
+                        <input type="checkbox" name="DormAdminID" value="@dAdmin.ID" checked="@check" />
                     </td>
                     <td>@dAdmin.Name</td>
                     <td>@(dAdmin.Sex==true?"男":"女")</td>
-                    <td>@dAdmin.Age</td>
+                    <td>@dAdmin.Phone</td>
                     <td>
                         <img src="~/Content/image/@dAdmin.Photo" alt="@dAdmin.Name" width="50" height="50" />
                     </td>

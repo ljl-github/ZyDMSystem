@@ -16,7 +16,7 @@ namespace ZyDMSystem.Models
     {
         public int ID { get; set; }
         public int StuID { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
+        public System.DateTime Date { get; set; }
     
         public virtual Student Student { get; set; }
     }

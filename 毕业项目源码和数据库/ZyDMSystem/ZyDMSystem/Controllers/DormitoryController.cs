@@ -11,36 +11,27 @@ namespace ZyDMSystem.Controllers
     public class DormitoryController : Controller
     {
         ZyDMSystemEntities db = new ZyDMSystemEntities();
-        public static string name;
         // GET: Dormitory
         //楼宇列表
+        public ActionResult Index(int? page = null)
+        {
+            List<Dormitory> dList = db.Dormitory.OrderBy(p => p.DormitoryID).ToList();
+            //第几页
+            int pageNumber = page ?? 1;
+            //每页显示5条
+            int pageSize = 5;
+            IPagedList<Dormitory> dormList = dList.ToPagedList<Dormitory>(pageNumber, pageSize);
+            return View(dormList);
+        }
+        [HttpPost]
         public ActionResult Index(string Name, int? page = null)
         {
-            IPagedList<Dormitory> dormList = null;
-            if ((Name != "" && Name != null) || name != null)
-            {
-                if (name == null)
-                {
-                    name = Name;
-                }
-                var dList = db.Dormitory.Where(s => ((s.Name == Name || s.Name == name))).ToList();
-                //第几页
-                int pageNumber = page ?? 1;
-                //每页显示5条
-                int pageSize = 5;
-                ViewBag.Name = name;
-                dormList = dList.ToPagedList<Dormitory>(pageNumber, pageSize);
-            }
-            else
-            {
-                ViewBag.Name = name;
-                var dList = db.Dormitory.Where(s => s.Name.Contains("")).ToList();
-                //第几页
-                int pageNumber = page ?? 1;
-                //每页显示5条
-                int pageSize = 5;
-                dormList = dList.ToPagedList<Dormitory>(pageNumber, pageSize);
-            }
+            List<Dormitory> dList = db.Dormitory.Where(s => (s.Name.Contains(Name)) || (s.Name == Name)).OrderBy(p => p.DormitoryID).ToList();
+            //第几页
+            int pageNumber = page ?? 1;
+            //每页显示5条
+            int pageSize = 5;
+            IPagedList<Dormitory> dormList = dList.ToPagedList<Dormitory>(pageNumber, pageSize);
             return View(dormList);
         }
         //设置楼宇管理员
@@ -77,34 +68,34 @@ namespace ZyDMSystem.Controllers
         }
         //添加楼宇
         [HttpPost]
-        //public int AddDorm(string Name)
-        //{
-        //    var dormi = db.Dormitory.Where(a => a.Name == Name).ToList();
-        //    if (dormi.Count > 0)
-        //    {
-        //        return 0;
-        //    }
-        //    else
-        //    {
-        //        var dormitory = new Dormitory() { Name = Name };
-        //        db.Dormitory.Add(dormitory);
-        //        db.SaveChanges();
-        //        return 1;
-        //    }
-        //}
         public ActionResult AddDorm(Dormitory dormitory)
         {
             var dormi = db.Dormitory.Where(a => a.Name == dormitory.Name).ToList();
             if (dormi.Count > 0)
             {
-                return Content("<script>alert('该楼宇已存在！');history.go(-1)</script>");
+                return Content("<script>alert('该楼宇已存在！');location.href='/Dormitory/Index';</script>");
             }
             else
             {
                 db.Dormitory.Add(dormitory);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Content("<script>alert('添加成功！');location.href='/Dormitory/Index';</script>");
             }
+        }
+
+        //楼宇信息
+        [HttpPost]
+        public ActionResult DormitoryDetail(int? id)
+        {
+            var dormitory = db.Dormitory.Find(id);
+            return Json(dormitory);
+        }
+        [HttpPost]
+        public ActionResult EditDormitory(Dormitory dormitory)
+        {
+            db.Entry(dormitory).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

@@ -6,7 +6,7 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="StuID" Type="Int32" Nullable="false" />
-    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
     <NavigationProperty Name="Student" Relationship="Self.FK_AbsentRecord_Student" FromRole="AbsentRecord" ToRole="Student" />
   </EntityType>
   <EntityType Name="Admin">

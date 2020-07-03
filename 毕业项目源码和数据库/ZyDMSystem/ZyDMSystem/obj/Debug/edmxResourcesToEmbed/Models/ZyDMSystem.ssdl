@@ -6,7 +6,7 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="StuID" Type="int" Nullable="false" />
-    <Property Name="Date" Type="date" />
+    <Property Name="Date" Type="date" Nullable="false" />
   </EntityType>
   <EntityType Name="Admin">
     <Key>

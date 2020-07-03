@@ -32,13 +32,15 @@
     </style>
 </head>
 <body>
-    <form action="/AbsentRecord/Index" method="post">
+    @*<form action="/AbsentRecord/Index" method="post">
         <div class="form-group" style="margin-left:1em;">
             <label for="Name">姓名：</label>
-            <input type="text" name="Name" value="@ViewBag.Name" />
+            <input type="text" name="Name" />
+            <label for="Date">缺寝时间：</label>
+            <input type="date" name="Date" value="@DateTime.Now" />
             <input type="submit" value="查询" class="btn btn-primary" style="margin-left:0.5em;" />
         </div>
-    </form>
+    </form>*@
     <table class="table table-bordered table-hover text-center" id="stu_table">
         <tr class="bg-primary text-white">
             <th>姓名</th>

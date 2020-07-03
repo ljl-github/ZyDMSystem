@@ -15,6 +15,7 @@
     @Scripts.Render("~/bundles/bootstrap4")
     @Styles.Render("~/Content/css4")
     <script src="~/Scripts/jquery.validate.js"></script>
+    <link href="~/Content/css/page.css" rel="stylesheet" />
     <title>楼宇列表</title>
     <style type="text/css">
         #stu_table tr td {
@@ -25,14 +26,17 @@
             width: 0.8em;
             height: 0.8em;
         }
+
             .checkbox:hover {
                 cursor: pointer;
             }
+
         label.error {
-            color:red;
+            color: red;
         }
+
         #Name-error {
-            color:red;
+            color: red;
         }
     </style>
 </head>
@@ -64,7 +68,7 @@
                     }
                 </td>
                 <td>
-                    <a href="#" class="btn  btn-outline-info">编辑楼宇</a>
+                    <button class="btn btn-outline-info" data-toggle="modal" data-target="#EditDormitoryModel" data-whatever="@dormitory.DormitoryID">编辑楼宇</button>
                     <a href="/Dormitory/SetDormAdmin/@dormitory.DormitoryID" class="btn  btn-outline-primary">设置楼宇管理员</a>
                 </td>
             </tr>
@@ -120,3 +124,53 @@
         </div>
     </div>
 </div>
+<!-- 修改提示模态框（Modal） -->
+<div class="modal fade" id="EditDormitoryModel" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">修改老师信息</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/Teacher/EditTeacher" id="editTeacherForm">
+                    <input type="hidden" value="TeacherID" name="TeacherID" />
+                    <div class="form-group">
+                        <label class="control-label" for="TeacherName">老师姓名:</label>
+                        <input type="text" name="TeacherName" class="form-control" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="editSubmit">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#EditDormitoryModel').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) //点击触发的按钮
+        var dID = button.data('whatever') //获取传递的值
+        var modal = $(this) //获得监控的模式框
+
+        //模式框赋值
+        $.ajax({
+            type: "post",
+            url: "/Dormitory/DormitoryDetail",
+            dataType: "json",
+            data: {
+                "id": dID
+            },
+            success: function (data) {
+                alert(data)
+            },
+            error: function () {
+                alert('0')
+            }
+        });
+
+    });
+</script>
