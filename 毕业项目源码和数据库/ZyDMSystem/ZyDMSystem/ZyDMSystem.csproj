@@ -383,6 +383,7 @@
     <Content Include="Views\DormAdmin\EditDormAdmin.cshtml" />
     <Content Include="Views\DormAdmin\AddDormAdmin.cshtml" />
     <Content Include="Views\Dorm\Index.cshtml" />
+    <Content Include="Views\Dorm\DistributeDorm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
