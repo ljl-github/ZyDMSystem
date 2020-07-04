@@ -59,7 +59,7 @@ namespace ZyDMSystem.Controllers
                 student.Photo = fileName;
                 db.Student.Add(student);
                 db.SaveChanges();
-                return Content("<script>alert('添加成功！');location.href='/Student/AddStu';</script>");
+                return Content("<script>alert('添加成功！');location.href='/Student/Index';</script>");
             }
         }
 

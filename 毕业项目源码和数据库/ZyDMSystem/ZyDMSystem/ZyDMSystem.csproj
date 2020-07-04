@@ -380,10 +380,12 @@
     <Content Include="Views\Home\MyInfo.cshtml" />
     <Content Include="Views\Home\Personal.cshtml" />
     <Content Include="Views\Home\ReplacePwd.cshtml" />
+    <Content Include="Views\DormAdmin\EditDormAdmin.cshtml" />
+    <Content Include="Views\DormAdmin\AddDormAdmin.cshtml" />
+    <Content Include="Views\Dorm\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Dorm\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

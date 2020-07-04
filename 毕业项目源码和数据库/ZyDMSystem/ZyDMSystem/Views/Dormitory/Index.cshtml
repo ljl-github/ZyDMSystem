@@ -68,7 +68,7 @@
                     }
                 </td>
                 <td>
-                    <button class="btn btn-outline-info" data-toggle="modal" data-target="#EditDormitoryModel" data-whatever="@dormitory.DormitoryID">编辑楼宇</button>
+                    <button class="btn btn-outline-info" data-toggle="modal" data-target="#EditDormitoryModel" data-whatever="@dormitory.DormitoryID" data-whatever1="@dormitory.Name">编辑楼宇</button>
                     <a href="/Dormitory/SetDormAdmin/@dormitory.DormitoryID" class="btn  btn-outline-primary">设置楼宇管理员</a>
                 </td>
             </tr>
@@ -135,11 +135,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="/Teacher/EditTeacher" id="editTeacherForm">
-                    <input type="hidden" value="TeacherID" name="TeacherID" />
+                <form method="post" action="/Dormitory/EditDormitory" id="editDormitoryForm">
+                    <input type="hidden" value="DormitoryID" name="DormitoryID" />
                     <div class="form-group">
-                        <label class="control-label" for="TeacherName">老师姓名:</label>
-                        <input type="text" name="TeacherName" class="form-control" />
+                        <label class="control-label" for="Name">楼宇名称:</label>
+                        <input type="text" name="Name" class="form-control" />
                     </div>
                 </form>
             </div>
@@ -154,23 +154,15 @@
     $('#EditDormitoryModel').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) //点击触发的按钮
         var dID = button.data('whatever') //获取传递的值
+        var Name = button.data('whatever1')
         var modal = $(this) //获得监控的模式框
 
         //模式框赋值
-        $.ajax({
-            type: "post",
-            url: "/Dormitory/DormitoryDetail",
-            dataType: "json",
-            data: {
-                "id": dID
-            },
-            success: function (data) {
-                alert(data)
-            },
-            error: function () {
-                alert('0')
-            }
-        });
+        modal.find('.modal-body input[name="DormitoryID"]').val(dID);
+        modal.find('.modal-body input[name="Name"]').val(Name);
 
     });
+    $("#editSubmit").click(function () {
+        $("#editDormitoryForm").submit();
+    })
 </script>

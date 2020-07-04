@@ -58,7 +58,8 @@ namespace ZyDMSystem.Controllers
             }
             else
             {
-                foreach (var admin in db.DormAdmin.ToList())
+                var adminList=db.DormAdmin.Where(a=>a.DormitoryID==DormitoryID).ToList();
+                foreach (var admin in adminList)
                 {
                     admin.DormitoryID = null;
                 }
@@ -84,7 +85,6 @@ namespace ZyDMSystem.Controllers
         }
 
         //楼宇信息
-        [HttpPost]
         public ActionResult DormitoryDetail(int? id)
         {
             var dormitory = db.Dormitory.Find(id);
@@ -95,7 +95,7 @@ namespace ZyDMSystem.Controllers
         {
             db.Entry(dormitory).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Content("<script>alert('编辑成功！');history.go(-1);</script>");
         }
     }
 }

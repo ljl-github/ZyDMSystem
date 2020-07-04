@@ -1,10 +1,12 @@
-﻿@{
+﻿
+@{
     Layout = null;
 }
-@using ZyDMSystem.Models
-@model List<DormAdmin>
+@using ZyDMSystem.Models;
+@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<DormAdmin>
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -12,35 +14,62 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap4")
     @Styles.Render("~/Content/css4")
-    <script src="~/Scripts/jquery.validate.js"></script>
-    <title>Index</title>
+    <link href="~/Content/css/page.css" rel="stylesheet" />
+    <title>楼宇管理员管理</title>
+    <style type="text/css">
+        #stu_table tr td {
+            padding: 0px;
+        }
+    </style>
 </head>
 <body>
-    <table class="table table-hover table-bordered">
-        <tr class="bg-light">
+    <table class="table table-bordered table-hover text-center" id="stu_table">
+        <tr class="bg-primary text-white">
             <th>姓名</th>
             <th>性别</th>
             <th>工号</th>
-            <th>照片</th>
+            <th>电话</th>
             <th>地址</th>
+            <th>图片</th>
+            <th>管理楼宇</th>
             <th>操作</th>
         </tr>
         @foreach (var dAdmin in Model)
         {
-            <tr>
+            <tr class="text-center" style="line-height:104px;">
                 <td>@dAdmin.Name</td>
                 <td>@(dAdmin.Sex==true?"男":"女")</td>
                 <td>@dAdmin.Account</td>
-                <td>
-                    <img src="~/Content/image/@dAdmin.Photo" alt="@dAdmin.Name" width="50" height="50" />
-                </td>
+                <td>@dAdmin.Phone</td>
                 <td>@dAdmin.Address</td>
+                <td><img src="~/Content/image/@dAdmin.Photo" alt="@dAdmin.Name" width="60" height="80" /></td>
                 <td>
-                    <a href="#" class="btn btn-outline-primary">编辑</a>
-                    <a href="#" class="btn btn-outline-danger">删除</a>
+                    @if (dAdmin.DormitoryID != null)
+                    { 
+                        @dAdmin.Dormitory.Name
+                    }
+                    else
+                    {
+                        @:无
+                    }
+                </td>
+                <td>
+                    <a href="/DormAdmin/EditDormAdmin/@dAdmin.ID" class="btn btn-info">编辑</a>
+                    <a href="/DormAdmin/DeleteDormAdmin/@dAdmin.ID" class="btn btn-danger" onclick="return confirm('您确定要删除该学生吗？')">删除</a>
                 </td>
             </tr>
         }
     </table>
+    <div>
+        @*分页*@
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+        @*<span>每页 @Model.PageSize 条记录,共 @Model.PageCount 页，当前第 @Model.PageNumber 页</span>*@
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $(".pagination").append("<span style='border-style:none;'>每页 @Model.PageSize 条记录,共 @Model.PageCount 页，当前第 @Model.PageNumber 页</span>");
+
+        })
+    </script>
 </body>
 </html>
