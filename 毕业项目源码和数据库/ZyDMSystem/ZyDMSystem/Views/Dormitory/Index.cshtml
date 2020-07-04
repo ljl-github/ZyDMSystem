@@ -55,6 +55,7 @@
         <tr class="bg-primary text-white">
             <th>楼宇名称</th>
             <th>楼宇管理员</th>
+            <th>宿舍</th>
             <th>操作</th>
         </tr>
         @foreach (var dormitory in Model)
@@ -68,7 +69,14 @@
                     }
                 </td>
                 <td>
+                    @foreach (var dorm in dormitory.Dorm)
+                    {
+                        @dorm.DormNumber @:
+                    }
+                </td>
+                <td>
                     <button class="btn btn-outline-info" data-toggle="modal" data-target="#EditDormitoryModel" data-whatever="@dormitory.DormitoryID" data-whatever1="@dormitory.Name">编辑楼宇</button>
+                    <a href="/Dorm/ForAddDorm/@dormitory.DormitoryID" class="btn  btn-outline-warning">添加宿舍</a>
                     <a href="/Dormitory/SetDormAdmin/@dormitory.DormitoryID" class="btn  btn-outline-primary">设置楼宇管理员</a>
                 </td>
             </tr>

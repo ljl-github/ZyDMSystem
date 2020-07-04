@@ -1,10 +1,13 @@
 ﻿using PagedList;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ZyDMSystem.Models;
+using ZyDMSystem.BLL;
 
 namespace ZyDMSystem.Controllers
 {
@@ -54,7 +57,7 @@ namespace ZyDMSystem.Controllers
                     dAdmin.DormitoryID = DormitoryID;
                 }
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Content("<script>alert('设置成功！');location.href='/Dormitory/Index';</script>");
             }
             else
             {
@@ -64,7 +67,7 @@ namespace ZyDMSystem.Controllers
                     admin.DormitoryID = null;
                 }
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Content("<script>alert('设置成功！');location.href='/Dormitory/Index';</script>");
             }
         }
         //添加楼宇
@@ -80,10 +83,11 @@ namespace ZyDMSystem.Controllers
             {
                 db.Dormitory.Add(dormitory);
                 db.SaveChanges();
-                return Content("<script>alert('添加成功！');location.href='/Dormitory/Index';</script>");
+                //添加成功则返回提示并跳转到添加宿舍界面
+                string successMsg = "<script>alert('添加成功,请您为该楼宇添加宿舍！');location.href='/Dorm/AddDorm/" + dormitory.DormitoryID + "';</script>";
+                return Content(successMsg);
             }
         }
-
         //楼宇信息
         public ActionResult DormitoryDetail(int? id)
         {
@@ -96,6 +100,38 @@ namespace ZyDMSystem.Controllers
             db.Entry(dormitory).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
             return Content("<script>alert('编辑成功！');history.go(-1);</script>");
+        }
+        //Excel批量导入宿舍
+        [HttpPost]
+        public ActionResult ExcelToUpload(int id)
+        {  //用来存储excel表中读出来的数据
+            DataTable excelTable = new DataTable();
+            string msg = "";
+            if (Request.Files.Count > 0) //request.files.count客户端传过来几个文件
+            {
+                try
+                {
+                    HttpPostedFileBase mypost = Request.Files[0];//取客户端传过来多个文件的第一个
+                    string fileName = Path.GetFileName(mypost.FileName);//通过文件流取文件名称
+                    string serverpath = Server.MapPath(
+                    string.Format("~/{0}", "Excel")); //获取要存入的服务器上的地址
+                    string path = Path.Combine(serverpath, fileName); //将定义的服务器路径和文件名结合，形成完整路径
+                    mypost.SaveAs(path); //将文件保存
+                    //msg = "文件上传成功！";
+                    excelTable = ImportExcel.GetExcelDataTable(path);//获得表数据
+                    msg = SaveExcelToDB.InsertDataToDB(excelTable, id);// 写入基础数据
+
+                }
+                catch (Exception ex)
+                {
+                    msg = ex.Message;
+                }
+            }
+            else
+            {
+                msg = "请选择文件";
+            }
+            return Json(msg);
         }
     }
 }

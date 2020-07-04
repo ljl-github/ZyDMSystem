@@ -77,5 +77,29 @@ namespace ZyDMSystem.Controllers
                         };
             return Json(dList, JsonRequestBehavior.AllowGet);
         }
+
+        //为楼宇添加宿舍
+        public ActionResult ForAddDorm(int? id)
+        {
+            return View(db.Dormitory.Find(id));
+        }
+        [HttpPost]
+        public ActionResult AddDorm(Dorm dorm)
+        {
+            var dor = db.Dorm.Where(d => d.DormNumber == dorm.DormNumber&&d.DormitoryID==dorm.DormitoryID).ToList();
+            if (dor.Count>0)
+            {
+                //添加失败则返回提示并跳转到上一页
+                string errorMsg = "<script>alert('该宿舍已存在！');history.go(-1);</script>";
+                return Content(errorMsg);
+            }
+            else
+            {
+                //添加成功则返回到楼宇列表
+                db.Dorm.Add(dorm);
+                db.SaveChanges();
+                return Content("<script>alert('添加成功！');location.href='/Dormitory/Index';</script>");
+            }
+        }
     }
 }
