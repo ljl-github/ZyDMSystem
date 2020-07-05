@@ -32,22 +32,19 @@
     </style>
 </head>
 <body>
-    @*<form action="/AbsentRecord/Index" method="post">
+    <form action="/AbsentRecord/Index" method="post">
         <div class="form-group" style="margin-left:1em;">
             <label for="Name">姓名：</label>
             <input type="text" name="Name" />
-            <label for="Date">缺寝时间：</label>
-            <input type="date" name="Date" value="@DateTime.Now" />
             <input type="submit" value="查询" class="btn btn-primary" style="margin-left:0.5em;" />
         </div>
-    </form>*@
+    </form>
     <table class="table table-bordered table-hover text-center" id="stu_table">
         <tr class="bg-primary text-white">
             <th>姓名</th>
             <th>班级</th>
             <th>性别</th>
             <th>学号</th>
-            <th>图片</th>
             <th>系部</th>
             <th>专业</th>
             <th>宿舍</th>
@@ -55,12 +52,11 @@
         </tr>
         @foreach (var stu in Model)
         {
-            <tr class="text-center" style="line-height:104px;">
+            <tr class="text-center" style="line-height:39px;">
                 <td>@stu.Student.Name</td>
                 <td>@stu.Student.Class.ClassName</td>
                 <td>@(stu.Student.Sex==true?"男":"女")</td>
                 <td>@stu.Student.Account</td>
-                <td><img src="~/Content/image/@stu.Student.Photo" alt="@stu.Student.Name" width="60" height="80" /></td>
                 <td>@stu.Student.Class.Major.Department.DepartmentName</td>
                 <td>@stu.Student.Class.Major.MajorName</td>
                 <td>

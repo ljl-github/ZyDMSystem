@@ -39,6 +39,7 @@
 <body>
     <form action="/Student/Index" method="post">
         <div class="form-group" style="margin-left:1em;">
+            <a href="/Student/AddStu" class="btn btn-outline-primary">添加学生</a>
             <label for="Name">姓名：</label>
             <input type="text" name="Name" />
             <input type="submit" value="查询" class="btn btn-primary" style="margin-left:0.5em;" />
@@ -52,7 +53,6 @@
             <th>学号</th>
             <th>电话</th>
             <th>地址</th>
-            <th>图片</th>
             <th>系部</th>
             <th>专业</th>
             <th>宿舍</th>
@@ -60,15 +60,14 @@
             <th>操作</th>
         </tr>
         @foreach (var stu in Model)
-                {
-            <tr class="text-center" style="line-height:104px;">
+        {
+            <tr class="text-center" style="line-height:39px;">
                 <td>@stu.Name</td>
                 <td>@stu.Class.ClassName</td>
                 <td>@(stu.Sex==true?"男":"女")</td>
                 <td>@stu.Account</td>
                 <td>@stu.Phone</td>
                 <td>@stu.Address</td>
-                <td><img src="~/Content/image/@stu.Photo" alt="@stu.Name" width="60" height="80" /></td>
                 <td>@stu.Class.Major.Department.DepartmentName</td>
                 <td>@stu.Class.Major.MajorName</td>
                 <td>

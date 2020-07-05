@@ -17,7 +17,6 @@
     <Property Name="Sex" Type="bit" />
     <Property Name="Account" Type="nvarchar" MaxLength="30" />
     <Property Name="Pwd" Type="nvarchar" MaxLength="50" />
-    <Property Name="Photo" Type="nvarchar" MaxLength="100" />
     <Property Name="Phone" Type="nvarchar" MaxLength="11" />
     <Property Name="Address" Type="nvarchar" MaxLength="100" />
   </EntityType>
@@ -50,8 +49,8 @@
       <PropertyRef Name="DormID" />
     </Key>
     <Property Name="DormID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Floor" Type="int" />
     <Property Name="DormNumber" Type="int" />
+    <Property Name="Floor" Type="int" />
     <Property Name="PNumber" Type="int" />
     <Property Name="DormitoryID" Type="int" Nullable="false" />
   </EntityType>
@@ -64,7 +63,6 @@
     <Property Name="Sex" Type="bit" />
     <Property Name="Account" Type="nvarchar" MaxLength="30" />
     <Property Name="Pwd" Type="nvarchar" MaxLength="50" />
-    <Property Name="Photo" Type="nvarchar" MaxLength="100" />
     <Property Name="Phone" Type="nvarchar" MaxLength="11" />
     <Property Name="Address" Type="nvarchar" MaxLength="100" />
     <Property Name="DormitoryID" Type="int" />
@@ -112,7 +110,6 @@
     <Property Name="Sex" Type="bit" />
     <Property Name="Account" Type="nvarchar" MaxLength="6" />
     <Property Name="Pwd" Type="nvarchar" MaxLength="50" />
-    <Property Name="Photo" Type="nvarchar" MaxLength="100" />
     <Property Name="Phone" Type="nvarchar" MaxLength="11" />
     <Property Name="Address" Type="nvarchar" MaxLength="100" />
     <Property Name="State" Type="nvarchar" MaxLength="3" />

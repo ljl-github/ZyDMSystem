@@ -23,6 +23,14 @@
     </style>
 </head>
 <body>
+    <form action="/DormAdmin/Index" method="post">
+        <div class="form-group" style="margin-left:1em;">
+            <a href="/DormAdmin/AddDormAdmin" class="btn btn-outline-primary">添加楼宇管理员</a>
+            <label for="Name">姓名：</label>
+            <input type="text" name="Name" />
+            <input type="submit" value="查询" class="btn btn-primary" style="margin-left:0.5em;" />
+        </div>
+    </form>
     <table class="table table-bordered table-hover text-center" id="stu_table">
         <tr class="bg-primary text-white">
             <th>姓名</th>
@@ -30,22 +38,20 @@
             <th>工号</th>
             <th>电话</th>
             <th>地址</th>
-            <th>图片</th>
             <th>管理楼宇</th>
             <th>操作</th>
         </tr>
         @foreach (var dAdmin in Model)
         {
-            <tr class="text-center" style="line-height:104px;">
+            <tr class="text-center" style="line-height:39px;">
                 <td>@dAdmin.Name</td>
                 <td>@(dAdmin.Sex==true?"男":"女")</td>
                 <td>@dAdmin.Account</td>
                 <td>@dAdmin.Phone</td>
                 <td>@dAdmin.Address</td>
-                <td><img src="~/Content/image/@dAdmin.Photo" alt="@dAdmin.Name" width="60" height="80" /></td>
                 <td>
                     @if (dAdmin.DormitoryID != null)
-                    { 
+                    {
                         @dAdmin.Dormitory.Name
                     }
                     else
@@ -68,7 +74,6 @@
     <script type="text/javascript">
         $(function () {
             $(".pagination").append("<span style='border-style:none;'>每页 @Model.PageSize 条记录,共 @Model.PageCount 页，当前第 @Model.PageNumber 页</span>");
-
         })
     </script>
 </body>

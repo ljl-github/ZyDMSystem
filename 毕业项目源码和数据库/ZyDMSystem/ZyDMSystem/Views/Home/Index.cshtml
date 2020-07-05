@@ -34,49 +34,41 @@
             line-height: 30px;
         }
 
-        .card-img-top {
-            height: 120px;
-            width: 120px;
-            border-radius: 50%;
-            margin: 0 auto;
-        }
-
         .left_menu {
             margin: 0px;
             padding: 0px;
         }
-
-            .left_menu a.menu {
-                color: #565656;
-                font-size: 24px;
-            }
-
-            .left_menu .menu:hover {
-                color: black;
-                text-decoration: none;
-            }
-
-            .left_menu a.menu svg {
-                margin-top: 0.2em;
-            }
-
-        .menu_item {
-            display: none;
-            margin-left: 3.5em;
+        .left_menu .row{
+            color:black;
         }
-
-            .menu_item a {
-                color: #565656;
-                font-size: 20px;
-            }
-
-                .menu_item a:hover {
-                    color: black;
-                    text-decoration: none;
-                }
-
+         .left_menu .row:hover{
+            color:black;
+            opacity:0.7;
+        }
+        a.menu {
+            color:white;
+            font-size:24px;
+        }
+        a.menu:hover{
+            text-decoration:none;
+        }
+        a.menu .row svg{
+            margin-top:0.2em;
+        }
+        .left{
+            padding:0px;
+            margin:0px;
+        }
         .left, .right {
             margin-top: 0.8em;
+        }
+        #navbarDropdownMenuLink font{
+            font-size:18px;
+            color:black;
+        }
+        #navbarDropdownMenuLink font:hover{
+            font-size: 18px;
+            color: blue;
         }
     </style>
 </head>
@@ -93,18 +85,18 @@
             <ul class="navbar-nav " style="line-height:76px;font-size:22px;">
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        
+
                         @if (userAdmin != null)
                         {
-                            <img src="~/Content/image/@userAdmin.Photo" width="50" height="50" style="border-radius:50%;margin-bottom:0.5em;" />
+                            <font>@userAdmin.Name</font>
                         }
                         @if (userDormAdmin != null)
                         {
-                            <img src="~/Content/image/@userDormAdmin.Photo" width="50" height="50" style="border-radius:50%;margin-bottom:0.5em;" />
+                            <font>@userDormAdmin.Name</font>
                         }
                         @if (userStu != null)
                         {
-                            <img src="~/Content/image/@userStu.Photo" width="50" height="50" style="border-radius:50%;margin-bottom:0.5em;" />
+                            <font>@userStu.Name</font>
                         }
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="width:80px;">
@@ -124,95 +116,88 @@
                     </div>
                 </li>
             </ul>
-            <a class="btn btn-danger" href="/Home/Quit">退出系统</a>
+            <a class="btn btn-danger" href="/Home/Quit">退出</a>
         </div>
     </nav>
     <div class="row" style="margin:0px;padding:0px;">
         <div class="left col-lg-2">
-            <div class="card bg-transparent border-0" style="width: 18rem;">
-                @if (userAdmin != null)
-                {
-                    <img src="~/Content/image/@userAdmin.Photo" class="card-img-top" alt="@userAdmin.Name">
-                    <div class="card-body text-center">
-                        <p class="card-text">姓名:@userAdmin.Name</p>
-                        <p class="card-text">工号:@userAdmin.Account</p>
-                    </div>
-                }
-                @if (userDormAdmin != null)
-                {
-                    <img src="~/Content/image/@userDormAdmin.Photo" class="card-img-top" alt="@userDormAdmin.Name">
-                    <div class="card-body text-center" id="info">
-                        <p class="card-text">姓名:@userDormAdmin.Name</p>
-                        <p class="card-text">学号:@userDormAdmin.Account</p>
-                    </div>
-                }
-                @if (userStu != null)
-                {
-                    <img src="~/Content/image/@userStu.Photo" class="card-img-top" alt="@userStu.Name">
-                    <div class="card-body text-center" id="info">
-                        <p class="card-text">姓名:@userStu.Name</p>
-                        <p class="card-text">学号:@userStu.Account</p>
-                    </div>
-                }
-            </div>
             <ul class="left_menu">
                 <li>
-                    <a href="#" class="menu">
+                    <a href="#" data-src="/Home/About" class="menu">
                         <div class="row">
-                            <div class="text-center col-lg-9">后台管理</div>
-                            <svg class="bi bi-chevron-down col-lg-3" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-                            </svg>
-                            <svg style="display:none" class="bi bi-chevron-up col-lg-3" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" />
+                            <div class="text-center col-lg-9">后台首页</div>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-double-right col-lg-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+                                <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
                             </svg>
                         </div>
                     </a>
-                    <div class="menu_item">
-                        <div><a href="#">首页</a></div>
-                        <div><a href="#">首页管理1</a></div>
-                        <div><a href="#">首页管理</a></div>
-                    </div>
                 </li>
-            </ul>
-            <ul class="left_menu">
                 <li>
-                    <a href="#" class="menu">
+                    <a href="#" data-src="/Student/Index" class="menu">
                         <div class="row">
                             <div class="text-center col-lg-9">学生管理</div>
-                            <svg class="bi bi-chevron-down col-lg-3" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-                            </svg>
-                            <svg style="display:none" class="bi bi-chevron-up col-lg-3" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" />
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-double-right col-lg-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+                                <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
                             </svg>
                         </div>
                     </a>
-                    <div class="menu_item">
-                        <div><a data-src="/Student/Index" href="#">学生列表</a></div>
-                        <div><a data-src="/Student/AddStu" href="#">学生添加</a></div>
-                        <div><a data-src="/AbsentRecord/Index" href="#">学生缺寝记录</a></div>
-                    </div>
                 </li>
-            </ul>
-            <ul class="left_menu">
                 <li>
-                    <a href="#" class="menu">
+                    <a data-src="/CheckIn/Index" href="#" class="menu">
+                        <div class="row">
+                            <div class="text-center col-lg-9">入住记录</div>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-double-right col-lg-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+                                <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+                            </svg>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a data-src="/AbsentRecord/Index" href="#" class="menu">
+                        <div class="row">
+                            <div class="text-center col-lg-9">缺寝记录</div>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-double-right col-lg-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+                                <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+                            </svg>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a data-src="/MoveOut/Index" href="#" class="menu">
+                        <div class="row">
+                            <div class="text-center col-lg-9">迁出记录</div>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-double-right col-lg-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+                                <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+                            </svg>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a data-src="/Dormitory/Index" href="#" class="menu">
                         <div class="row">
                             <div class="text-center col-lg-9">楼宇管理</div>
-                            <svg class="bi bi-chevron-down col-lg-3" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-                            </svg>
-                            <svg style="display:none" class="bi bi-chevron-up col-lg-3" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" />
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-double-right col-lg-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+                                <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
                             </svg>
                         </div>
                     </a>
-                    <div class="menu_item">
-                        <div><a data-src="/Dormitory/Index" href="#">查看楼宇</a></div>
-                        <div><a data-src="/DormAdmin/Index" href="#">楼宇管理员管理</a></div>
-                        <div><a data-src="/DormAdmin/AddDormAdmin" href="#">添加楼宇管理员</a></div>
-                    </div>
+                </li>
+                <li>
+                    <a data-src="/DormAdmin/Index" href="#" class="menu">
+                        <div class="row">
+                            <div class="col-lg-9 text-center">楼宇管理员</div>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-double-right col-lg-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+                                <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+                            </svg>
+                        </div>
+                    </a>
                 </li>
             </ul>
         </div>
@@ -238,12 +223,8 @@
         //使用定时器每秒向div写入当前时间
         setInterval("getDate()", 1000);
 
-        $(".menu").click(function () {
-            $(this).parent().children("div").slideToggle(500);
-            $(this).children().children("svg").toggle();
-        })
 
-        $(".menu_item div a").click(function () {
+        $(".left_menu a.menu").click(function () {
             var src = $(this).attr("data-src");
             $("#iframe_content").attr("src", src);
         })

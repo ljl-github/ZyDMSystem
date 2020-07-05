@@ -19,8 +19,19 @@ namespace ZyDMSystem.Controllers
             List<DormAdmin> dList = db.DormAdmin.ToList();
             //第几页
             int pageNumber = page ?? 1;
-            //每页显示5条
-            int pageSize = 5;
+            //每页显示10条
+            int pageSize = 10;
+            IPagedList<DormAdmin> dAdminList = dList.ToPagedList<DormAdmin>(pageNumber, pageSize);
+            return View(dAdminList);
+        }
+        [HttpPost]
+        public ActionResult Index(string Name, int? page = null)
+        {
+            List<DormAdmin> dList = db.DormAdmin.Where(s => (s.Name.Contains(Name)) || (s.Name == Name)).ToList();
+            //第几页
+            int pageNumber = page ?? 1;
+            //每页显示10条
+            int pageSize = 10;
             IPagedList<DormAdmin> dAdminList = dList.ToPagedList<DormAdmin>(pageNumber, pageSize);
             return View(dAdminList);
         }
@@ -31,35 +42,11 @@ namespace ZyDMSystem.Controllers
             return View(db.DormAdmin.Find(id));
         }
         [HttpPost]
-        public ActionResult EditDormAdmin(HttpPostedFileBase Photo, DormAdmin dormAdmin)
+        public ActionResult EditDormAdmin(DormAdmin dormAdmin)
         {
-            var adm = db.DormAdmin.Find(dormAdmin.ID);
-            if (Photo != null)
-            {
-                //获取图片文件名 
-                string fileName = Path.GetFileName(Photo.FileName);
-                adm.Photo = fileName;
-                adm.Name = dormAdmin.Name;
-                adm.Sex = dormAdmin.Sex;
-                adm.Pwd = dormAdmin.Pwd;
-                adm.Phone = dormAdmin.Phone;
-                adm.Address = dormAdmin.Address;
-                adm.DormitoryID = dormAdmin.DormitoryID;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                dormAdmin.Photo = adm.Photo;
-                adm.Name = dormAdmin.Name;
-                adm.Sex = dormAdmin.Sex;
-                adm.Pwd = dormAdmin.Pwd;
-                adm.Phone = dormAdmin.Phone;
-                adm.Address = dormAdmin.Address;
-                adm.DormitoryID = dormAdmin.DormitoryID;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            db.Entry(dormAdmin).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         //添加
@@ -68,24 +55,17 @@ namespace ZyDMSystem.Controllers
             return View(db.Dormitory.ToList());
         }
         [HttpPost]
-        public ActionResult AddDormAdmin(HttpPostedFileBase Photo, DormAdmin dormAdmin)
+        public ActionResult AddDormAdmin(DormAdmin dormAdmin)
         {
-            //获取图片文件名 截取判断后缀名
-            string fileName = Path.GetFileName(Photo.FileName);
-            string fileFormat = fileName.Substring(fileName.LastIndexOf('.') + 1);
-            if (fileFormat != "jpg" && fileFormat != "jpeg" && fileFormat != "png" && fileFormat != "JPG" && fileFormat != "JPEG")
+            if (ModelState.IsValid)
             {
-                ModelState.AddModelError("errorMsg", "图片格式不正确！");
-                return View(db.Dormitory.ToList());
-            }
-            else
-            {
-                //保存图片
-                Photo.SaveAs(Server.MapPath("~/Content/image/") + fileName);
-                dormAdmin.Photo = fileName;
                 db.DormAdmin.Add(dormAdmin);
                 db.SaveChanges();
                 return Content("<script>alert('添加成功！');location.href='/DormAdmin/Index';</script>");
+            }
+            else
+            {
+                return Content("<script>alert('添加失败！');location.href='/DormAdmin/Index';</script>");
             }
         }
         //检查工号

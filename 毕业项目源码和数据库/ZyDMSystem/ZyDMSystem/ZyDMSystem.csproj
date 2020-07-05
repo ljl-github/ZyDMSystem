@@ -158,11 +158,13 @@
     <Compile Include="BLL\ImportExcel.cs" />
     <Compile Include="BLL\SaveExcelToDB.cs" />
     <Compile Include="Controllers\AbsentRecordController.cs" />
+    <Compile Include="Controllers\CheckInController.cs" />
     <Compile Include="Controllers\DormAdminController.cs" />
     <Compile Include="Controllers\DormController.cs" />
     <Compile Include="Controllers\DormitoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MoveOutController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -406,6 +408,8 @@
     <Content Include="Views\Dorm\Index.cshtml" />
     <Content Include="Views\Dorm\DistributeDorm.cshtml" />
     <Content Include="Views\Dorm\ForAddDorm.cshtml" />
+    <Content Include="Views\CheckIn\Index.cshtml" />
+    <Content Include="Views\MoveOut\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

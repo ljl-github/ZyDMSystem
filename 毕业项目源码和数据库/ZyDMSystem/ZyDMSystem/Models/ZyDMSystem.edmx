@@ -22,7 +22,6 @@
           <Property Name="Sex" Type="bit" />
           <Property Name="Account" Type="nvarchar" MaxLength="30" />
           <Property Name="Pwd" Type="nvarchar" MaxLength="50" />
-          <Property Name="Photo" Type="nvarchar" MaxLength="100" />
           <Property Name="Phone" Type="nvarchar" MaxLength="11" />
           <Property Name="Address" Type="nvarchar" MaxLength="100" />
         </EntityType>
@@ -55,8 +54,8 @@
             <PropertyRef Name="DormID" />
           </Key>
           <Property Name="DormID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Floor" Type="int" />
           <Property Name="DormNumber" Type="int" />
+          <Property Name="Floor" Type="int" />
           <Property Name="PNumber" Type="int" />
           <Property Name="DormitoryID" Type="int" Nullable="false" />
         </EntityType>
@@ -69,7 +68,6 @@
           <Property Name="Sex" Type="bit" />
           <Property Name="Account" Type="nvarchar" MaxLength="30" />
           <Property Name="Pwd" Type="nvarchar" MaxLength="50" />
-          <Property Name="Photo" Type="nvarchar" MaxLength="100" />
           <Property Name="Phone" Type="nvarchar" MaxLength="11" />
           <Property Name="Address" Type="nvarchar" MaxLength="100" />
           <Property Name="DormitoryID" Type="int" />
@@ -117,7 +115,6 @@
           <Property Name="Sex" Type="bit" />
           <Property Name="Account" Type="nvarchar" MaxLength="6" />
           <Property Name="Pwd" Type="nvarchar" MaxLength="50" />
-          <Property Name="Photo" Type="nvarchar" MaxLength="100" />
           <Property Name="Phone" Type="nvarchar" MaxLength="11" />
           <Property Name="Address" Type="nvarchar" MaxLength="100" />
           <Property Name="State" Type="nvarchar" MaxLength="3" />
@@ -385,7 +382,6 @@
           <Property Name="Sex" Type="Boolean" />
           <Property Name="Account" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Photo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -423,8 +419,8 @@
             <PropertyRef Name="DormID" />
           </Key>
           <Property Name="DormID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Floor" Type="Int32" />
           <Property Name="DormNumber" Type="Int32" />
+          <Property Name="Floor" Type="Int32" />
           <Property Name="PNumber" Type="Int32" />
           <Property Name="DormitoryID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CheckIn" Relationship="Self.FK_CheckIn_Dorm" FromRole="Dorm" ToRole="CheckIn" />
@@ -443,7 +439,6 @@
           <Property Name="Sex" Type="Boolean" />
           <Property Name="Account" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Photo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="DormitoryID" Type="Int32" />
@@ -501,7 +496,6 @@
           <Property Name="Sex" Type="Boolean" />
           <Property Name="Account" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
           <Property Name="Pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Photo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="State" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
@@ -775,7 +769,6 @@
                 <ScalarProperty Name="Sex" ColumnName="Sex" />
                 <ScalarProperty Name="Account" ColumnName="Account" />
                 <ScalarProperty Name="Pwd" ColumnName="Pwd" />
-                <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
               </MappingFragment>
@@ -812,8 +805,8 @@
             <EntityTypeMapping TypeName="ZyDMSystemModel.Dorm">
               <MappingFragment StoreEntitySet="Dorm">
                 <ScalarProperty Name="DormID" ColumnName="DormID" />
-                <ScalarProperty Name="Floor" ColumnName="Floor" />
                 <ScalarProperty Name="DormNumber" ColumnName="DormNumber" />
+                <ScalarProperty Name="Floor" ColumnName="Floor" />
                 <ScalarProperty Name="PNumber" ColumnName="PNumber" />
                 <ScalarProperty Name="DormitoryID" ColumnName="DormitoryID" />
               </MappingFragment>
@@ -827,7 +820,6 @@
                 <ScalarProperty Name="Sex" ColumnName="Sex" />
                 <ScalarProperty Name="Account" ColumnName="Account" />
                 <ScalarProperty Name="Pwd" ColumnName="Pwd" />
-                <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="DormitoryID" ColumnName="DormitoryID" />
@@ -880,7 +872,6 @@
                 <ScalarProperty Name="Sex" ColumnName="Sex" />
                 <ScalarProperty Name="Account" ColumnName="Account" />
                 <ScalarProperty Name="Pwd" ColumnName="Pwd" />
-                <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="State" ColumnName="State" />

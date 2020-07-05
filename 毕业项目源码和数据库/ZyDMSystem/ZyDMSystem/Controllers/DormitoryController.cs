@@ -21,8 +21,8 @@ namespace ZyDMSystem.Controllers
             List<Dormitory> dList = db.Dormitory.OrderBy(p => p.DormitoryID).ToList();
             //第几页
             int pageNumber = page ?? 1;
-            //每页显示5条
-            int pageSize = 5;
+            //每页显示10条
+            int pageSize = 10;
             IPagedList<Dormitory> dormList = dList.ToPagedList<Dormitory>(pageNumber, pageSize);
             return View(dormList);
         }
@@ -32,8 +32,8 @@ namespace ZyDMSystem.Controllers
             List<Dormitory> dList = db.Dormitory.Where(s => (s.Name.Contains(Name)) || (s.Name == Name)).OrderBy(p => p.DormitoryID).ToList();
             //第几页
             int pageNumber = page ?? 1;
-            //每页显示5条
-            int pageSize = 5;
+            //每页显示10条
+            int pageSize = 10;
             IPagedList<Dormitory> dormList = dList.ToPagedList<Dormitory>(pageNumber, pageSize);
             return View(dormList);
         }
@@ -124,7 +124,7 @@ namespace ZyDMSystem.Controllers
                 }
                 catch (Exception ex)
                 {
-                    msg = ex.Message;
+                    msg = "Excel导入失败，请检查匹配";
                 }
             }
             else

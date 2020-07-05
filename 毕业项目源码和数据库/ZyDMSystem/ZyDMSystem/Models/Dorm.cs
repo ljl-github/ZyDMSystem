@@ -25,8 +25,8 @@ namespace ZyDMSystem.Models
         }
     
         public int DormID { get; set; }
-        public Nullable<int> Floor { get; set; }
         public Nullable<int> DormNumber { get; set; }
+        public Nullable<int> Floor { get; set; }
         public Nullable<int> PNumber { get; set; }
         public int DormitoryID { get; set; }
     

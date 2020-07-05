@@ -18,7 +18,6 @@
           <ScalarProperty Name="Sex" ColumnName="Sex" />
           <ScalarProperty Name="Account" ColumnName="Account" />
           <ScalarProperty Name="Pwd" ColumnName="Pwd" />
-          <ScalarProperty Name="Photo" ColumnName="Photo" />
           <ScalarProperty Name="Phone" ColumnName="Phone" />
           <ScalarProperty Name="Address" ColumnName="Address" />
         </MappingFragment>
@@ -55,8 +54,8 @@
       <EntityTypeMapping TypeName="ZyDMSystemModel.Dorm">
         <MappingFragment StoreEntitySet="Dorm">
           <ScalarProperty Name="DormID" ColumnName="DormID" />
-          <ScalarProperty Name="Floor" ColumnName="Floor" />
           <ScalarProperty Name="DormNumber" ColumnName="DormNumber" />
+          <ScalarProperty Name="Floor" ColumnName="Floor" />
           <ScalarProperty Name="PNumber" ColumnName="PNumber" />
           <ScalarProperty Name="DormitoryID" ColumnName="DormitoryID" />
         </MappingFragment>
@@ -70,7 +69,6 @@
           <ScalarProperty Name="Sex" ColumnName="Sex" />
           <ScalarProperty Name="Account" ColumnName="Account" />
           <ScalarProperty Name="Pwd" ColumnName="Pwd" />
-          <ScalarProperty Name="Photo" ColumnName="Photo" />
           <ScalarProperty Name="Phone" ColumnName="Phone" />
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="DormitoryID" ColumnName="DormitoryID" />
@@ -123,7 +121,6 @@
           <ScalarProperty Name="Sex" ColumnName="Sex" />
           <ScalarProperty Name="Account" ColumnName="Account" />
           <ScalarProperty Name="Pwd" ColumnName="Pwd" />
-          <ScalarProperty Name="Photo" ColumnName="Photo" />
           <ScalarProperty Name="Phone" ColumnName="Phone" />
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="State" ColumnName="State" />
