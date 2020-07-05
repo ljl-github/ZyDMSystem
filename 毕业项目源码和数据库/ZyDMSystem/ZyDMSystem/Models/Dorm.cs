@@ -17,10 +17,8 @@ namespace ZyDMSystem.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Dorm()
         {
-            this.CheckIn = new HashSet<CheckIn>();
             this.DormExchange = new HashSet<DormExchange>();
             this.DormExchange1 = new HashSet<DormExchange>();
-            this.MoveOut = new HashSet<MoveOut>();
             this.Student = new HashSet<Student>();
         }
     
@@ -30,15 +28,11 @@ namespace ZyDMSystem.Models
         public Nullable<int> PNumber { get; set; }
         public int DormitoryID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CheckIn> CheckIn { get; set; }
         public virtual Dormitory Dormitory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DormExchange> DormExchange { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DormExchange> DormExchange1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MoveOut> MoveOut { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Student> Student { get; set; }
     }

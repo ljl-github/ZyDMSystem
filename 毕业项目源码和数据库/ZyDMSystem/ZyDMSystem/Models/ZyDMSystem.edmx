@@ -31,7 +31,6 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StuID" Type="int" Nullable="false" />
-          <Property Name="DormID" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" />
         </EntityType>
         <EntityType Name="Class">
@@ -53,7 +52,7 @@
           <Key>
             <PropertyRef Name="DormID" />
           </Key>
-          <Property Name="DormID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DormID" Type="int" Nullable="false" />
           <Property Name="DormNumber" Type="int" />
           <Property Name="Floor" Type="int" />
           <Property Name="PNumber" Type="int" />
@@ -103,7 +102,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StuID" Type="int" Nullable="false" />
-          <Property Name="DormID" Type="int" Nullable="false" />
+          <Property Name="Remake" Type="nvarchar" MaxLength="200" />
           <Property Name="Date" Type="date" />
         </EntityType>
         <EntityType Name="Student">
@@ -130,18 +129,6 @@
             </Principal>
             <Dependent Role="AbsentRecord">
               <PropertyRef Name="StuID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CheckIn_Dorm">
-          <End Role="Dorm" Type="Self.Dorm" Multiplicity="1" />
-          <End Role="CheckIn" Type="Self.CheckIn" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Dorm">
-              <PropertyRef Name="DormID" />
-            </Principal>
-            <Dependent Role="CheckIn">
-              <PropertyRef Name="DormID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -241,18 +228,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MoveOut_Dorm">
-          <End Role="Dorm" Type="Self.Dorm" Multiplicity="1" />
-          <End Role="MoveOut" Type="Self.MoveOut" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Dorm">
-              <PropertyRef Name="DormID" />
-            </Principal>
-            <Dependent Role="MoveOut">
-              <PropertyRef Name="DormID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_MoveOut_Student">
           <End Role="Student" Type="Self.Student" Multiplicity="1" />
           <End Role="MoveOut" Type="Self.MoveOut" Multiplicity="*" />
@@ -306,10 +281,6 @@
             <End Role="Student" EntitySet="Student" />
             <End Role="AbsentRecord" EntitySet="AbsentRecord" />
           </AssociationSet>
-          <AssociationSet Name="FK_CheckIn_Dorm" Association="Self.FK_CheckIn_Dorm">
-            <End Role="Dorm" EntitySet="Dorm" />
-            <End Role="CheckIn" EntitySet="CheckIn" />
-          </AssociationSet>
           <AssociationSet Name="FK_CheckIn_Student" Association="Self.FK_CheckIn_Student">
             <End Role="Student" EntitySet="Student" />
             <End Role="CheckIn" EntitySet="CheckIn" />
@@ -341,10 +312,6 @@
           <AssociationSet Name="FK_Major_Department" Association="Self.FK_Major_Department">
             <End Role="Department" EntitySet="Department" />
             <End Role="Major" EntitySet="Major" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MoveOut_Dorm" Association="Self.FK_MoveOut_Dorm">
-            <End Role="Dorm" EntitySet="Dorm" />
-            <End Role="MoveOut" EntitySet="MoveOut" />
           </AssociationSet>
           <AssociationSet Name="FK_MoveOut_Student" Association="Self.FK_MoveOut_Student">
             <End Role="Student" EntitySet="Student" />
@@ -391,9 +358,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StuID" Type="Int32" Nullable="false" />
-          <Property Name="DormID" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Dorm" Relationship="Self.FK_CheckIn_Dorm" FromRole="CheckIn" ToRole="Dorm" />
           <NavigationProperty Name="Student" Relationship="Self.FK_CheckIn_Student" FromRole="CheckIn" ToRole="Student" />
         </EntityType>
         <EntityType Name="Class">
@@ -418,16 +383,14 @@
           <Key>
             <PropertyRef Name="DormID" />
           </Key>
-          <Property Name="DormID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DormID" Type="Int32" Nullable="false" />
           <Property Name="DormNumber" Type="Int32" />
           <Property Name="Floor" Type="Int32" />
           <Property Name="PNumber" Type="Int32" />
           <Property Name="DormitoryID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CheckIn" Relationship="Self.FK_CheckIn_Dorm" FromRole="Dorm" ToRole="CheckIn" />
           <NavigationProperty Name="Dormitory" Relationship="Self.FK_Dorm_Dormitory" FromRole="Dorm" ToRole="Dormitory" />
           <NavigationProperty Name="DormExchange" Relationship="Self.FK_DormExchange_Dorm" FromRole="Dorm" ToRole="DormExchange" />
           <NavigationProperty Name="DormExchange1" Relationship="Self.FK_DormExchange_Dorm1" FromRole="Dorm" ToRole="DormExchange" />
-          <NavigationProperty Name="MoveOut" Relationship="Self.FK_MoveOut_Dorm" FromRole="Dorm" ToRole="MoveOut" />
           <NavigationProperty Name="Student" Relationship="Self.FK_Student_Dorm" FromRole="Dorm" ToRole="Student" />
         </EntityType>
         <EntityType Name="DormAdmin">
@@ -482,9 +445,8 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StuID" Type="Int32" Nullable="false" />
-          <Property Name="DormID" Type="Int32" Nullable="false" />
+          <Property Name="Remake" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Date" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Dorm" Relationship="Self.FK_MoveOut_Dorm" FromRole="MoveOut" ToRole="Dorm" />
           <NavigationProperty Name="Student" Relationship="Self.FK_MoveOut_Student" FromRole="MoveOut" ToRole="Student" />
         </EntityType>
         <EntityType Name="Student">
@@ -517,18 +479,6 @@
             </Principal>
             <Dependent Role="AbsentRecord">
               <PropertyRef Name="StuID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CheckIn_Dorm">
-          <End Role="Dorm" Type="Self.Dorm" Multiplicity="1" />
-          <End Role="CheckIn" Type="Self.CheckIn" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Dorm">
-              <PropertyRef Name="DormID" />
-            </Principal>
-            <Dependent Role="CheckIn">
-              <PropertyRef Name="DormID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -613,18 +563,6 @@
             </Principal>
             <Dependent Role="DormExchange">
               <PropertyRef Name="NewDormID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MoveOut_Dorm">
-          <End Role="Dorm" Type="Self.Dorm" Multiplicity="1" />
-          <End Role="MoveOut" Type="Self.MoveOut" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Dorm">
-              <PropertyRef Name="DormID" />
-            </Principal>
-            <Dependent Role="MoveOut">
-              <PropertyRef Name="DormID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -693,10 +631,6 @@
             <End Role="Student" EntitySet="Student" />
             <End Role="AbsentRecord" EntitySet="AbsentRecord" />
           </AssociationSet>
-          <AssociationSet Name="FK_CheckIn_Dorm" Association="Self.FK_CheckIn_Dorm">
-            <End Role="Dorm" EntitySet="Dorm" />
-            <End Role="CheckIn" EntitySet="CheckIn" />
-          </AssociationSet>
           <AssociationSet Name="FK_CheckIn_Student" Association="Self.FK_CheckIn_Student">
             <End Role="Student" EntitySet="Student" />
             <End Role="CheckIn" EntitySet="CheckIn" />
@@ -724,10 +658,6 @@
           <AssociationSet Name="FK_DormExchange_Dorm1" Association="Self.FK_DormExchange_Dorm1">
             <End Role="Dorm" EntitySet="Dorm" />
             <End Role="DormExchange" EntitySet="DormExchange" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MoveOut_Dorm" Association="Self.FK_MoveOut_Dorm">
-            <End Role="Dorm" EntitySet="Dorm" />
-            <End Role="MoveOut" EntitySet="MoveOut" />
           </AssociationSet>
           <AssociationSet Name="FK_Student_Dorm" Association="Self.FK_Student_Dorm">
             <End Role="Dorm" EntitySet="Dorm" />
@@ -779,7 +709,6 @@
               <MappingFragment StoreEntitySet="CheckIn">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="StuID" ColumnName="StuID" />
-                <ScalarProperty Name="DormID" ColumnName="DormID" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -859,7 +788,7 @@
               <MappingFragment StoreEntitySet="MoveOut">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="StuID" ColumnName="StuID" />
-                <ScalarProperty Name="DormID" ColumnName="DormID" />
+                <ScalarProperty Name="Remake" ColumnName="Remake" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
               </MappingFragment>
             </EntityTypeMapping>

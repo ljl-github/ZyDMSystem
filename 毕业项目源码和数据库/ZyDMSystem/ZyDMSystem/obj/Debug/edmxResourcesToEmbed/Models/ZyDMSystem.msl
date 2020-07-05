@@ -28,7 +28,6 @@
         <MappingFragment StoreEntitySet="CheckIn">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="StuID" ColumnName="StuID" />
-          <ScalarProperty Name="DormID" ColumnName="DormID" />
           <ScalarProperty Name="Date" ColumnName="Date" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -108,7 +107,7 @@
         <MappingFragment StoreEntitySet="MoveOut">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="StuID" ColumnName="StuID" />
-          <ScalarProperty Name="DormID" ColumnName="DormID" />
+          <ScalarProperty Name="Remake" ColumnName="Remake" />
           <ScalarProperty Name="Date" ColumnName="Date" />
         </MappingFragment>
       </EntityTypeMapping>

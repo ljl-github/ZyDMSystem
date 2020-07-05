@@ -38,6 +38,9 @@
         #Name-error {
             color: red;
         }
+        a:hover {
+            text-decoration:none;
+        }
     </style>
 </head>
 <body>
@@ -71,7 +74,10 @@
                 <td>
                     @foreach (var dorm in dormitory.Dorm)
                     {
-                        @dorm.DormNumber @:
+                        @dorm.DormNumber
+                        <a href="/Dorm/DeleteDorm/@dorm.DormID">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true" onclick="return confirm('确定要删除此宿舍吗(此过程不可逆)?')">&times;</span>
+                        </a>
                     }
                 </td>
                 <td>

@@ -16,10 +16,9 @@ namespace ZyDMSystem.Models
     {
         public int ID { get; set; }
         public int StuID { get; set; }
-        public int DormID { get; set; }
+        public string Remake { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
     
-        public virtual Dorm Dorm { get; set; }
         public virtual Student Student { get; set; }
     }
 }

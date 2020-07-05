@@ -53,7 +53,6 @@ namespace ZyDMSystem.Controllers
                 CheckIn checkIn = new CheckIn()
                 {
                     StuID = ID,
-                    DormID = DormID,
                     Date = DateTime.Now
                 };
                 db.CheckIn.Add(checkIn);
@@ -99,6 +98,22 @@ namespace ZyDMSystem.Controllers
                 db.Dorm.Add(dorm);
                 db.SaveChanges();
                 return Content("<script>alert('添加成功！');location.href='/Dormitory/Index';</script>");
+            }
+        }
+
+        //删除宿舍
+        public ActionResult DeleteDorm(int? id)
+        {
+            var dorm = db.Dorm.Find(id);
+            if (dorm.Student.Count > 0)
+            {
+                return Content("<script>alert('该宿舍有学生居住，不可删除！');history.go(-1);</script>");
+            }
+            else
+            {
+                db.Dorm.Remove(dorm);
+                db.SaveChanges();
+                return Content("<script>alert('删除成功！');location.href='/Dormitory/Index';</script>");
             }
         }
     }

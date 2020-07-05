@@ -81,5 +81,13 @@ namespace ZyDMSystem.Controllers
                 return 1;
             }
         }
+        //删除楼宇管理员
+        public ActionResult DeleteDormAdmin(int? id)
+        {
+            var dAdmin = db.DormAdmin.Find(id);
+            db.DormAdmin.Remove(dAdmin);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
