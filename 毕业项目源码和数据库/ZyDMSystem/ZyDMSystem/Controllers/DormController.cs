@@ -65,7 +65,6 @@ namespace ZyDMSystem.Controllers
         [HttpPost]
         public ActionResult GetDormList(string dormitoryID)
         {
-            Dorm s = new Dorm();
             int dID = Convert.ToInt32(dormitoryID);
             var dList = from m in db.Dorm
                         where m.DormitoryID == dID
