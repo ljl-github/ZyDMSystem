@@ -416,6 +416,10 @@
     <Content Include="Views\Department\Index.cshtml" />
     <Content Include="Views\Major\Index.cshtml" />
     <Content Include="Views\Classes\Index.cshtml" />
+    <Content Include="Views\Student\DormitoryStu.cshtml" />
+    <Content Include="Views\AbsentRecord\DormitoryStuAbsentRecord.cshtml" />
+    <Content Include="Views\AbsentRecord\AbsentRecordStu.cshtml" />
+    <Content Include="Views\AbsentRecord\MyRecord.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

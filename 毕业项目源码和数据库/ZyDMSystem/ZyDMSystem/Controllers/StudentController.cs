@@ -36,6 +36,30 @@ namespace ZyDMSystem.Controllers
             IPagedList<Student> stuList = sList.ToPagedList<Student>(pageNumber, pageSize);
             return View(stuList);
         }
+        //宿管查询管理楼宇的学生
+        public ActionResult DormitoryStu(int id,int? page = null)
+        {
+            List<Student> sList = db.Student.Where(s => s.Dorm.DormitoryID==id).OrderBy(p => p.ClassID).ToList();
+            //第几页
+            int pageNumber = page ?? 1;
+            //每页显示10条
+            int pageSize = 10;
+            IPagedList<Student> stuList = sList.ToPagedList<Student>(pageNumber, pageSize);
+            ViewBag.dormitoryID = id;
+            return View(stuList);
+        }
+        [HttpPost]
+        public ActionResult DormitoryStu(int ID,string Name, int? page = null)
+        {
+            List<Student> sList = db.Student.Where(s => s.Dorm.DormitoryID == ID&&(s.Name.Contains(Name)||s.Name==Name)).OrderBy(p => p.ClassID).ToList();
+            //第几页
+            int pageNumber = page ?? 1;
+            //每页显示10条
+            int pageSize = 10;
+            IPagedList<Student> stuList = sList.ToPagedList<Student>(pageNumber, pageSize);
+            ViewBag.dormitoryID = ID;
+            return View(stuList);
+        }
         //添加学生
         public ActionResult AddStu()
         {
