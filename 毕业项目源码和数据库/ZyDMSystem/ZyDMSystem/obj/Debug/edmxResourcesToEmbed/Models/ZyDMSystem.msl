@@ -81,7 +81,10 @@
           <ScalarProperty Name="StuID" ColumnName="StuID" />
           <ScalarProperty Name="OldDormID" ColumnName="OldDormID" />
           <ScalarProperty Name="NewDormID" ColumnName="NewDormID" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
           <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="ReMark" ColumnName="ReMark" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

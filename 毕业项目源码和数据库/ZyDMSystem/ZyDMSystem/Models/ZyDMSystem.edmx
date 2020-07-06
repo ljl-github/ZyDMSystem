@@ -52,7 +52,7 @@
           <Key>
             <PropertyRef Name="DormID" />
           </Key>
-          <Property Name="DormID" Type="int" Nullable="false" />
+          <Property Name="DormID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DormNumber" Type="int" />
           <Property Name="Floor" Type="int" />
           <Property Name="PNumber" Type="int" />
@@ -79,7 +79,10 @@
           <Property Name="StuID" Type="int" Nullable="false" />
           <Property Name="OldDormID" Type="int" Nullable="false" />
           <Property Name="NewDormID" Type="int" Nullable="false" />
+          <Property Name="Reason" Type="nvarchar" MaxLength="100" />
           <Property Name="Date" Type="date" />
+          <Property Name="State" Type="int" />
+          <Property Name="ReMark" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Dormitory">
           <Key>
@@ -383,7 +386,7 @@
           <Key>
             <PropertyRef Name="DormID" />
           </Key>
-          <Property Name="DormID" Type="Int32" Nullable="false" />
+          <Property Name="DormID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DormNumber" Type="Int32" />
           <Property Name="Floor" Type="Int32" />
           <Property Name="PNumber" Type="Int32" />
@@ -415,7 +418,10 @@
           <Property Name="StuID" Type="Int32" Nullable="false" />
           <Property Name="OldDormID" Type="Int32" Nullable="false" />
           <Property Name="NewDormID" Type="Int32" Nullable="false" />
+          <Property Name="Reason" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="State" Type="Int32" />
+          <Property Name="ReMark" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Dorm" Relationship="Self.FK_DormExchange_Dorm" FromRole="DormExchange" ToRole="Dorm" />
           <NavigationProperty Name="Dorm1" Relationship="Self.FK_DormExchange_Dorm1" FromRole="DormExchange" ToRole="Dorm" />
           <NavigationProperty Name="Student" Relationship="Self.FK_DormExchange_Student" FromRole="DormExchange" ToRole="Student" />
@@ -762,7 +768,10 @@
                 <ScalarProperty Name="StuID" ColumnName="StuID" />
                 <ScalarProperty Name="OldDormID" ColumnName="OldDormID" />
                 <ScalarProperty Name="NewDormID" ColumnName="NewDormID" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ReMark" ColumnName="ReMark" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

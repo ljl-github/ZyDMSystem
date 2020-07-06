@@ -163,6 +163,7 @@
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\DormAdminController.cs" />
     <Compile Include="Controllers\DormController.cs" />
+    <Compile Include="Controllers\DormExchangeController.cs" />
     <Compile Include="Controllers\DormitoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -420,6 +421,9 @@
     <Content Include="Views\AbsentRecord\DormitoryStuAbsentRecord.cshtml" />
     <Content Include="Views\AbsentRecord\AbsentRecordStu.cshtml" />
     <Content Include="Views\AbsentRecord\MyRecord.cshtml" />
+    <Content Include="Views\DormExchange\Index.cshtml" />
+    <Content Include="Views\DormExchange\ApplyExchange.cshtml" />
+    <Content Include="Views\DormExchange\MyApplyExchange.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

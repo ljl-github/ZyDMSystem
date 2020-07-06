@@ -52,7 +52,7 @@
     <Key>
       <PropertyRef Name="DormID" />
     </Key>
-    <Property Name="DormID" Type="Int32" Nullable="false" />
+    <Property Name="DormID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="DormNumber" Type="Int32" />
     <Property Name="Floor" Type="Int32" />
     <Property Name="PNumber" Type="Int32" />
@@ -84,7 +84,10 @@
     <Property Name="StuID" Type="Int32" Nullable="false" />
     <Property Name="OldDormID" Type="Int32" Nullable="false" />
     <Property Name="NewDormID" Type="Int32" Nullable="false" />
+    <Property Name="Reason" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="State" Type="Int32" />
+    <Property Name="ReMark" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Dorm" Relationship="Self.FK_DormExchange_Dorm" FromRole="DormExchange" ToRole="Dorm" />
     <NavigationProperty Name="Dorm1" Relationship="Self.FK_DormExchange_Dorm1" FromRole="DormExchange" ToRole="Dorm" />
     <NavigationProperty Name="Student" Relationship="Self.FK_DormExchange_Student" FromRole="DormExchange" ToRole="Student" />

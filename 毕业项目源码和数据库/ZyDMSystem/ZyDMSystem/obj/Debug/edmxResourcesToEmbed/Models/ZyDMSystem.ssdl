@@ -47,7 +47,7 @@
     <Key>
       <PropertyRef Name="DormID" />
     </Key>
-    <Property Name="DormID" Type="int" Nullable="false" />
+    <Property Name="DormID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DormNumber" Type="int" />
     <Property Name="Floor" Type="int" />
     <Property Name="PNumber" Type="int" />
@@ -74,7 +74,10 @@
     <Property Name="StuID" Type="int" Nullable="false" />
     <Property Name="OldDormID" Type="int" Nullable="false" />
     <Property Name="NewDormID" Type="int" Nullable="false" />
+    <Property Name="Reason" Type="nvarchar" MaxLength="100" />
     <Property Name="Date" Type="date" />
+    <Property Name="State" Type="int" />
+    <Property Name="ReMark" Type="nvarchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="Dormitory">
     <Key>

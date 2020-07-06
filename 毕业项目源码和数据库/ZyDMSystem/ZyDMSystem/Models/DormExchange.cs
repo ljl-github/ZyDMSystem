@@ -18,7 +18,10 @@ namespace ZyDMSystem.Models
         public int StuID { get; set; }
         public int OldDormID { get; set; }
         public int NewDormID { get; set; }
+        public string Reason { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
+        public Nullable<int> State { get; set; }
+        public string ReMark { get; set; }
     
         public virtual Dorm Dorm { get; set; }
         public virtual Dorm Dorm1 { get; set; }
