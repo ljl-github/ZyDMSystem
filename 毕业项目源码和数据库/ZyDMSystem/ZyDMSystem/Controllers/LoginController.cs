@@ -56,8 +56,24 @@ namespace ZyDMSystem.Controllers
                 var stu = db.Student.SingleOrDefault(a => a.Account == Account && a.Pwd == Pwd);
                 if (stu != null)
                 {
-                    Session["stu"] = stu;
-                    return RedirectToAction("Index", "Home");
+                    if (stu.State == "已迁出") 
+                    {
+                        ModelState.AddModelError("errorMsg", "您已迁出！");
+                        return View();
+                    }
+                    else
+                    {
+                        if (stu.DormID == null)
+                        {
+                            string msg = "<script>alert('请进行入住登记！');location.href='/CheckIn/StuCheckIn/"+stu.ID+"';</script>";
+                            return Content(msg);
+                        }
+                        else
+                        {
+                            Session["stu"] = stu;
+                            return RedirectToAction("Index", "Home");
+                        }
+                    }
                 }
                 else
                 {

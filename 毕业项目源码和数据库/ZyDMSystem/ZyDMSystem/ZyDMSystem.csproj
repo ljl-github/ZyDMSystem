@@ -431,6 +431,9 @@
     <Content Include="Views\DormExchange\HandleDormExchange.cshtml" />
     <Content Include="Views\MoveOut\StuMoveOut.cshtml" />
     <Content Include="Views\MoveOut\dAdminMoveIndex.cshtml" />
+    <Content Include="Views\CheckIn\StuCheckIn.cshtml" />
+    <Content Include="Views\CheckIn\DormitoryStuCheckIn.cshtml" />
+    <Content Include="Views\CheckIn\DAdminStuCheckIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

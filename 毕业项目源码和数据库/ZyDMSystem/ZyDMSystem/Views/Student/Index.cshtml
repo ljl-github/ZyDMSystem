@@ -73,8 +73,16 @@
                 <td>
                     @if (stu.DormID == null)
                     {
-                        <span>该学生还没有宿舍！</span>
-                        <a href="/Dorm/DistributeDorm/@stu.ID">去分配</a>
+                        if (stu.State == "已迁出")
+                        {
+                            <span>已迁出</span>
+                        }
+                        else
+                        {
+                            <span>该学生还没有宿舍！</span>
+                            <a href="/Dorm/DistributeDorm/@stu.ID">去分配</a>
+                        }
+
                     }
                     else
                     {
@@ -85,7 +93,10 @@
                     @stu.State
                 </td>
                 <td>
-                    <a href="/Student/EditStu/@stu.ID" class="btn btn-outline-info">编辑</a>
+                    @if (stu.State != "已迁出")
+                    { 
+                        <a href="/Student/EditStu/@stu.ID" class="btn btn-outline-info">编辑</a>
+                    }
                     <a href="/Student/DeleteStu/@stu.ID" class="btn btn-outline-danger" onclick="return confirm('您确定要删除该学生吗？')">删除</a>
                 </td>
             </tr>
