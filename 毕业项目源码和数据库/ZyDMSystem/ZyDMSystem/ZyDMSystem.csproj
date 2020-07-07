@@ -424,6 +424,13 @@
     <Content Include="Views\DormExchange\Index.cshtml" />
     <Content Include="Views\DormExchange\ApplyExchange.cshtml" />
     <Content Include="Views\DormExchange\MyApplyExchange.cshtml" />
+    <Content Include="Views\DormExchange\DormExchangeDetail.cshtml" />
+    <Content Include="Views\DormExchange\MyDormExchangeDetail.cshtml" />
+    <Content Include="Views\DormExchange\DormAdminExchangeIndex.cshtml" />
+    <Content Include="Views\DormExchange\DAdminDormExchangeDetail.cshtml" />
+    <Content Include="Views\DormExchange\HandleDormExchange.cshtml" />
+    <Content Include="Views\MoveOut\StuMoveOut.cshtml" />
+    <Content Include="Views\MoveOut\dAdminMoveIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
