@@ -24,17 +24,6 @@ namespace ZyDMSystem.Controllers
             IPagedList<DormAdmin> dAdminList = dList.ToPagedList<DormAdmin>(pageNumber, pageSize);
             return View(dAdminList);
         }
-        [HttpPost]
-        public ActionResult Index(string Name, int? page = null)
-        {
-            List<DormAdmin> dList = db.DormAdmin.Where(s => (s.Name.Contains(Name)) || (s.Name == Name)).ToList();
-            //第几页
-            int pageNumber = page ?? 1;
-            //每页显示10条
-            int pageSize = 10;
-            IPagedList<DormAdmin> dAdminList = dList.ToPagedList<DormAdmin>(pageNumber, pageSize);
-            return View(dAdminList);
-        }
         //编辑
         public ActionResult EditDormAdmin(int? id)
         {

@@ -37,14 +37,21 @@
     </style>
 </head>
 <body>
-    <form action="/Student/Index" method="post">
-        <div class="form-group" style="margin-left:1em;">
-            <a href="/Student/AddStu" class="btn btn-outline-primary">添加学生</a>
-            <label for="Name">姓名：</label>
-            <input type="text" name="Name" />
-            <input type="submit" value="查询" class="btn btn-primary" style="margin-left:0.5em;" />
+    <div class="row" style="margin-top:.5em;">
+        <div class="col-lg-7">
+            <form action="/Student/Index" method="post">
+                <div class="form-group" style="margin-left:1em;">
+                    <a href="/Student/AddStu" class="btn btn-outline-primary">添加学生</a>
+                    <label for="Name">姓名：</label>
+                    <input type="text" name="Name" />
+                    <input type="submit" value="查询" class="btn btn-primary" style="margin-left:0.5em;" />
+                </div>
+            </form>
         </div>
-    </form>
+        <div>
+            <a href="/Student/StuExcel" class="btn btn-outline-primary">批量导出学生信息</a>
+        </div>
+    </div>
     <table class="table table-bordered table-hover text-center" id="stu_table">
         <tr class="bg-primary text-white">
             <th>姓名</th>

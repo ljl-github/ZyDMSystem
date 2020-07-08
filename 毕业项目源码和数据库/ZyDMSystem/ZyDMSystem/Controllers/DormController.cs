@@ -42,8 +42,9 @@ namespace ZyDMSystem.Controllers
 
             //判断人数是否已满
             if (pNumber >= dorm.PNumber)
-            { 
-                return Content("<script>alert('该宿舍居住人数已满,请重新选择！');history.go(-1);</script>");
+            {
+                string errorMsg = "<script>alert('该宿舍居住人数已满,请重新选择！');location.href='/Dorm/DistributeDorm/"+ID+ "';</script>";
+                return Content(errorMsg);
             }
             else
             {

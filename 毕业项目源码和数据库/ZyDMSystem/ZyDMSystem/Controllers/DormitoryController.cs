@@ -16,26 +16,9 @@ namespace ZyDMSystem.Controllers
         ZyDMSystemEntities db = new ZyDMSystemEntities();
         // GET: Dormitory
         //楼宇列表
-        public ActionResult Index(int? page = null)
+        public ActionResult Index()
         {
-            List<Dormitory> dList = db.Dormitory.OrderBy(p => p.DormitoryID).ToList();
-            //第几页
-            int pageNumber = page ?? 1;
-            //每页显示10条
-            int pageSize = 10;
-            IPagedList<Dormitory> dormList = dList.ToPagedList<Dormitory>(pageNumber, pageSize);
-            return View(dormList);
-        }
-        [HttpPost]
-        public ActionResult Index(string Name, int? page = null)
-        {
-            List<Dormitory> dList = db.Dormitory.Where(s => (s.Name.Contains(Name)) || (s.Name == Name)).OrderBy(p => p.DormitoryID).ToList();
-            //第几页
-            int pageNumber = page ?? 1;
-            //每页显示10条
-            int pageSize = 10;
-            IPagedList<Dormitory> dormList = dList.ToPagedList<Dormitory>(pageNumber, pageSize);
-            return View(dormList);
+            return View(db.Dormitory.ToList());
         }
         //设置楼宇管理员
         public ActionResult SetDormAdmin(int? id) 
@@ -84,7 +67,7 @@ namespace ZyDMSystem.Controllers
                 db.Dormitory.Add(dormitory);
                 db.SaveChanges();
                 //添加成功则返回提示并跳转到添加宿舍界面
-                string successMsg = "<script>alert('添加成功,请您为该楼宇添加宿舍！');location.href='/Dorm/AddDorm/" + dormitory.DormitoryID + "';</script>";
+                string successMsg = "<script>alert('添加成功,请您为该楼宇添加宿舍！');location.href='/Dorm/ForAddDorm/" + dormitory.DormitoryID + "';</script>";
                 return Content(successMsg);
             }
         }
@@ -104,7 +87,8 @@ namespace ZyDMSystem.Controllers
         //Excel批量导入宿舍
         [HttpPost]
         public ActionResult ExcelToUpload(int id)
-        {  //用来存储excel表中读出来的数据
+        {  
+            //用来存储excel表中读出来的数据
             DataTable excelTable = new DataTable();
             string msg = "";
             if (Request.Files.Count > 0) //request.files.count客户端传过来几个文件

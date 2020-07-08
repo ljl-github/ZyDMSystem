@@ -3,9 +3,7 @@
     Layout = null;
 }
 @using ZyDMSystem.Models;
-@using PagedList;
-@using PagedList.Mvc;
-@model IPagedList<Dormitory>
+@model List<Dormitory>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +13,6 @@
     @Scripts.Render("~/bundles/bootstrap4")
     @Styles.Render("~/Content/css4")
     <script src="~/Scripts/jquery.validate.js"></script>
-    <link href="~/Content/css/page.css" rel="stylesheet" />
     <title>楼宇列表</title>
     <style type="text/css">
         #stu_table tr td {
@@ -44,16 +41,9 @@
     </style>
 </head>
 <body>
-    <form action="/Dormitory/Index" method="post">
-        <div class="form-group" style="margin-left:1em;">
-            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#staticBackdrop">
-                添加楼宇
-            </button>
-            <label for="Name">楼宇名称：</label>
-            <input type="text" name="Name"  />
-            <input type="submit" value="查询" class="btn btn-primary" style="margin-left:0.5em;" />
-        </div>
-    </form>
+    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#staticBackdrop">
+        添加楼宇
+    </button>
     <table class="table table-bordered table-hover text-center">
         <tr class="bg-primary text-white">
             <th>楼宇名称</th>
@@ -88,15 +78,9 @@
             </tr>
         }
     </table>
-    <div>
-        @*分页*@
-        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
-        @*<span>每页 @Model.PageSize 条记录,共 @Model.PageCount 页，当前第 @Model.PageNumber 页</span>*@
-    </div>
     <script type="text/javascript">
         $(function () {
-            $(".pagination").append("<span style='border-style:none;'>每页 @Model.PageSize 条记录,共 @Model.PageCount 页，当前第 @Model.PageNumber 页</span>");
-
+            
             $("#AddDorm").validate({
                 rules: {
                     Name: { required: true}
@@ -114,7 +98,7 @@
 </html>
 
 <!-- 添加楼宇模态框 -->
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop"  data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

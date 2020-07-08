@@ -65,7 +65,9 @@ namespace ZyDMSystem.Controllers
                     {
                         if (stu.DormID == null)
                         {
-                            string msg = "<script>alert('请进行入住登记！');location.href='/CheckIn/StuCheckIn/"+stu.ID+"';</script>";
+                            //string msg = "<script>alert('请进行入住登记！');location.href='/CheckIn/StuCheckIn/"+stu.ID+"';</script>";
+                            //return Content(msg);
+                            string msg = "<script>alert('您还未入住，请进行入住登记后再使用！');location.href='/Login/Login/';</script>";
                             return Content(msg);
                         }
                         else
