@@ -165,6 +165,7 @@
     <Compile Include="Controllers\DormController.cs" />
     <Compile Include="Controllers\DormExchangeController.cs" />
     <Compile Include="Controllers\DormitoryController.cs" />
+    <Compile Include="Controllers\DormRepairController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MajorController.cs" />
@@ -198,6 +199,9 @@
       <DependentUpon>ZyDMSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Dormitory.cs">
+      <DependentUpon>ZyDMSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DormRepair.cs">
       <DependentUpon>ZyDMSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Major.cs">
@@ -434,6 +438,14 @@
     <Content Include="Views\CheckIn\StuCheckIn.cshtml" />
     <Content Include="Views\CheckIn\DormitoryStuCheckIn.cshtml" />
     <Content Include="Views\CheckIn\DAdminStuCheckIn.cshtml" />
+    <Content Include="Views\DormRepair\Index.cshtml" />
+    <Content Include="Views\DormRepair\DormRepairDetail.cshtml" />
+    <Content Include="Views\DormRepair\DormRepairIndex.cshtml" />
+    <Content Include="Views\DormRepair\DormAdminRepairDetail.cshtml" />
+    <Content Include="Views\DormRepair\HandleDormRepair.cshtml" />
+    <Content Include="Views\DormRepair\MyDormRepair.cshtml" />
+    <Content Include="Views\DormRepair\MyDormRepairDetail.cshtml" />
+    <Content Include="Views\DormRepair\ApplyDormRepair.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

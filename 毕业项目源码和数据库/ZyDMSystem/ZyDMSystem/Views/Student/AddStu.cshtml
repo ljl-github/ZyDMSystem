@@ -139,10 +139,10 @@
                     dataType: 'json', //返回类型，有json，text，HTML。这里并没有jsonp格式，所以别妄想能用jsonp做跨域了。
                     success: function (data) {
                         alert(data);
-                        location.href = "/Student/AddStu";
+                        location.href = "/Student/Index";
                     },
-                    error: function (errorThrown) {
-                        alert(errorThrown);
+                    error: function () {
+                        alert('发生未知错误！');
                     }
                 });
             }

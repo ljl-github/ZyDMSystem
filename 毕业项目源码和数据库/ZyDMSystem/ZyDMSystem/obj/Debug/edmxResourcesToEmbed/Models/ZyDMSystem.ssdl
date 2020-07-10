@@ -86,6 +86,16 @@
     <Property Name="DormitoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="30" />
   </EntityType>
+  <EntityType Name="DormRepair">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StuID" Type="int" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Date" Type="date" />
+    <Property Name="State" Type="int" />
+  </EntityType>
   <EntityType Name="Major">
     <Key>
       <PropertyRef Name="MajorID" />
@@ -214,6 +224,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_DormRepair_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="DormRepair" Type="Self.DormRepair" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DormRepair">
+        <PropertyRef Name="StuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Major_Department">
     <End Role="Department" Type="Self.Department" Multiplicity="1" />
     <End Role="Major" Type="Self.Major" Multiplicity="*" />
@@ -272,6 +294,7 @@
     <EntitySet Name="DormAdmin" EntityType="Self.DormAdmin" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DormExchange" EntityType="Self.DormExchange" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Dormitory" EntityType="Self.Dormitory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DormRepair" EntityType="Self.DormRepair" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Major" EntityType="Self.Major" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MoveOut" EntityType="Self.MoveOut" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
@@ -306,6 +329,10 @@
     <AssociationSet Name="FK_DormExchange_Student" Association="Self.FK_DormExchange_Student">
       <End Role="Student" EntitySet="Student" />
       <End Role="DormExchange" EntitySet="DormExchange" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DormRepair_Student" Association="Self.FK_DormRepair_Student">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="DormRepair" EntitySet="DormRepair" />
     </AssociationSet>
     <AssociationSet Name="FK_Major_Department" Association="Self.FK_Major_Department">
       <End Role="Department" EntitySet="Department" />

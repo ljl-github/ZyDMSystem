@@ -20,6 +20,7 @@ namespace ZyDMSystem.Models
             this.AbsentRecord = new HashSet<AbsentRecord>();
             this.CheckIn = new HashSet<CheckIn>();
             this.DormExchange = new HashSet<DormExchange>();
+            this.DormRepair = new HashSet<DormRepair>();
             this.MoveOut = new HashSet<MoveOut>();
         }
     
@@ -42,6 +43,8 @@ namespace ZyDMSystem.Models
         public virtual Dorm Dorm { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DormExchange> DormExchange { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DormRepair> DormRepair { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MoveOut> MoveOut { get; set; }
     }

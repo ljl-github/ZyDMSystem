@@ -96,6 +96,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="DormRepair">
+      <EntityTypeMapping TypeName="ZyDMSystemModel.DormRepair">
+        <MappingFragment StoreEntitySet="DormRepair">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="StuID" ColumnName="StuID" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="State" ColumnName="State" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Major">
       <EntityTypeMapping TypeName="ZyDMSystemModel.Major">
         <MappingFragment StoreEntitySet="Major">

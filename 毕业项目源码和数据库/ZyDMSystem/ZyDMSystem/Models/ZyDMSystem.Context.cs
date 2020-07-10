@@ -34,6 +34,7 @@ namespace ZyDMSystem.Models
         public virtual DbSet<DormAdmin> DormAdmin { get; set; }
         public virtual DbSet<DormExchange> DormExchange { get; set; }
         public virtual DbSet<Dormitory> Dormitory { get; set; }
+        public virtual DbSet<DormRepair> DormRepair { get; set; }
         public virtual DbSet<Major> Major { get; set; }
         public virtual DbSet<MoveOut> MoveOut { get; set; }
         public virtual DbSet<Student> Student { get; set; }

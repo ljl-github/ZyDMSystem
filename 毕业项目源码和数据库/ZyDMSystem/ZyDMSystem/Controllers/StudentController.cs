@@ -41,7 +41,7 @@ namespace ZyDMSystem.Controllers
         //宿管查询管理楼宇的学生
         public ActionResult DormitoryStu(int id,int? page = null)
         {
-            List<Student> sList = db.Student.Where(s => s.Dorm.DormitoryID==id).OrderBy(p => p.ClassID).ToList();
+            List<Student> sList = db.Student.Where(s => s.Dorm.DormitoryID==id&&s.State!="已迁出").OrderBy(p => p.ClassID).ToList();
             //第几页
             int pageNumber = page ?? 1;
             //每页显示10条
@@ -121,6 +121,31 @@ namespace ZyDMSystem.Controllers
             }
             else
             {
+                var moveList = db.MoveOut.Where(a => a.StuID == id).ToList();
+                foreach (var item in moveList)
+                {
+                    db.MoveOut.Remove(item);
+                }
+                var checkList = db.CheckIn.Where(a => a.StuID == id).ToList();
+                foreach (var item in checkList)
+                {
+                    db.CheckIn.Remove(item);
+                }
+                var exchangeList = db.DormExchange.Where(a => a.StuID == id).ToList();
+                foreach (var item in exchangeList)
+                {
+                    db.DormExchange.Remove(item);
+                }
+                var akList = db.AbsentRecord.Where(a => a.StuID == id).ToList();
+                foreach (var item in akList)
+                {
+                    db.AbsentRecord.Remove(item);
+                }
+                var rList = db.DormRepair.Where(a => a.StuID == id).ToList();
+                foreach (var item in rList)
+                {
+                    db.DormRepair.Remove(item);
+                }
                 db.Student.Remove(student);
                 db.SaveChanges();
                 return Content("<script>alert('删除成功！');location.href='/Student/Index';</script>");

@@ -16,9 +16,26 @@ namespace ZyDMSystem.Controllers
         ZyDMSystemEntities db = new ZyDMSystemEntities();
         // GET: Dormitory
         //楼宇列表
-        public ActionResult Index()
+        public ActionResult Index(int? page = null)
         {
-            return View(db.Dormitory.ToList());
+            List<Dormitory> dList = db.Dormitory.ToList();
+            //第几页
+            int pageNumber = page ?? 1;
+            //每页显示10条
+            int pageSize = 10;
+            IPagedList<Dormitory> doryList = dList.ToPagedList<Dormitory>(pageNumber, pageSize);
+            return View(doryList);
+        }
+        [HttpPost]
+        public ActionResult Index(string Name, int? page = null)
+        {
+            List<Dormitory> dList = db.Dormitory.Where(s => (s.Name.Contains(Name)) || (s.Name == Name)).ToList();
+            //第几页
+            int pageNumber = page ?? 1;
+            //每页显示10条
+            int pageSize = 10;
+            IPagedList<Dormitory> dorList = dList.ToPagedList<Dormitory>(pageNumber, pageSize);
+            return View(dorList);
         }
         //设置楼宇管理员
         public ActionResult SetDormAdmin(int? id) 
@@ -116,6 +133,21 @@ namespace ZyDMSystem.Controllers
                 msg = "请选择文件";
             }
             return Json(msg);
+        }
+        //删除楼宇
+        public ActionResult DeleteDormitory(int id)
+        {
+            var dormitory=db.Dormitory.Find(id);
+            if (dormitory.Dorm.Count > 0||dormitory.DormAdmin.Count>0)
+            {
+                return Content("<script>alert('楼宇存在宿舍色或宿管,不可删除!');location.href='/Dormitory/Index';</script>");
+            }
+            else
+            {
+                db.Dormitory.Remove(dormitory);
+                db.SaveChanges();
+                return Content("<script>alert('删除成功!');location.href='/Dormitory/Index';</script>");
+            }
         }
     }
 }

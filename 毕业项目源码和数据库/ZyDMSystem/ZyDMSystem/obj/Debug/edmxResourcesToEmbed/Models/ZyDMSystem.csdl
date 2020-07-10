@@ -101,6 +101,17 @@
     <NavigationProperty Name="Dorm" Relationship="Self.FK_Dorm_Dormitory" FromRole="Dormitory" ToRole="Dorm" />
     <NavigationProperty Name="DormAdmin" Relationship="Self.FK_DormAdmin_Dormitory" FromRole="Dormitory" ToRole="DormAdmin" />
   </EntityType>
+  <EntityType Name="DormRepair">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StuID" Type="Int32" Nullable="false" />
+    <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="State" Type="Int32" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_DormRepair_Student" FromRole="DormRepair" ToRole="Student" />
+  </EntityType>
   <EntityType Name="Major">
     <Key>
       <PropertyRef Name="MajorID" />
@@ -140,6 +151,7 @@
     <NavigationProperty Name="Class" Relationship="Self.FK_Student_Class" FromRole="Student" ToRole="Class" />
     <NavigationProperty Name="Dorm" Relationship="Self.FK_Student_Dorm" FromRole="Student" ToRole="Dorm" />
     <NavigationProperty Name="DormExchange" Relationship="Self.FK_DormExchange_Student" FromRole="Student" ToRole="DormExchange" />
+    <NavigationProperty Name="DormRepair" Relationship="Self.FK_DormRepair_Student" FromRole="Student" ToRole="DormRepair" />
     <NavigationProperty Name="MoveOut" Relationship="Self.FK_MoveOut_Student" FromRole="Student" ToRole="MoveOut" />
   </EntityType>
   <Association Name="FK_AbsentRecord_Student">
@@ -274,6 +286,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_DormRepair_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="DormRepair" Type="Self.DormRepair" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DormRepair">
+        <PropertyRef Name="StuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_MoveOut_Student">
     <End Role="Student" Type="Self.Student" Multiplicity="1" />
     <End Role="MoveOut" Type="Self.MoveOut" Multiplicity="*" />
@@ -296,6 +320,7 @@
     <EntitySet Name="DormAdmin" EntityType="Self.DormAdmin" />
     <EntitySet Name="DormExchange" EntityType="Self.DormExchange" />
     <EntitySet Name="Dormitory" EntityType="Self.Dormitory" />
+    <EntitySet Name="DormRepair" EntityType="Self.DormRepair" />
     <EntitySet Name="Major" EntityType="Self.Major" />
     <EntitySet Name="MoveOut" EntityType="Self.MoveOut" />
     <EntitySet Name="Student" EntityType="Self.Student" />
@@ -342,6 +367,10 @@
     <AssociationSet Name="FK_DormExchange_Student" Association="Self.FK_DormExchange_Student">
       <End Role="Student" EntitySet="Student" />
       <End Role="DormExchange" EntitySet="DormExchange" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DormRepair_Student" Association="Self.FK_DormRepair_Student">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="DormRepair" EntitySet="DormRepair" />
     </AssociationSet>
     <AssociationSet Name="FK_MoveOut_Student" Association="Self.FK_MoveOut_Student">
       <End Role="Student" EntitySet="Student" />

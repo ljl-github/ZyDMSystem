@@ -19,7 +19,7 @@ namespace ZyDMSystem.Controllers
         //学生缺寝列表
         public ActionResult Index(int? page = null)
         {
-            List<AbsentRecord> aList = db.AbsentRecord.ToList();
+            List<AbsentRecord> aList = db.AbsentRecord.OrderByDescending(a=>a.Date).ToList();
             //第几页
             int pageNumber = page ?? 1;
             //每页显示10条
@@ -71,22 +71,38 @@ namespace ZyDMSystem.Controllers
         [HttpPost]
         public ActionResult AbsentRecordStu(AbsentRecord absent,int DormitoryID)
         {
-            var date =absent.Date.ToShortDateString();
-            var absentList = db.AbsentRecord.Where(a=>a.StuID==absent.StuID).ToList();
-            List<AbsentRecord> list = new List<AbsentRecord>();
-            if (absentList.Count > 0)
+            var stu = db.Student.Find(absent.StuID);
+            if (stu.State == "已迁出") 
             {
-                foreach (var item in absentList)
+                string errorMsg = "<script>alert('该学生已迁出！');location.href='/AbsentRecord/AbsentRecordStu/" + DormitoryID + "';</script>";
+                return Content(errorMsg);
+            }
+            else
+            {
+                var date = absent.Date.ToShortDateString();
+                var absentList = db.AbsentRecord.Where(a => a.StuID == absent.StuID).ToList();
+                List<AbsentRecord> list = new List<AbsentRecord>();
+                if (absentList.Count > 0)
                 {
-                    if (item.Date.ToShortDateString() == date)
+                    foreach (var item in absentList)
                     {
-                        list.Add(item);
+                        if (item.Date.ToShortDateString() == date)
+                        {
+                            list.Add(item);
+                        }
                     }
-                }
-                if (list.Count > 0)
-                { 
-                    string errorMsg = "<script>alert('该学生今日已缺寝！');location.href='/AbsentRecord/AbsentRecordStu/" + DormitoryID + "';</script>";
-                    return Content(errorMsg);
+                    if (list.Count > 0)
+                    {
+                        string errorMsg = "<script>alert('该学生今日已缺寝！');location.href='/AbsentRecord/AbsentRecordStu/" + DormitoryID + "';</script>";
+                        return Content(errorMsg);
+                    }
+                    else
+                    {
+                        db.AbsentRecord.Add(absent);
+                        db.SaveChanges();
+                        string successMsg = "<script>alert('操作成功！');location.href='/AbsentRecord/DormitoryStuAbsentRecord/" + DormitoryID + "';</script>";
+                        return Content(successMsg);
+                    }
                 }
                 else
                 {
@@ -95,13 +111,6 @@ namespace ZyDMSystem.Controllers
                     string successMsg = "<script>alert('操作成功！');location.href='/AbsentRecord/DormitoryStuAbsentRecord/" + DormitoryID + "';</script>";
                     return Content(successMsg);
                 }
-            }
-            else
-            {
-                db.AbsentRecord.Add(absent);
-                db.SaveChanges();
-                string successMsg = "<script>alert('操作成功！');location.href='/AbsentRecord/DormitoryStuAbsentRecord/" + DormitoryID + "';</script>";
-                return Content(successMsg);
             }
         }
         //取得学生列表
